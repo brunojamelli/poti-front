@@ -1,7 +1,29 @@
 <template>
   <div class="home">
-    <h2>Inicio</h2>
-    {{ list }}
+    <h2>Bem Vindo</h2>
+    <h3>Lista de Anuncios</h3>
+    <div class="grid-container">
+      <Card
+        class="grid-item"
+        v-for="item in an_list"
+        :key="item.title"
+        style="width: 22rem; margin-bottom: 1em"
+      >
+        <template #title>
+          <div class="item-title">
+            {{ item.title }}
+          </div>
+        </template>
+        <template #content>
+          <p>
+            {{ item.description }}
+          </p>
+        </template>
+        <template #subtitle> {{ item.value }} <b>R$</b> </template>
+      </Card>
+    </div>
+
+    <!-- {{ an_list }} -->
   </div>
 </template>
 
@@ -10,17 +32,41 @@
 
 <script>
 // @ is an alias to /src
+// import Button from "primevue/button";
+import Card from "primevue/card";
 import ApiService from "../utils/ApiService";
 const http = new ApiService("announcement");
 export default {
   name: "Home",
-  components: {},
+  components: {
+    // Button,
+    Card,
+  },
   data: () => ({
-    list: null,
+    an_list: null,
   }),
   async created() {
+    this.an_list = [];
+  },
+  async mounted() {
     let response = await http.getList();
-    this.list = response.data;
+    this.an_list = response.data;
   },
 };
 </script>
+
+<style scoped>
+.grid-container {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  padding: 10px;
+}
+
+.grid-item {
+  background-color: rgba(255, 255, 255, 0.8);
+  /* border: 1px solid rgba(0, 0, 0, 0.8); */
+  /* padding: 20px;
+  font-size: 30px; */
+  text-align: left;
+}
+</style>
