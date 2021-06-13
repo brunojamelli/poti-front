@@ -19,11 +19,11 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 3%;
+  margin-top: 2%;
 }
 
 #menu {
-  width: 80%;
+  width: 70%;
   margin: auto;
 }
 
@@ -49,24 +49,19 @@ export default {
         { label: "Inicio", icon: "pi pi-fw pi-home", to: "/" },
         {
           label: "Pendentes",
-          icon: "pi pi-fw pi-pencil",
+          icon: "pi pi-exclamation-circle",
           to: "/pendentes",
         },
         {
           label: "Administradores",
-          icon: "pi pi-fw pi-pencil",
+          icon: "pi pi-shield",
           to: "/administradores",
         },
         {
           label: "Anunciantes",
-          icon: "pi pi-fw pi-file",
+          icon: "pi pi-calendar",
           to: "/anunciantes",
-        },
-        {
-          label: "Sobre",
-          icon: "pi pi-fw pi-calendar",
-          to: "/about",
-        },
+        }
       ],
     };
   },
