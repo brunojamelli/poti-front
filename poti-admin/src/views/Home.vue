@@ -32,14 +32,12 @@
 
 <script>
 // @ is an alias to /src
-// import Button from "primevue/button";
 import Card from "primevue/card";
 import ApiService from "../utils/ApiService";
 const http = new ApiService("announcement");
 export default {
   name: "Home",
   components: {
-    // Button,
     Card,
   },
   data: () => ({
@@ -55,7 +53,7 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .grid-container {
   display: grid;
   grid-template-columns: auto auto auto;
@@ -64,9 +62,6 @@ export default {
 
 .grid-item {
   background-color: rgba(255, 255, 255, 0.8);
-  /* border: 1px solid rgba(0, 0, 0, 0.8); */
-  /* padding: 20px;
-  font-size: 30px; */
   text-align: left;
 }
 </style>
