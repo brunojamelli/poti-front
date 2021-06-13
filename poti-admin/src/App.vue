@@ -46,19 +46,19 @@ export default {
   data() {
     return {
       items: [
-        { label: "Inicio", icon: "pi pi-fw pi-home", to: "/" },
+        { label: "inicio", icon: "pi pi-fw pi-home", to: "/" },
         {
-          label: "Pendentes",
+          label: "pendentes",
           icon: "pi pi-exclamation-circle",
           to: "/pendentes",
         },
         {
-          label: "Administradores",
+          label: "administradores",
           icon: "pi pi-shield",
           to: "/administradores",
         },
         {
-          label: "Anunciantes",
+          label: "anunciantes",
           icon: "pi pi-calendar",
           to: "/anunciantes",
         }
