@@ -1,6 +1,7 @@
 <template>
   <div>
-    
+    <p></p>
+    <h2>anunciantes por aqui</h2>
   </div>
 </template>
 

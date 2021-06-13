@@ -47,16 +47,20 @@ export default {
     return {
       items: [
         { label: "Inicio", icon: "pi pi-fw pi-home", to: "/" },
-
         {
-          label: "Gerenciar Administradores",
+          label: "Pendentes",
           icon: "pi pi-fw pi-pencil",
-          to: "/tabmenu/edit",
+          to: "/pendentes",
         },
         {
-          label: "Gerenciar Anunciantes",
+          label: "Administradores",
+          icon: "pi pi-fw pi-pencil",
+          to: "/administradores",
+        },
+        {
+          label: "Anunciantes",
           icon: "pi pi-fw pi-file",
-          to: "/tabmenu/documentation",
+          to: "/anunciantes",
         },
         {
           label: "Sobre",

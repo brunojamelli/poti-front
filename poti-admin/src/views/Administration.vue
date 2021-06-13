@@ -1,6 +1,6 @@
 <template>
   <div>
-    
+    <h2>administradores por aqui</h2>
   </div>
 </template>
 
