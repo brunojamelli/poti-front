@@ -6,7 +6,7 @@
       <Card
         class="grid-item"
         v-for="item in an_list"
-        :key="item.title"
+        :key="item.id"
         style="width: 22rem; margin-bottom: 1em"
       >
         <template #title>
