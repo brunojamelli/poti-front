@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>anúncios pendentes</h2>
+    <h2>Anúncios Pendentes</h2>
   </div>
 </template>
 <style scoped>
