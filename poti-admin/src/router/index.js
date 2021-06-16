@@ -4,6 +4,7 @@ import Home from '../views/Home.vue'
 import Administration from '../views/Administration.vue'
 import AdministrationRegister from '../views/AdministrationRegister.vue'
 import Pending from '../views/Pending.vue'
+import Valids from '../views/Valids.vue'
 import Advertiser from '../views/Advertiser.vue'
 import Login from '../views/Login.vue'
 
@@ -29,6 +30,11 @@ const routes = [
     path: '/pendentes',
     name: 'pendentes',
     component: Pending
+  },
+  {
+    path: '/validados',
+    name: 'validados',
+    component: Valids
   },
   {
     path: '/entrar',

@@ -4,7 +4,7 @@
     <div class="grid-container">
       <Card
         class="grid-item"
-        v-for="item in pendings"
+        v-for="item in valids"
         :key="item.id"
         style="width: 22rem; margin-bottom: 1em"
       >
@@ -19,13 +19,6 @@
           </p>
         </template>
         <template #subtitle> {{ item.value }} <b>R$</b> </template>
-        <template #footer>
-          <Button
-            icon="pi pi-check"
-            class="p-button-secondary"
-            label="Validar"
-          />
-        </template>
       </Card>
     </div>
   </div>
@@ -37,27 +30,27 @@
 import ApiService from "../utils/ApiService";
 const http = new ApiService("announcement/by_validation");
 import Card from "primevue/card";
-import Button from "primevue/button";
+// import Button from "primevue/button";
 
 export default {
-  name: "Pending",
+  name: "Valids",
   components: {
     Card,
-    Button,
+    // Button,
   },
   data: () => ({
-    pendings: null,
+    valids: null,
   }),
   async created() {
-    this.pendings = [];
+    this.valids = [];
   },
   async mounted() {
     const params = new URLSearchParams({
-      isValid: 0,
+      isValid: 1,
     }).toString();
 
     const response = await http.getListWithParams(params);
-    this.pendings = response.data;
+    this.valids = response.data;
   },
 };
 </script>

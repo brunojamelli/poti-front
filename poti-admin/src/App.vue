@@ -48,6 +48,11 @@ export default {
           to: "/pendentes",
         },
         {
+          label: "validados",
+          icon: "pi pi-exclamation-circle",
+          to: "/validados",
+        },
+        {
           label: "administradores",
           icon: "pi pi-shield",
           to: "/administradores",
