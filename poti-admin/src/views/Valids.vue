@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Anúncios Pendentes</h2>
+    <h2>Anúncios Validos</h2>
     <div class="grid-container">
       <Card
         class="grid-item"
