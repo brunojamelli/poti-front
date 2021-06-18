@@ -20,6 +20,16 @@
           </p>
         </template>
         <template #subtitle> {{ item.value }} <b>R$</b> </template>
+        <template #footer>
+          <Button icon="pi pi-check" label="Save" />
+          <Button
+            icon="pi pi-times"
+            label="Detalhes"
+            class="p-button-secondary"
+            style="margin-left: 0.5em"
+            @click="sendToDetail('detalhes-anuncio', item)"
+          />
+        </template>
       </Card>
     </div>
 
@@ -34,15 +44,23 @@
 // @ is an alias to /src
 import Card from "primevue/card";
 import ApiService from "../utils/ApiService";
+import Button from "primevue/button";
+
 const http = new ApiService("announcement");
 export default {
   name: "Home",
   components: {
     Card,
+    Button
   },
   data: () => ({
     an_list: null,
   }),
+  methods: {
+    sendToDetail(where, data) {
+      this.$router.push({ name: where, params: { advertiser: data } });
+    },
+  },
   async created() {
     this.an_list = [];
   },

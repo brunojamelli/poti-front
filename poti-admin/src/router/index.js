@@ -7,6 +7,7 @@ import Pending from '../views/Pending.vue'
 import Valids from '../views/Valids.vue'
 import Advertiser from '../views/Advertiser.vue'
 import Login from '../views/Login.vue'
+import DetailAdvertiser from '../views/detail/DetailAdvertiser'
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,12 @@ const routes = [
     path: '/validados',
     name: 'validados',
     component: Valids
+  },
+  {
+    path: '/detalhes-anuncio',
+    name: 'detalhes-anuncio',
+    component: DetailAdvertiser,
+    props: true,
   },
   {
     path: '/entrar',
