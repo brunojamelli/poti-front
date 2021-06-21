@@ -2,7 +2,7 @@
   <div>
     <h2>Anunciantes cadastrados na plataforma</h2>
     <div class="grid-container">
-      <!-- <Card
+      <Card
         class="grid-item"
         v-for="item in advertisers"
         :key="item.id"
@@ -17,8 +17,11 @@
           <p>
             {{ item.whatsapp }}
           </p>
+          <!-- <p>
+            {{ formatPhone(item.whatsapp) }}
+          </p> -->
         </template>
-      </Card> -->
+      </Card>
     </div>
   </div>
 </template>
@@ -27,17 +30,26 @@
 </style>
 
 <script>
-// import Card from "primevue/card";
+import Card from "primevue/card";
 import ApiService from "../utils/ApiService";
 const http = new ApiService("advertiser");
 export default {
   name: "Advertiser",
   components: {
-    // Card,
+    Card,
   },
   data: () => ({
     advertisers: null,
   }),
+  methods: {
+    formatPhone(str) {
+      return str
+        .replace(/\D/g, "")
+        
+        .substring(0, 16)
+        .trim();
+    },
+  },
   async created() {
     this.advertisers = [];
   },

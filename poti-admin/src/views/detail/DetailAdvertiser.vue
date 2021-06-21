@@ -11,13 +11,15 @@
           />
         </template>
         <template #title>
-          <div>{{ advertiser.title }}</div>
+          <div id="ad-title">{{ advertiser.title }}</div>
         </template>
         <template #subtitle>
-          <p>{{ advertiser.value }} R$ - {{ advertiser.category }}</p>
+          <div id="ad-value">
+            {{ advertiser.value }} R$ - {{ advertiser.category }}
+          </div>
         </template>
         <template #content>
-          {{ advertiser.description }}
+          <div id="ad-description">{{ advertiser.description }}</div>
         </template>
 
         <template #footer> </template>
@@ -49,7 +51,17 @@ export default {
 }
 .teste {
   margin-top: 3%;
-  margin-left: 15%;
-  margin-right: 15%;
+  margin-left: 25%;
+  margin-right: 25%;
+}
+#ad-title {
+  text-align: left;
+}
+
+#ad-value {
+  text-align: left;
+}
+#ad-description {
+  text-align: left;
 }
 </style>
