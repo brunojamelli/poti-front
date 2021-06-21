@@ -1,12 +1,14 @@
 <template>
-  <div id="app">
+  <v-app>
     <div id="menu">
       <TabMenu :model="items" />
     </div>
-    <router-view />
-  </div>
-</template>
 
+    <v-main>
+      <router-view />
+    </v-main>
+  </v-app>
+</template>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -16,21 +18,18 @@
   color: #2c3e50;
   margin-top: 2%;
 }
-
 #menu {
   width: 70%;
   margin: auto;
+  margin-bottom: 1%;
 }
-
 #nav {
   padding: 30px;
 }
-
 #nav a {
   font-weight: bold;
   color: #2c3e50;
 }
-
 #nav a.router-link-exact-active {
   color: #42b983;
 }
@@ -61,7 +60,7 @@ export default {
           label: "anunciantes",
           icon: "pi pi-calendar",
           to: "/anunciantes",
-        }
+        },
       ],
     };
   },

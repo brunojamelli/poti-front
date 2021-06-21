@@ -32,26 +32,19 @@
         </template>
       </Card>
     </div>
-
-    <!-- {{ an_list }} -->
   </div>
 </template>
-
-<style scoped>
-</style>
-
 <script>
 // @ is an alias to /src
 import Card from "primevue/card";
 import ApiService from "../utils/ApiService";
 import Button from "primevue/button";
-
 const http = new ApiService("announcement");
 export default {
   name: "Home",
   components: {
     Card,
-    Button
+    Button,
   },
   data: () => ({
     an_list: null,
@@ -77,7 +70,6 @@ export default {
   grid-template-columns: auto auto auto;
   padding: 10px;
 }
-
 .grid-item {
   background-color: rgba(255, 255, 255, 0.8);
   text-align: left;

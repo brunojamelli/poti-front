@@ -12,6 +12,7 @@ import 'primevue/resources/primevue.min.css';
 import 'primeicons/primeicons.css';
 import TabMenu from "primevue/tabmenu";
 import store from './store'
+import vuetify from './plugins/vuetify'
 
 Vue.component('TabMenu', TabMenu);
 
@@ -20,5 +21,6 @@ Vue.use(PrimeVue);
 new Vue({
   router,
   store,
+  vuetify,
   render: h => h(App)
 }).$mount('#app')
