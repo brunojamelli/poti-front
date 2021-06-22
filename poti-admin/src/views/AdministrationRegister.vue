@@ -1,82 +1,71 @@
 <template>
-  <v-form ref="form" v-model="valid" lazy-validation>
-    <v-text-field
-      v-model="name"
-      :counter="10"
-      :rules="nameRules"
-      label="Name"
-      required
-    ></v-text-field>
+  <div>
+    <p class="font-weight-black"></p>
+    <h2>Cadastre um novo Administrador</h2>
+    <v-card class="mx-auto" max-width="500" style="margin-top: 20px">
+      <v-card-text>
+        <v-form ref="form" v-model="valid">
+          <v-text-field
+            v-model="form.name"
+            :counter="10"
+            :rules="[(v) => !!v || 'Nome é de preenchimento obrigatório']"
+            label="Nome"
+            required
+          ></v-text-field>
 
-    <v-text-field
-      v-model="email"
-      :rules="emailRules"
-      label="E-mail"
-      required
-    ></v-text-field>
-
-    <v-select
-      v-model="select"
-      :items="items"
-      :rules="[(v) => !!v || 'Item is required']"
-      label="Item"
-      required
-    ></v-select>
-
-    <v-checkbox
-      v-model="checkbox"
-      :rules="[(v) => !!v || 'You must agree to continue!']"
-      label="Do you agree?"
-      required
-    ></v-checkbox>
-
-    <v-btn :disabled="!valid" color="success" @click="validate">
-      Validate
-    </v-btn>
-
-    <v-btn color="error" @click="reset"> Reset Form </v-btn>
-
-    <v-btn color="warning" @click="resetValidation"> Reset Validation </v-btn>
-  </v-form>
+          <v-text-field
+            v-model="form.email"
+            :rules="[(v) => !!v || 'Email é de preenchimento obrigatório']"
+            label="E-mail"
+            required
+          ></v-text-field>
+          <v-text-field
+            v-model="form.password"
+            :rules="[(v) => !!v || 'A senha é de preenchimento obrigatória']"
+            label="Senha"
+            required
+          ></v-text-field>
+          <v-btn
+            large
+            rounded
+            dark
+            color="success"
+            @click.prevent="submit"
+          >
+            Cadastrar
+          </v-btn>
+        </v-form>
+      </v-card-text>
+    </v-card>
+  </div>
 </template>
 
 <style scoped>
 </style>
 
 <script>
-// import Button from "primevue/button";
-// import InputText from "primevue/inputtext";
 
+import ApiService from "../utils/ApiService";
+const http = new ApiService("administrator");
 export default {
   name: "AdministrationRegister",
   data: () => ({
     valid: true,
-    name: "",
-    nameRules: [
-      (v) => !!v || "Name is required",
-      (v) => (v && v.length <= 10) || "Name must be less than 10 characters",
-    ],
-    email: "",
-    emailRules: [
-      (v) => !!v || "E-mail is required",
-      (v) => /.+@.+/.test(v) || "E-mail must be valid",
-    ],
-    select: null,
-    items: ["Item 1", "Item 2", "Item 3", "Item 4"],
-    checkbox: false,
+    form: {
+      name: "",
+      email: "",
+      password: "",
+    },
   }),
 
   methods: {
-    validate() {
-      if (this.$refs.form.validate()) {
-        this.snackbar = true;
-      }
-    },
-    reset() {
-      this.$refs.form.reset();
-    },
-    resetValidation() {
-      this.$refs.form.resetValidation();
+    
+    async submit(evt) {
+      evt.preventDefault();
+      http.create(this.form);
+      alert("cadastrado com sucesso");
+      this.$router.push("/administradores");
+      this.$router.push("/administradores");
     },
   },
 };
