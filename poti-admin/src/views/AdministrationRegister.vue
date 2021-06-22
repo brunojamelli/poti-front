@@ -21,17 +21,14 @@
           ></v-text-field>
           <v-text-field
             v-model="form.password"
-            :rules="[(v) => !!v || 'A senha é de preenchimento obrigatória']"
             label="Senha"
+            :append-icon="value ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="() => (value = !value)"
+            :type="value ? 'password' : 'text'"
+            :rules="[rules.password]"
             required
           ></v-text-field>
-          <v-btn
-            large
-            rounded
-            dark
-            color="success"
-            @click.prevent="submit"
-          >
+          <v-btn large rounded dark color="success" @click.prevent="submit">
             Cadastrar
           </v-btn>
         </v-form>
@@ -44,22 +41,32 @@
 </style>
 
 <script>
-
 import ApiService from "../utils/ApiService";
 const http = new ApiService("administrator");
 export default {
   name: "AdministrationRegister",
   data: () => ({
-    valid: true,
     form: {
       name: "",
       email: "",
       password: "",
     },
+    valid: true,
+    value: true,
+    rules: {
+      required: (value) => !!value || "Required.",
+      password: (value) => {
+        const pattern =
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+        return (
+          pattern.test(value) ||
+          "Min. 8 characters with at least one capital letter, a number and a special character."
+        );
+      },
+    },
   }),
 
   methods: {
-    
     async submit(evt) {
       evt.preventDefault();
       http.create(this.form);
