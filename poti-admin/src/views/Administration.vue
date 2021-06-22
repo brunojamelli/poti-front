@@ -49,11 +49,13 @@ export default {
   methods: {
     navegateTo(where) {
       this.$router.push({ name: where });
-    }
+    },
   },
 
   async created() {
     this.adms = [];
+    let response = await http.getList();
+    this.adms = response.data;
   },
   async mounted() {
     let response = await http.getList();

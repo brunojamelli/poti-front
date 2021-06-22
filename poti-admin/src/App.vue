@@ -33,6 +33,10 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
+#ads-image{
+  width: 350px;
+  height: 100px;
+}
 </style>
 
 <script>

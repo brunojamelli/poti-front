@@ -9,6 +9,13 @@
         :key="item.id"
         style="width: 22rem; margin-bottom: 1em"
       >
+        <template #header>
+          <img
+            class="ads-image"
+            alt="user header"
+            src="http://via.placeholder.com/350x150"
+          />
+        </template>
         <template #title>
           <div class="item-title">
             {{ item.title }}
