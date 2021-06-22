@@ -7,7 +7,7 @@
           <img
             class="ads-reader"
             alt="user header"
-            src="../../assets/logo.png"
+            src="http://localhost:3333/photo/1620690041851 - postrock-fluxo.jpg"
           />
         </template>
         <template #title>
@@ -33,20 +33,31 @@
 
 <script>
 import Card from "primevue/card";
+import ApiService from "../../utils/ApiService";
+const http = new ApiService("photo/filenames/announcement");
 
 export default {
   name: "DetailAdvertiser",
+  data: () => ({
+    photo_list: [],
+    photo_link: ""
+  }),
   props: ["advertiser"],
   components: {
     Card,
+  },
+  async created() {
+    this.photo_list = await http.getOne(this.advertiser.id);
+    this.photo_link = this.photo_list[0].filename;
+    window.console.log(this.photo_link);
   },
 };
 </script>
 
 <style scoped>
 .ads-reader {
-  width: 10%;
-  height: 10%;
+  width: 40%;
+  height: 40%;
   margin-top: 10px;
 }
 .teste {
