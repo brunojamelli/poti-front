@@ -18,6 +18,13 @@ Vue.component('TabMenu', TabMenu);
 
 Vue.config.productionTip = false
 Vue.use(PrimeVue);
+
+const token = localStorage.getItem('token');
+if (token) {
+  Vue.prototype.$http.defaults.headers.common['x-access-token'] = token
+}
+
+
 new Vue({
   router,
   store,
