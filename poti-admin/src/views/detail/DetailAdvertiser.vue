@@ -50,9 +50,10 @@ export default {
   async created() {
     this.photo_link = `photo/filenames/announcement/${this.advertiser.id}`
     const http = new ApiService(this.photo_link);
-    this.photo_list = await http.getList();
+    let response = await http.getList();
+    this.photo_list = response.data;
     // this.photo_link = this.photo_list[0].filename;
-    window.console.log(this.photo_list[0]);
+    window.console.log(this.photo_list[0].filename);
   },
 };
 </script>
