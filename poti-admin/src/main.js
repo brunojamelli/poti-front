@@ -13,12 +13,13 @@ import 'primeicons/primeicons.css';
 import TabMenu from "primevue/tabmenu";
 import store from './store'
 import vuetify from './plugins/vuetify'
+import Axios from 'axios';
 
 Vue.component('TabMenu', TabMenu);
-
 Vue.config.productionTip = false
 Vue.use(PrimeVue);
 
+Vue.prototype.$http = Axios;
 const token = localStorage.getItem('token');
 if (token) {
   Vue.prototype.$http.defaults.headers.common['x-access-token'] = token

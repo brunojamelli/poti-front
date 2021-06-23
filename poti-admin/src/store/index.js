@@ -27,10 +27,11 @@ export default new Vuex.Store({
   },
   actions: {
     async login({ commit }, data) {
-      let endpoint = 'login'
+      let endpoint = 'loginAdmin'
       commit('auth_request')
       try {
         let result = await apiConfig.post(`/${endpoint}/`, data)
+        window.console.log(result.data.token);
         const token = result.data.token
 
         localStorage.setItem('token', token);

@@ -1,6 +1,7 @@
 import apiConfig from './config'
+import { getToken } from "../utils/auth";
 
-const headers = () => { return { headers: { Authorization: 'header' } } };
+const headers = () => { return { headers: { Authorization: `${getToken()}` } } };
 
 export default class ApiService {
 
@@ -17,7 +18,7 @@ export default class ApiService {
     }
 
     getList() {
-        return apiConfig.get(`/${this.endpoint}/`);
+        return apiConfig.get(`/${this.endpoint}/`, headers());
     }
 
     getOne(pk) {

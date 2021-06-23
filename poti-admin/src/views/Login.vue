@@ -12,7 +12,7 @@
 
         <v-card-text>
           <v-text-field
-            v-model="form.username"
+            v-model="form.email"
             label="Usuário"
             outlined
           ></v-text-field>
@@ -54,7 +54,7 @@ export default {
     data: () => ({
     show1: false,
     valid: true,
-    form: { username: "", password: "" },
+    form: { email: "", password: "" },
   }),
   methods: {
     login: function () {
