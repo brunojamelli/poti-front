@@ -34,22 +34,25 @@
 <script>
 import Card from "primevue/card";
 import ApiService from "../../utils/ApiService";
-const http = new ApiService("photo/filenames/announcement");
+
 
 export default {
   name: "DetailAdvertiser",
   data: () => ({
     photo_list: [],
-    photo_link: ""
+    photo_link: "",
+    first_file: ""
   }),
   props: ["advertiser"],
   components: {
     Card,
   },
   async created() {
-    this.photo_list = await http.getOne(this.advertiser.id);
-    this.photo_link = this.photo_list[0].filename;
-    window.console.log(this.photo_link);
+    this.photo_link = `photo/filenames/announcement/${this.advertiser.id}`
+    const http = new ApiService(this.photo_link);
+    this.photo_list = await http.getList();
+    // this.photo_link = this.photo_list[0].filename;
+    window.console.log(this.photo_list[0]);
   },
 };
 </script>
