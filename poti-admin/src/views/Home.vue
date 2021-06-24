@@ -28,9 +28,10 @@
         </template>
         <template #subtitle> {{ item.value }} <b>R$</b> </template>
         <template #footer>
-          <Button icon="pi pi-check" label="Save" />
+          <Button v-if="!item.valid" class="p-button-warning" icon="pi pi-check" label="Validar" />
+          <Button v-else label="Validado" class="p-button-success"/>
           <Button
-            icon="pi pi-times"
+            icon="pi pi-circle-off"
             label="Detalhes"
             class="p-button-secondary"
             style="margin-left: 0.5em"
