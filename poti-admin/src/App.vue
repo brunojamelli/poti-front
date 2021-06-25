@@ -20,7 +20,8 @@
 }
 #menu {
   width: 70%;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
   margin-bottom: 1%;
 }
 #nav {
@@ -33,9 +34,13 @@
 #nav a.router-link-exact-active {
   color: #42b983;
 }
-#ads-image{
+#ads-image {
   width: 350px;
   height: 100px;
+}
+#logout {
+  margin-left: 40%;
+  margin-top: 10%;
 }
 </style>
 

@@ -2,6 +2,9 @@
   <div class="home">
     <h2>Bem Vindo</h2>
     <h3>Lista de Anuncios</h3>
+    <!-- <v-btn id="logout" @click="logout" icon>
+      <v-icon>mdi-exit-to-app</v-icon>
+    </v-btn> -->
     <div class="grid-container">
       <Card
         class="grid-item"
@@ -78,7 +81,7 @@ export default {
       let response = service.patch(object.id);
       window.console.log(response);
       alert("validado");
-      let index = this.an_list.indexOf(object)
+      let index = this.an_list.indexOf(object);
       this.an_list[index].valid = true;
     },
   },
