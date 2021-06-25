@@ -57,7 +57,7 @@ export default {
       required: (value) => !!value || "Required.",
       password: (value) => {
         const pattern =
-          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+          /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%&])(?=.{8,})/;
         return (
           pattern.test(value) ||
           "Min. 8 characters with at least one capital letter, a number and a special character."
@@ -71,8 +71,7 @@ export default {
       evt.preventDefault();
       http.create(this.form);
       alert("cadastrado com sucesso");
-      this.$router.push("/administradores");
-      this.$router.push("/administradores");
+      this.$router.push("/");
     },
   },
 };

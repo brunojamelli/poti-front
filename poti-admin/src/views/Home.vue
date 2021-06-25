@@ -26,12 +26,24 @@
             {{ item.description }}
           </p>
         </template>
-        <template #subtitle> {{ item.value }} <b>R$</b> </template>
-        <template #footer>
-          <Button v-if="!item.valid" class="p-button-warning" icon="pi pi-check" label="Validar" />
-          <Button v-else label="Validado" class="p-button-success"/>
+        <template #subtitle>
           <Button
-            icon="pi pi-circle-off"
+            icon="pi pi-dollar"
+            class="p-button-rounded p-button-success"
+          />
+          <b>{{ item.value }}</b>
+        </template>
+        <template #footer>
+          <Button
+            v-if="!item.valid"
+            class="p-button-warning"
+            icon="pi pi-check"
+            label="Validar"
+            @click="adValitation(item)"
+          />
+          <Button v-else label="Validado" class="p-button-success" />
+          <Button
+            icon="pi pi-eye"
             label="Detalhes"
             class="p-button-secondary"
             style="margin-left: 0.5em"
@@ -60,6 +72,14 @@ export default {
   methods: {
     sendToDetail(where, data) {
       this.$router.push({ name: where, params: { advertiser: data } });
+    },
+    async adValitation(object) {
+      const service = new ApiService("announcement/validation");
+      let response = service.patch(object.id);
+      window.console.log(response);
+      alert("validado");
+      let index = this.an_list.indexOf(object)
+      this.an_list[index].valid = true;
     },
   },
   async created() {
