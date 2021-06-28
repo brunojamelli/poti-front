@@ -8,6 +8,13 @@
         :key="item.id"
         style="width: 22rem; margin-bottom: 1em"
       >
+        <template #header>
+          <img
+            class="ads-image"
+            alt="user header"
+            src="http://via.placeholder.com/350x150"
+          />
+        </template>
         <template #title>
           <div class="item-title">
             {{ item.title }}
@@ -18,7 +25,30 @@
             {{ item.description }}
           </p>
         </template>
-        <template #subtitle> {{ item.value }} <b>R$</b> </template>
+        <template #subtitle>
+          <Button
+            icon="pi pi-dollar"
+            class="p-button-rounded p-button-success"
+          />
+          <b>{{ item.value }}</b>
+        </template>
+        <template #footer>
+          <Button
+            v-if="!item.valid"
+            class="p-button-warning"
+            icon="pi pi-check"
+            label="Validar"
+            @click="adValitation(item)"
+          />
+          <Button v-else label="Validado" class="p-button-success" />
+          <Button
+            icon="pi pi-eye"
+            label="Detalhes"
+            class="p-button-secondary"
+            style="margin-left: 0.5em"
+            @click="sendToDetail('detalhes-anuncio', item)"
+          />
+        </template>
       </Card>
     </div>
   </div>

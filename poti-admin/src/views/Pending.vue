@@ -86,6 +86,14 @@ export default {
     sendToDetail(where, data) {
       this.$router.push({ name: where, params: { advertiser: data } });
     },
+    async adValitation(object) {
+      const service = new ApiService("announcement/validation");
+      let response = service.patch(object.id);
+      window.console.log(response);
+      alert("validado");
+      let index = this.an_list.indexOf(object);
+      this.an_list[index].valid = true;
+    },
   },
 };
 </script>

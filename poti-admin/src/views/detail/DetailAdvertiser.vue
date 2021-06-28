@@ -67,6 +67,7 @@ export default {
     const http = new ApiService(this.photo_link);
     let response = await http.getList();
     this.photo_list = response.data;
+    
     // this.photo_link = this.photo_list[0].filename;
     window.console.log(this.photo_list[0].filename);
   },
