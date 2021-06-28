@@ -82,5 +82,10 @@ export default {
     const response = await http.getListWithParams(params);
     this.pendings = response.data;
   },
+  methods: {
+    sendToDetail(where, data) {
+      this.$router.push({ name: where, params: { advertiser: data } });
+    },
+  },
 };
 </script>
