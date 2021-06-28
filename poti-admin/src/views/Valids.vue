@@ -60,13 +60,13 @@
 import ApiService from "../utils/ApiService";
 const http = new ApiService("announcement/by_validation");
 import Card from "primevue/card";
-// import Button from "primevue/button";
+import Button from "primevue/button";
 
 export default {
   name: "Valids",
   components: {
     Card,
-    // Button,
+    Button,
   },
   data: () => ({
     valids: null,
