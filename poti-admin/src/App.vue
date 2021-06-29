@@ -2,6 +2,9 @@
   <v-app>
     <div id="menu">
       <TabMenu :model="items" />
+      <v-btn id="logout" @click="logout" icon>
+        <v-icon>mdi-exit-to-app</v-icon>
+      </v-btn>
     </div>
 
     <v-main>
@@ -19,7 +22,7 @@
   margin-top: 2%;
 }
 #menu {
-  width: 70%;
+  width: 60%;
   margin-left: auto;
   margin-right: auto;
   margin-bottom: 1%;
@@ -39,8 +42,8 @@
   height: 100px;
 }
 #logout {
-  margin-left: 40%;
-  margin-top: 10%;
+  margin-left: 78%;
+  /* margin-top: 10%; */
 }
 </style>
 
@@ -72,6 +75,14 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    logout() {
+      this.$store
+        .dispatch("logout")
+        .then(() => this.$router.push("/entrar"))
+        .catch((err) => console.log(err));
+    },
   },
 };
 </script>
