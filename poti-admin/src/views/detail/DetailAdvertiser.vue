@@ -2,7 +2,7 @@
   <div>
     <!-- {{ advertiser }} -->
     <div class="teste">
-      <div class="grid-container">
+      <!-- <div class="grid-container">
         <Card
           class="grid-item"
           v-for="item in photo_list"
@@ -17,7 +17,26 @@
             />
           </template>
         </Card>
-      </div>
+      </div> -->
+      <v-row>
+        <v-col v-for="photo in photo_list" :key="photo" class="d-flex child-flex" cols="6">
+          <v-img
+            :src="`http://localhost:3333/photo/${photo.filename}`"
+            :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+            aspect-ratio="1.5"
+            class="grey lighten-2"
+          >
+            <template v-slot:placeholder>
+              <v-row class="fill-height ma-0" align="center" justify="center">
+                <v-progress-circular
+                  indeterminate
+                  color="grey lighten-5"
+                ></v-progress-circular>
+              </v-row>
+            </template>
+          </v-img>
+        </v-col>
+      </v-row>
       <Card>
         <!-- <template #header>
           <img
@@ -67,7 +86,7 @@ export default {
     const http = new ApiService(this.photo_link);
     let response = await http.getList();
     this.photo_list = response.data;
-    
+
     // this.photo_link = this.photo_list[0].filename;
     window.console.log(this.photo_list[0].filename);
   },

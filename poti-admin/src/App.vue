@@ -7,7 +7,7 @@
       </v-btn>
     </div>
 
-    <v-main>
+    <v-main class="content">
       <router-view />
     </v-main>
   </v-app>
@@ -44,6 +44,9 @@
 #logout {
   margin-left: 78%;
   /* margin-top: 10%; */
+}
+.content{
+  /* margin: auto; */
 }
 </style>
 
