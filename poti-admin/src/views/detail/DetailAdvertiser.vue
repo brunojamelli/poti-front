@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- {{ advertiser }} -->
-    <div class="teste">
+    <div class="detail-box">
       <!-- <div class="grid-container">
         <Card
           class="grid-item"
@@ -18,8 +18,14 @@
           </template>
         </Card>
       </div> -->
+
       <v-row>
-        <v-col v-for="photo in photo_list" :key="photo" class="d-flex child-flex" cols="6">
+        <v-col
+          v-for="photo in photo_list"
+          :key="photo"
+          class="d-flex child-flex"
+          cols="6"
+        >
           <v-img
             :src="`http://localhost:3333/photo/${photo.filename}`"
             :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
@@ -54,10 +60,20 @@
           </div>
         </template>
         <template #content>
-          <div id="ad-description">{{ advertiser.description }}</div>
+          <div id="ad-description">
+            {{ advertiser.description }}
+          </div>
         </template>
 
-        <template #footer> </template>
+        <template #footer>
+          <Button
+            v-show="!advertiser.valid"
+            class="p-button-warning"
+            icon="pi pi-check"
+            label="Validar"
+            @click="adValitation(advertiser)"
+          />
+        </template>
       </Card>
     </div>
   </div>
@@ -69,6 +85,7 @@
 <script>
 import Card from "primevue/card";
 import ApiService from "../../utils/ApiService";
+import Button from "primevue/button";
 
 export default {
   name: "DetailAdvertiser",
@@ -80,6 +97,7 @@ export default {
   props: ["advertiser"],
   components: {
     Card,
+    Button,
   },
   async created() {
     this.photo_link = `photo/filenames/announcement/${this.advertiser.id}`;
@@ -99,7 +117,7 @@ export default {
   height: 40%;
   margin-top: 10px;
 }
-.teste {
+.detail-box {
   margin-top: 3%;
   margin-left: 25%;
   margin-right: 25%;
