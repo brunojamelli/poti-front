@@ -100,9 +100,15 @@ export default {
   display: grid;
   grid-template-columns: auto auto auto;
   padding: 10px;
+  margin-left: 3%;
+
 }
 .grid-item {
   background-color: rgba(255, 255, 255, 0.8);
   text-align: left;
+}
+.home {
+  /* margin-left: 3%; */
+  /* margin-right: 50%; */
 }
 </style>
