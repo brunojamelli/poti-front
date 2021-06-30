@@ -30,11 +30,7 @@
           </p>
         </template>
         <template #subtitle>
-          <Button
-            icon="pi pi-dollar"
-            class="p-button-rounded p-button-success"
-          />
-          <b>{{ item.value }}</b>
+          <b> R$ </b>{{ item.value }} 
         </template>
         <template #footer>
           <Button
