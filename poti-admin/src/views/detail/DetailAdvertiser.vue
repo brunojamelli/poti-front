@@ -108,6 +108,15 @@ export default {
     // this.photo_link = this.photo_list[0].filename;
     window.console.log(this.photo_list[0].filename);
   },
+  methods: {
+    async adValitation(object) {
+      const service = new ApiService("announcement/validation");
+      let response = service.patch(object.id);
+      window.console.log(response);
+      alert("validado");
+      this.$router.push("/");
+    },
+  },
 };
 </script>
 
