@@ -43,6 +43,7 @@
           </v-img>
         </v-col>
       </v-row>
+      <br>
       <Card>
         <!-- <template #header>
           <img
@@ -62,6 +63,10 @@
         <template #content>
           <div id="ad-description">
             {{ advertiser.description }}
+          </div>
+          <div id="ad-quantity" v-show="advertiser.quantity != 0">
+            <b>Quantidade: </b> {{ advertiser.quantity }}
+
           </div>
         </template>
 
@@ -131,7 +136,7 @@ export default {
   margin-left: 25%;
   margin-right: 25%;
 }
-#ad-title {
+/* #ad-title {
   text-align: left;
 }
 
@@ -140,5 +145,5 @@ export default {
 }
 #ad-description {
   text-align: left;
-}
+} */
 </style>

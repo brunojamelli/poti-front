@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <h2>Bem Vindo</h2>
-    
+
     <div class="grid-container">
       <Card
         class="grid-item"
@@ -26,9 +26,7 @@
             {{ item.description }}
           </p>
         </template>
-        <template #subtitle>
-          <b> R$ </b>{{ item.value }} 
-        </template>
+        <template #subtitle> <b> R$ </b>{{ item.value }} </template>
         <template #footer>
           <Button
             v-if="!item.valid"
@@ -64,6 +62,7 @@ export default {
   },
   data: () => ({
     an_list: null,
+    photo_links: [],
   }),
   methods: {
     sendToDetail(where, data) {
@@ -84,6 +83,14 @@ export default {
   async mounted() {
     let response = await http.getList();
     this.an_list = response.data;
+    // for (var i = 0, l = this.an_list.length; i < l; i++) {
+    //   // console.log(this.an_list[i]);
+    //   let photo_link = `photo/filenames/announcement/${this.an_list[i].an_id}`;
+    //   const http = new ApiService(photo_link);
+    //   let response = await http.getList();
+    //   this.photo_links.push(response.data[0].filename);
+    //   window.console.table(this.photo_links);
+    // }
   },
 };
 </script>
@@ -94,7 +101,6 @@ export default {
   grid-template-columns: auto auto auto;
   padding: 10px;
   margin-left: 3%;
-
 }
 .grid-item {
   background-color: rgba(255, 255, 255, 0.8);
