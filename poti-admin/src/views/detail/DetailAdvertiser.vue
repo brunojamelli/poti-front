@@ -28,7 +28,7 @@
         >
           <v-img
             :src="`http://localhost:3333/photo/${photo.filename}`"
-            :lazy-src="`https://picsum.photos/10/6?image=${n * 5 + 10}`"
+            :lazy-src="`https://picsum.photos/10/6?image=${5 + 10}`"
             aspect-ratio="1.5"
             class="grey lighten-2"
           >
@@ -43,7 +43,7 @@
           </v-img>
         </v-col>
       </v-row>
-      <br>
+      <br />
       <Card>
         <!-- <template #header>
           <img
@@ -66,7 +66,16 @@
           </div>
           <div id="ad-quantity" v-show="advertiser.quantity != 0">
             <b>Quantidade: </b> {{ advertiser.quantity }}
-
+          </div>
+          <div id="contact-box">
+            <h4>Contato Anunciante</h4>
+            <div id="concact-email"><b>email: </b>{{concact_info.email}}</div>
+            <div id="contact-whatsapp" v-if="concact_info.whatsapp != null">
+              <div> <b>whatsapp:</b> {{concact_info.whatsapp}} </div>
+            </div>
+            <div v-else id="contact-whatsapp">
+              <div>Whatsapp não informado</div>
+            </div>
           </div>
         </template>
 
@@ -98,6 +107,7 @@ export default {
     photo_list: [],
     photo_link: "",
     first_file: "",
+    concact_info: {}
   }),
   props: ["advertiser"],
   components: {
@@ -112,6 +122,10 @@ export default {
 
     // this.photo_link = this.photo_list[0].filename;
     window.console.log(this.photo_list[0].filename);
+
+    const http2 = new ApiService(`advertiser/${this.advertiser.advertiser_id}`);
+    let response2 = await http2.getList();
+    this.concact_info = response2.data[0];
   },
   methods: {
     async adValitation(object) {
