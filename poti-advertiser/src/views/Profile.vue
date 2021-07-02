@@ -1,0 +1,11 @@
+<template></template>
+
+<script>
+export default {
+  name: "Profile",
+
+  components: {},
+};
+</script>
+<style scoped>
+</style>
