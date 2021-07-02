@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app clipped-rigth flat color="#0091EA" dark>
+    <v-app-bar app clipped-rigth flat color="#000000" dark>
       <v-app-bar-nav-icon
         dark
         @click.stop="drawer = !drawer"
@@ -19,9 +19,9 @@
       enable-resize-watcher
       fixed
       app
-      color="#0091EA"
+      color="#000000"
       dark
-      width="270"
+      width="220"
     >
       <v-list nav dense>
         <v-list-item>
