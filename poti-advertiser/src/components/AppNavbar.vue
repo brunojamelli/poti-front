@@ -88,20 +88,21 @@ export default {
           to: "anuncios-validados",
         },
         {
-          title: "Cadastrar",
+          title: "Cadastrar Anúncio",
           icon: "mdi-bookmark-plus",
-          subLinks: [
-            {
-              to: "registro-anuncio",
-              text: "Anúncio",
-              icon: "mdi-bookmark-plus",
-            },
-            {
-              to: "registro-anuncio",
-              text: "Fotos Anúncio",
-              icon: "mdi-bookmark-plus",
-            },
-          ],
+          to: "registro-anuncio",
+          // subLinks: [
+          //   {
+          //     to: "registro-anuncio",
+          //     text: "Anúncio",
+          //     icon: "mdi-bookmark-plus",
+          //   },
+          //   {
+          //     to: "registro-anuncio",
+          //     text: "Fotos Anúncio",
+          //     icon: "mdi-bookmark-plus",
+          //   },
+          // ],
         },
         {
           title: "Meu Perfil",
