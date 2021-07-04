@@ -5,6 +5,8 @@ import Profile from '../views/Profile.vue'
 import Login from '../views/forms/Login.vue'
 import AdRegistration from '../views/forms/AdRegistration.vue'
 import AdvertiserRegistration from '../views/forms/AdvertiserRegistration.vue'
+import ValidatedAds from '../views/ValidatedAds.vue'
+import ActivatedAds from '../views/ActivatedAds.vue'
 
 
 Vue.use(VueRouter)
@@ -16,14 +18,14 @@ const routes = [
     component: Home
   },
   {
-    path: '/perfil',
-    name: 'perfil',
-    component: Profile
-  },
-  {
     path: '/entrar',
     name: 'entrar',
     component: Login
+  },
+  {
+    path: '/perfil',
+    name: 'perfil',
+    component: Profile
   },
   {
     path: '/registro-anuncio',
@@ -34,6 +36,16 @@ const routes = [
     path: '/registro-anunciante',
     name: 'registro-anunciante',
     component: AdvertiserRegistration
+  },
+  {
+    path: '/anuncios-validados',
+    name: 'anuncios-validados',
+    component: ValidatedAds
+  },
+  {
+    path: '/anuncios-ativos',
+    name: 'anuncios-ativos',
+    component: ActivatedAds
   },
   {
     path: '/about',

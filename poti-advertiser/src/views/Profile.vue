@@ -1,6 +1,6 @@
 <template>
   <v-card class="mx-auto" max-width="500">
-    <div class="title">Registro Anuncio</div>
+    <div class="title">Meu Perfil</div>
   </v-card>
 </template>
 

@@ -78,12 +78,12 @@ export default {
       drawer: true,
       items: [
         {
-          title: "Espaços",
+          title: "Meus Anuncios",
           icon: "mdi-home-city-outline",
           to: "home",
         },
         {
-          title: "Ver disponibilidade",
+          title: "Anuncios Validados",
           icon: "mdi-calendar-search ",
           to: "perfil",
         },
@@ -92,12 +92,12 @@ export default {
           icon: "mdi-calendar-plus",
           subLinks: [
             {
-              to: "register-reservation-recurring",
+              to: "registro-anuncio",
               text: "Anúncio",
               icon: "mdi-calendar-week",
             },
             {
-              to: "register-reservation-normal",
+              to: "registro-anuncio",
               text: "Fotos Anúncio",
               icon: "mdi-calendar-today",
             },
