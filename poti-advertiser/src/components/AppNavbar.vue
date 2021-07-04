@@ -79,34 +79,34 @@ export default {
       items: [
         {
           title: "Meus Anuncios",
-          icon: "mdi-home-city-outline",
+          icon: "mdi-home",
           to: "home",
         },
         {
           title: "Anuncios Validados",
-          icon: "mdi-calendar-search ",
-          to: "perfil",
+          icon: "mdi-checkbox-marked-circle ",
+          to: "anuncios-validados",
         },
         {
           title: "Cadastrar",
-          icon: "mdi-calendar-plus",
+          icon: "mdi-bookmark-plus",
           subLinks: [
             {
               to: "registro-anuncio",
               text: "Anúncio",
-              icon: "mdi-calendar-week",
+              icon: "mdi-bookmark-plus",
             },
             {
               to: "registro-anuncio",
               text: "Fotos Anúncio",
-              icon: "mdi-calendar-today",
+              icon: "mdi-bookmark-plus",
             },
           ],
         },
         {
-          title: "Cadastrar Espaço",
-          icon: "mdi-home-plus",
-          to: "register-space",
+          title: "Meu Perfil",
+          icon: "mdi-eye-plus",
+          to: "perfil",
         },
       ],
       namePage: "Espaços",
