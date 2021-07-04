@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h2>Login</h2>
-  </div>
+  <v-card width="1400px" class="mx-auto">
+    <div class="title">Login</div>
+  </v-card>
 </template>
 
 <script>

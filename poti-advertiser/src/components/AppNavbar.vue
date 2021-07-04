@@ -85,20 +85,20 @@ export default {
         {
           title: "Ver disponibilidade",
           icon: "mdi-calendar-search ",
-          to: "check-availability",
+          to: "perfil",
         },
         {
-          title: "Cadastrar Reserva",
+          title: "Cadastrar",
           icon: "mdi-calendar-plus",
           subLinks: [
             {
               to: "register-reservation-recurring",
-              text: "Recorrente",
+              text: "Anúncio",
               icon: "mdi-calendar-week",
             },
             {
               to: "register-reservation-normal",
-              text: "Normal",
+              text: "Fotos Anúncio",
               icon: "mdi-calendar-today",
             },
           ],

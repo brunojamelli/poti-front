@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <h2>Registro Anunciante</h2>
-  </div>
+  <v-card width="1400px" class="mx-auto">
+    <div class="title">Registro Anunciante</div>
+  </v-card>
 </template>
 
 <script>
