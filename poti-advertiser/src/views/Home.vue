@@ -25,5 +25,11 @@ export default {
   methods: {
 
   },
+  async created(){
+
+  },
+  async mounted(){
+    
+  }
 };
 </script>
