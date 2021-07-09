@@ -19,5 +19,11 @@ export default {
   name: "Home",
 
   components: {},
+  data: () => ({
+    
+  }),
+  methods: {
+
+  },
 };
 </script>
