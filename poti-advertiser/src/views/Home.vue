@@ -9,7 +9,9 @@
       <v-btn depressed color="primary" @click="clickValids"> Validos </v-btn>
       <v-btn depressed color="primary" @click="clickActivateds"> Ativos </v-btn>
       <v-btn depressed color="error" @click="clickInvalids"> Invalidos </v-btn>
-      <v-btn depressed color="warning" @click="clickDisableds"> Inativos </v-btn>
+      <v-btn depressed color="warning" @click="clickDisableds">
+        Inativos
+      </v-btn>
     </v-row>
     <br />
     <v-row align="center">
@@ -30,21 +32,52 @@ export default {
     advId: 4,
   }),
   methods: {
-    clickValids(){
-      alert('listando validos')
+    async clickValids() {
+      alert("listando validos");
+      http = new ApiService(`announcement/advertiser/${this.advId}`);
+      const params = new URLSearchParams({
+        filterBy: "valids",
+      }).toString();
+
+      const response = await http.getListWithParams(params);
+      this.announcements = response.data;
     },
-    clickInvalids(){
-      alert('listando invalidos')
+    async clickInvalids() {
+      alert("listando invalidos");
+      http = new ApiService(`announcement/advertiser/${this.advId}`);
+      const params = new URLSearchParams({
+        filterBy: "invalids",
+      }).toString();
+
+      const response = await http.getListWithParams(params);
+      this.announcements = response.data;
     },
-    clickActivateds(){
-      alert('listando ativados')
+    async clickActivateds() {
+      alert("listando ativados");
+      http = new ApiService(`announcement/advertiser/${this.advId}`);
+      const params = new URLSearchParams({
+        filterBy: "activated",
+      }).toString();
+
+      const response = await http.getListWithParams(params);
+      this.announcements = response.data;
     },
-    clickDisableds(){
-      alert('listando inativos')
+    async clickDisableds() {
+      alert("listando inativos");
+      http = new ApiService(`announcement/advertiser/${this.advId}`);
+      const params = new URLSearchParams({
+        filterBy: "disabled",
+      }).toString();
+
+      const response = await http.getListWithParams(params);
+      this.announcements = response.data;
     },
-    clickListAll(){
-      alert('listando todos')
-    }
+    async clickListAll() {
+      http = new ApiService(`announcement/advertiser/${this.advId}`);
+      const response = await http.getList();
+      this.announcements = response.data;
+      alert("listando todos");
+    },
   },
   async created() {
     http = new ApiService(`announcement/advertiser/${this.advId}`);
