@@ -5,11 +5,11 @@
       <br />
     </div>
     <v-row align="center" justify="space-around">
-      <v-btn depressed> Todos </v-btn>
-      <v-btn depressed color="primary"> Validos </v-btn>
-      <v-btn depressed color="primary"> Ativos </v-btn>
-      <v-btn depressed color="error"> Invalidos </v-btn>
-      <v-btn depressed color="warning"> Inativos </v-btn>
+      <v-btn depressed @click="clickListAll"> Todos </v-btn>
+      <v-btn depressed color="primary" @click="clickValids"> Validos </v-btn>
+      <v-btn depressed color="primary" @click="clickActivateds"> Ativos </v-btn>
+      <v-btn depressed color="error" @click="clickInvalids"> Invalidos </v-btn>
+      <v-btn depressed color="warning" @click="clickDisableds"> Inativos </v-btn>
     </v-row>
     <br />
     <v-row align="center">
@@ -30,8 +30,20 @@ export default {
     advId: 4,
   }),
   methods: {
-    async clickValids(){
-      
+    clickValids(){
+      alert('listando validos')
+    },
+    clickInvalids(){
+      alert('listando invalidos')
+    },
+    clickActivateds(){
+      alert('listando ativados')
+    },
+    clickDisableds(){
+      alert('listando inativos')
+    },
+    clickListAll(){
+      alert('listando todos')
     }
   },
   async created() {
