@@ -7,6 +7,7 @@ import AdRegistration from '../views/forms/AdRegistration.vue'
 import AdvertiserRegistration from '../views/forms/AdvertiserRegistration.vue'
 import ValidatedAds from '../views/ValidatedAds.vue'
 import ActivatedAds from '../views/ActivatedAds.vue'
+import beforeEach from './beforeEach'
 
 
 Vue.use(VueRouter)
@@ -60,5 +61,7 @@ const routes = [
 const router = new VueRouter({
   routes
 })
+
+router.beforeEach(beforeEach);
 
 export default router

@@ -27,7 +27,7 @@ export default new Vuex.Store({
   },
   actions: {
     async login({ commit }, data) {
-      let endpoint = 'loginAdmin'
+      let endpoint = 'loginAn'
       commit('auth_request')
       try {
         let result = await apiConfig.post(`/${endpoint}/`, data)
