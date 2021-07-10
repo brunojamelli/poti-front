@@ -78,7 +78,7 @@ export default {
   components: {},
   data: () => ({
     announcements: [],
-    advId: 4,
+    advertiserId: 0,
     loading: false,
     selection: 1,
   }),
@@ -89,7 +89,7 @@ export default {
   },
   methods: {
     async clickValids() {
-      http = new ApiService(`announcement/advertiser/${this.advId}`);
+      http = new ApiService(`announcement/advertiser/${this.advertiserId}`);
       const params = new URLSearchParams({
         filterBy: "valids",
       }).toString();
@@ -99,7 +99,7 @@ export default {
       this.$store.commit("setTitle", "Anúncios Válidos");
     },
     async clickInvalids() {
-      http = new ApiService(`announcement/advertiser/${this.advId}`);
+      http = new ApiService(`announcement/advertiser/${this.advertiserId}`);
       const params = new URLSearchParams({
         filterBy: "invalids",
       }).toString();
@@ -109,7 +109,7 @@ export default {
       this.$store.commit("setTitle", "Anúncios Inválidos");
     },
     async clickActivateds() {
-      http = new ApiService(`announcement/advertiser/${this.advId}`);
+      http = new ApiService(`announcement/advertiser/${this.advertiserId}`);
       const params = new URLSearchParams({
         filterBy: "activated",
       }).toString();
@@ -119,7 +119,7 @@ export default {
       this.$store.commit("setTitle", "Anúncios Ativos");
     },
     async clickDisableds() {
-      http = new ApiService(`announcement/advertiser/${this.advId}`);
+      http = new ApiService(`announcement/advertiser/${this.advertiserId}`);
       const params = new URLSearchParams({
         filterBy: "disabled",
       }).toString();
@@ -129,7 +129,7 @@ export default {
       this.$store.commit("setTitle", "Anúncios Desativados");
     },
     async clickListAll() {
-      http = new ApiService(`announcement/advertiser/${this.advId}`);
+      http = new ApiService(`announcement/advertiser/${this.advertiserId}`);
       const response = await http.getList();
       this.announcements = response.data;
       this.$store.commit("setTitle", "Todos Anúncios");
@@ -141,10 +141,10 @@ export default {
     },
   },
   async created() {
-    const obj = decode(this.$store.state.token);
-    window.console.log(obj.user.id);
-
-    http = new ApiService(`announcement/advertiser/${this.advId}`);
+    const userToken = decode(this.$store.state.token);
+    window.console.log(userToken.user.id);
+    this.advertiserId = userToken.user.id;
+    http = new ApiService(`announcement/advertiser/${this.advertiserId}`);
     const response = await http.getList();
     this.announcements = response.data;
     this.$store.commit("setTitle", "Anúncios");
