@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     showMenu() {
-      return this.$route.name !== "login";
+      return this.$route.name !== "entrar";
     }
   },
 };

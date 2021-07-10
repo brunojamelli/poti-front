@@ -54,11 +54,11 @@
           <!-- <v-btn color="deep-purple lighten-2" text @click="reserve">
             Reserve
           </v-btn> -->
-          <v-btn v-if="!item.active" depressed color="primary" @click="a"> Ativar </v-btn>
+          <v-btn v-if="!item.active" depressed color="primary" @click="a">
+            Ativar
+          </v-btn>
           <v-btn v-else depressed color="warning" @click="a"> Desativar </v-btn>
           <v-btn depressed color="error" @click="a"> Apagar </v-btn>
-
-
         </v-card-actions>
       </v-card>
     </v-row>
@@ -67,6 +67,8 @@
 
 <script>
 import ApiService from "../utils/ApiService";
+import decode from "jwt-decode";
+
 let http = {};
 export default {
   name: "Home",
@@ -78,6 +80,11 @@ export default {
     loading: false,
     selection: 1,
   }),
+  computed: {
+    token() {
+      return this.$store.getters.isLoggedIn;
+    },
+  },
   methods: {
     async clickValids() {
       http = new ApiService(`announcement/advertiser/${this.advId}`);
@@ -127,6 +134,9 @@ export default {
     },
   },
   async created() {
+    const obj  = decode(this.$store.state.token);
+    window.console.log(obj.user.id);
+    
     http = new ApiService(`announcement/advertiser/${this.advId}`);
     const response = await http.getList();
     this.announcements = response.data;
