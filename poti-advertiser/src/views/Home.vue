@@ -56,11 +56,11 @@
           <!-- <v-btn color="deep-purple lighten-2" text @click="reserve">
             Reserve
           </v-btn> -->
-          <v-btn v-if="!item.active" depressed color="primary" @click="a">
+          <v-btn v-if="!item.active" depressed color="primary" @click="click01(false)">
             Ativar
           </v-btn>
-          <v-btn v-else depressed color="warning" @click="a"> Desativar </v-btn>
-          <v-btn depressed color="error" @click="a"> Apagar </v-btn>
+          <v-btn v-else depressed color="warning" @click="click01(true)"> Desativar </v-btn>
+          <v-btn depressed color="error" @click="click02"> Apagar </v-btn>
         </v-card-actions>
       </v-card>
     </v-row>
@@ -134,6 +134,13 @@ export default {
       this.announcements = response.data;
       this.$store.commit("setTitleHome", "Todos Anúncios");
     },
+    async click01(payload){
+      window.console.log(payload);
+    },
+    async click02(){
+
+    },
+
     reserve() {
       this.loading = true;
 
