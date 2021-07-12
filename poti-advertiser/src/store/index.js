@@ -9,10 +9,14 @@ export default new Vuex.Store({
     token: localStorage.getItem('token') || '',
     user: {},
     titlePage: "",
+    titleHome: ""
   },
   mutations: {
     setTitle(state, payload) {
       state.titlePage = payload;
+    },
+    setTitleHome(state, payload) {
+      state.titleHome = payload;
     },
     auth_request(state) {
       state.status = 'loading'
@@ -61,5 +65,6 @@ export default new Vuex.Store({
     isLoggedIn: state => !!state.token,
     authStatus: state => state.status,
     titlePage: state => state.titlePage,
+    titleHome: state => state.titleHome,
   }
 })

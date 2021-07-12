@@ -2,7 +2,7 @@
   <div>
     <div>
       <h2 style="text-align: center">
-        {{ $store.getters.titlePage }}
+        {{ $store.getters.titleHome }}
       </h2>
       <br />
     </div>
@@ -96,7 +96,7 @@ export default {
 
       const response = await http.getListWithParams(params);
       this.announcements = response.data;
-      this.$store.commit("setTitle", "Anúncios Válidos");
+      this.$store.commit("setTitleHome", "Anúncios Válidos");
     },
     async clickInvalids() {
       http = new ApiService(`announcement/advertiser/${this.advertiserId}`);
@@ -106,7 +106,7 @@ export default {
 
       const response = await http.getListWithParams(params);
       this.announcements = response.data;
-      this.$store.commit("setTitle", "Anúncios Inválidos");
+      this.$store.commit("setTitleHome", "Anúncios Inválidos");
     },
     async clickActivateds() {
       http = new ApiService(`announcement/advertiser/${this.advertiserId}`);
@@ -116,7 +116,7 @@ export default {
 
       const response = await http.getListWithParams(params);
       this.announcements = response.data;
-      this.$store.commit("setTitle", "Anúncios Ativos");
+      this.$store.commit("setTitleHome", "Anúncios Ativos");
     },
     async clickDisableds() {
       http = new ApiService(`announcement/advertiser/${this.advertiserId}`);
@@ -126,13 +126,13 @@ export default {
 
       const response = await http.getListWithParams(params);
       this.announcements = response.data;
-      this.$store.commit("setTitle", "Anúncios Desativados");
+      this.$store.commit("setTitleHome", "Anúncios Desativados");
     },
     async clickListAll() {
       http = new ApiService(`announcement/advertiser/${this.advertiserId}`);
       const response = await http.getList();
       this.announcements = response.data;
-      this.$store.commit("setTitle", "Todos Anúncios");
+      this.$store.commit("setTitleHome", "Todos Anúncios");
     },
     reserve() {
       this.loading = true;
@@ -148,6 +148,8 @@ export default {
     const response = await http.getList();
     this.announcements = response.data;
     this.$store.commit("setTitle", "Anúncios");
+    this.$store.commit("setTitleHome", "Todos Anúncios");
+    
   },
   async mounted() {},
 };
