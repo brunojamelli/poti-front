@@ -9,6 +9,9 @@ export default {
   name: "AdRegistration",
 
   components: {},
+  created(){
+    this.$store.commit("setTitle", "Cadastro de Anúncio");
+  }
 };
 </script>
 <style scoped>

@@ -9,6 +9,9 @@ export default {
   name: "Profile",
 
   components: {},
+  created(){
+    this.$store.commit("setTitle", "Perfil");
+  }
 };
 </script>
 <style scoped>
