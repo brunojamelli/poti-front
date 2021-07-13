@@ -5,6 +5,7 @@ import Profile from '../views/Profile.vue'
 import Login from '../views/forms/Login.vue'
 import AdRegistration from '../views/forms/AdRegistration.vue'
 import AdvertiserRegistration from '../views/forms/AdvertiserRegistration.vue'
+import PhotoRegistration from '../views/forms/PhotoRegistration.vue'
 import ValidatedAds from '../views/ValidatedAds.vue'
 import ActivatedAds from '../views/ActivatedAds.vue'
 import beforeEach from './beforeEach'
@@ -47,6 +48,11 @@ const routes = [
     path: '/anuncios-ativos',
     name: 'anuncios-ativos',
     component: ActivatedAds
+  },
+  {
+    path: '/cadastro-fotos',
+    name: 'cadastro-fotos',
+    component: PhotoRegistration
   },
   {
     path: '/about',
