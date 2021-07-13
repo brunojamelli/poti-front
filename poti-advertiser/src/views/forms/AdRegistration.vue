@@ -1,18 +1,146 @@
 <template>
-  <v-card width="1400px" class="mx-auto">
-    <div class="title">Registro Anuncio</div>
+  <v-card class="mx-auto" max-width="500" style="margin-top: 20px">
+    <!-- <div class="title">Registro Anuncio</div> -->
+    <v-card-text>
+      <v-form class="m-3" v-model="isValid">
+        <v-text-field
+          v-model="form.name"
+          label="Titulo"
+          :rules="[(v) => !!v || 'Titulo é de preenchimento obrigatório']"
+          required
+          outlined
+        ></v-text-field>
+
+        <v-textarea
+          v-model="form.description"
+          label="Descrição"
+          :rules="[(v) => !!v || 'Descrição é de preenchimento obrigatório']"
+          required
+          auto-grow
+          outlined
+          rows="3"
+          row-height="25"
+        ></v-textarea>
+
+        <v-select
+          v-model="form.special"
+          :items="options"
+          item-text="label"
+          item-value="value"
+          label="Categoria"
+          :rules="[(v) => !!v || 'Categoria é de preenchimento obrigatório']"
+          required
+          outlined
+          @change="$v.select.$touch()"
+          @blur="$v.select.$touch()"
+        ></v-select>
+
+        <v-text-field
+          v-model="form.value"
+          label="Valor"
+          :rules="[(v) => !!v || 'Valor é de preenchimento obrigatório']"
+          required
+          value="0.00"
+          prefix="$"
+          outlined
+        ></v-text-field>
+
+        <v-text-field
+          v-model="form.qtdPeople"
+          label="Quantidade"
+          :rules="[(v) => !!v || 'Quantidade é de preenchimento obrigatório']"
+          required
+          type="number"
+          outlined
+        ></v-text-field>
+
+        <v-card-actions class="justify-center">
+          <v-btn
+            style="width: 250px"
+            large
+            rounded
+            dark
+            color="success"
+            @click.prevent="submit"
+          >
+            Cadastrar
+          </v-btn>
+        </v-card-actions>
+      </v-form>
+    </v-card-text>
   </v-card>
 </template>
 
 <script>
+import ApiService from "../../utils/ApiService";
+const http = new ApiService("spaces");
+
 export default {
   name: "AdRegistration",
-
+  data() {
+    return {
+      form: {
+        name: "",
+        description: "",
+        localization: "",
+        responsible: "",
+        special: null,
+        justification: "",
+        disabled: false,
+        computers: null,
+        qtdPeople: "",
+        extension: "",
+        value: 0.00,
+      },
+      options: [
+        { label: "Venda", value: "Venda" },
+        { label: "Serviço", value: "Serviço" },
+      ],
+      options2: [
+        { label: "Sim", value: "true" },
+        { label: "Não", value: "false" },
+      ],
+      show: true,
+      isValid: true,
+    };
+  },
+  methods: {
+    async submit(evt) {
+      evt.preventDefault();
+      http.create(this.form);
+      this.$alert("Espaço Cadastrado.", "Sucesso", "success");
+      this.$router.push("/");
+    },
+    onReset(evt) {
+      evt.preventDefault();
+      (this.form.name = ""),
+        (this.form.description = ""),
+        (this.form.localization = ""),
+        (this.form.responsible = ""),
+        (this.form.special = null),
+        (this.form.justification = ""),
+        (this.form.disabled = false),
+        (this.form.computers = null),
+        (this.form.qtdPeople = ""),
+        (this.form.extension = ""),
+        (this.show = false);
+      this.$nextTick(() => {
+        this.show = true;
+      });
+    },
+  },
   components: {},
-  created(){
+  created() {
     this.$store.commit("setTitle", "Cadastro de Anúncio");
-  }
+  },
 };
 </script>
 <style scoped>
+#formSpace {
+  width: 400px;
+  margin: auto;
+}
+#btnRegister {
+  margin-right: 11em;
+}
 </style>
