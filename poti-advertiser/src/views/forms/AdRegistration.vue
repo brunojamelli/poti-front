@@ -5,7 +5,7 @@
     <v-card-text>
       <v-form class="m-3" v-model="isValid">
         <v-text-field
-          v-model="form.name"
+          v-model="form.title"
           label="Titulo"
           :rules="[(v) => !!v || 'Titulo é de preenchimento obrigatório']"
           required
@@ -24,7 +24,7 @@
         ></v-textarea>
 
         <v-select
-          v-model="form.special"
+          v-model="form.category"
           :items="options"
           item-text="label"
           item-value="value"
@@ -47,7 +47,7 @@
         ></v-text-field>
 
         <v-text-field
-          v-model="form.qtdPeople"
+          v-model="form.quantity"
           label="Quantidade"
           :rules="[(v) => !!v || 'Quantidade é de preenchimento obrigatório']"
           required
@@ -74,23 +74,17 @@
 
 <script>
 import ApiService from "../../utils/ApiService";
-const http = new ApiService("spaces");
+const http = new ApiService("announcement");
 
 export default {
   name: "AdRegistration",
   data() {
     return {
       form: {
-        name: "",
+        title: "",
         description: "",
-        localization: "",
-        responsible: "",
-        special: null,
-        justification: "",
-        disabled: false,
-        computers: null,
-        qtdPeople: "",
-        extension: "",
+        category: null,
+        quantity: 0,
         value: 0.0,
       },
       options: [
@@ -108,10 +102,13 @@ export default {
   methods: {
     async submit(evt) {
       evt.preventDefault();
-      http.create(this.form);
       // this.$alert("Espaço Cadastrado.", "Sucesso", "success");
-      alert("caso queira adicionar as fotos agora, clique em ok")
-      this.$router.push("/cadastro-fotos");
+      alert("caso queira adicionar as fotos agora, clique em ok");
+      // alert(this.form);
+      window.console.log(this.form);
+      http.create(this.form);
+      
+      // this.$router.push("/cadastro-fotos");
     },
     onReset(evt) {
       evt.preventDefault();
@@ -123,7 +120,7 @@ export default {
         (this.form.justification = ""),
         (this.form.disabled = false),
         (this.form.computers = null),
-        (this.form.qtdPeople = ""),
+        (this.form.quantityPeople = ""),
         (this.form.extension = ""),
         (this.show = false);
       this.$nextTick(() => {
