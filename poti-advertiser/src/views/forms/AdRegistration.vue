@@ -1,6 +1,7 @@
 <template>
   <v-card class="mx-auto" max-width="500" style="margin-top: 20px">
     <!-- <div class="title">Registro Anuncio</div> -->
+    <h2 class="text-center">Cadastro de Anúncio</h2>
     <v-card-text>
       <v-form class="m-3" v-model="isValid">
         <v-text-field
@@ -90,7 +91,7 @@ export default {
         computers: null,
         qtdPeople: "",
         extension: "",
-        value: 0.00,
+        value: 0.0,
       },
       options: [
         { label: "Venda", value: "Venda" },
@@ -108,8 +109,9 @@ export default {
     async submit(evt) {
       evt.preventDefault();
       http.create(this.form);
-      this.$alert("Espaço Cadastrado.", "Sucesso", "success");
-      this.$router.push("/");
+      // this.$alert("Espaço Cadastrado.", "Sucesso", "success");
+      alert("caso queira adicionar as fotos agora, clique em ok")
+      this.$router.push("/cadastro-fotos");
     },
     onReset(evt) {
       evt.preventDefault();
@@ -131,7 +133,7 @@ export default {
   },
   components: {},
   created() {
-    this.$store.commit("setTitle", "Cadastro de Anúncio");
+    this.$store.commit("setTitle", "");
   },
 };
 </script>

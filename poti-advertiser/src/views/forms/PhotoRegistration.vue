@@ -4,9 +4,9 @@
       <v-file-input
         :rules="rules"
         accept="image/png, image/jpeg, image/bmp"
-        placeholder="Pick an avatar"
+        placeholder="Adicione fotos ao seu anúncio"
         prepend-icon="mdi-camera"
-        label="Avatar"
+        label="Foto"
       ></v-file-input>
       <v-card-actions class="justify-center">
         <v-btn
@@ -35,6 +35,15 @@ export default {
   }),
   created() {
     this.$store.commit("setTitle", "Cadastro de Fotos");
+  },
+  methods: {
+    async submit(evt) {
+      evt.preventDefault();
+    //   http.create(this.form);
+      // this.$alert("Espaço Cadastrado.", "Sucesso", "success");
+      alert("foto salva com sucesso !!");
+    //   this.$router.push("/cadastro-fotos");
+    },
   },
 };
 </script>
