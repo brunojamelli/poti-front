@@ -8,6 +8,7 @@ import AdvertiserRegistration from '../views/forms/AdvertiserRegistration.vue'
 import PhotoRegistration from '../views/forms/PhotoRegistration.vue'
 import ValidatedAds from '../views/ValidatedAds.vue'
 import ActivatedAds from '../views/ActivatedAds.vue'
+import AdDetails from '../views/AdDetails.vue'
 import beforeEach from './beforeEach'
 
 
@@ -18,6 +19,11 @@ const routes = [
     path: '/',
     name: 'home',
     component: Home
+  },
+  {
+    path: '/detalhes-anuncio',
+    name: 'detalhes-anuncio',
+    component: AdDetails
   },
   {
     path: '/entrar',

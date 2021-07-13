@@ -35,6 +35,9 @@
             indeterminate
           ></v-progress-linear>
         </template>
+        <v-row align="center" justify="space-around">
+          <v-btn depressed class="mx-auto my-4" @click="click03"> Detalhes </v-btn>
+        </v-row>
 
         <v-img
           height="180"
@@ -52,14 +55,21 @@
         </v-card-text>
 
         <v-divider class="mx-4"></v-divider>
-        <v-card-actions>
+        <v-card-actions >
           <!-- <v-btn color="deep-purple lighten-2" text @click="reserve">
             Reserve
           </v-btn> -->
-          <v-btn v-if="!item.active" depressed color="primary" @click="click01(false)">
+          <v-btn
+            v-if="!item.active"
+            depressed
+            color="primary"
+            @click="click01(false)"
+          >
             Ativar
           </v-btn>
-          <v-btn v-else depressed color="warning" @click="click01(true)"> Desativar </v-btn>
+          <v-btn v-else depressed color="warning" @click="click01(true)">
+            Desativar
+          </v-btn>
           <v-btn depressed color="error" @click="click02"> Apagar </v-btn>
         </v-card-actions>
       </v-card>
@@ -134,11 +144,15 @@ export default {
       this.announcements = response.data;
       this.$store.commit("setTitleHome", "Todos Anúncios");
     },
-    async click01(payload){
+    async click01(payload) {
       window.console.log(payload);
     },
-    async click02(){
+    async click02() {},
 
+    click03(){
+      // this.$router.push("/");
+      alert("detalhes");
+      this.$router.push("/detalhes-anuncio");
     },
 
     reserve() {
@@ -156,7 +170,6 @@ export default {
     this.announcements = response.data;
     this.$store.commit("setTitle", "Anúncios");
     this.$store.commit("setTitleHome", "Todos Anúncios");
-    
   },
   async mounted() {},
 };
