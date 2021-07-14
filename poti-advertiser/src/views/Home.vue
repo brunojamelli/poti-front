@@ -170,6 +170,13 @@ export default {
     this.announcements = response.data;
     this.$store.commit("setTitle", "Anúncios");
     this.$store.commit("setTitleHome", "Todos Anúncios");
+    http = new ApiService('announcement');
+    let allAds = [];
+    let response2 = await http.getList();
+    allAds = response2.data;
+    window.console.log(allAds);
+    allAds.sort((a, b) => (a.id > b.id) ? 1 : (a.id === b.id) ? ((a.size > b.size) ? 1 : -1) : -1 )
+    window.console.log(allAds[allAds.length-1]);
   },
   async mounted() {},
 };
