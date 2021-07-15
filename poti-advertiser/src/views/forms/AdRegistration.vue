@@ -68,6 +68,30 @@
           </v-btn>
         </v-card-actions>
       </v-form>
+      <v-dialog v-model="dialog" max-width="320">
+        <v-card>
+          <v-card-title class="text-h5">
+            Deseja prosseguir ao cadastro das fotos do anúncio?
+          </v-card-title>
+
+          <v-card-text>
+            Caso queira prosseguir no cadastro das fotos do anúncio, clique em Concordo, 
+            mas, caso queira voltar a tela inicial, clique em Voltar aos Anúncios
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+
+            <v-btn color="green darken-1" text @click="clickDisagree">
+              Voltar aos Anúncios
+            </v-btn>
+
+            <v-btn color="green darken-1" text @click="clickAgree">
+              Concordo
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
     </v-card-text>
   </v-card>
 </template>
@@ -80,6 +104,7 @@ export default {
   name: "AdRegistration",
   data() {
     return {
+      dialog: false,
       form: {
         title: "",
         description: "",
@@ -102,12 +127,9 @@ export default {
   methods: {
     async submit(evt) {
       evt.preventDefault();
-      // this.$alert("Espaço Cadastrado.", "Sucesso", "success");
-      alert("caso queira adicionar as fotos agora, clique em ok");
+      this.dialog = true;
       window.console.log(this.form);
       http.create(this.form);
-      
-      this.$router.push("/cadastro-fotos");
     },
     onReset(evt) {
       evt.preventDefault();
@@ -125,6 +147,14 @@ export default {
       this.$nextTick(() => {
         this.show = true;
       });
+    },
+    clickDisagree() {
+      this.dialog = false;
+      this.$router.push("/");
+    },
+    clickAgree() {
+      this.dialog = false;
+      this.$router.push("/cadastro-fotos");
     },
   },
   components: {},
