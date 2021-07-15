@@ -25,8 +25,8 @@
   </v-card>
 </template>
 <script>
-// import ApiService from "../../utils/ApiService";
-// const http = new ApiService("photo");
+import ApiService from "../../utils/ApiService";
+let http = {};
 import apiConfig from "../../utils/config";
 // import { getToken } from "../../utils/auth";
 const headers = () => {
@@ -50,25 +50,40 @@ export default {
     form: {
       files: [],
       an_id: 25,
+      last_id: 0,
     },
   }),
-  created() {
+  async created() {
     this.$store.commit("setTitle", "Cadastro de Fotos");
+    http = new ApiService("announcement");
+    let allAds = [];
+    let response2 = await http.getList();
+    allAds = response2.data;
+    window.console.log(allAds);
+    allAds.sort((a, b) =>
+      a.id > b.id ? 1 : a.id === b.id ? (a.size > b.size ? 1 : -1) : -1
+    );
+    window.console.log(allAds[allAds.length - 1]);
+    this.last_id = allAds[allAds.length - 1].id;
   },
   methods: {
     async submit(evt) {
       evt.preventDefault();
       const formData = new FormData();
-      formData.append("an_id", 4);
-      
-      for (const i of Object.keys(this.form.files)) {
-        formData.append("photo", this.form.files[i]);
+      if (this.last_id != 0) {
+        formData.append("an_id", this.last_id);
+
+        for (const i of Object.keys(this.form.files)) {
+          formData.append("photo", this.form.files[i]);
+        }
+        await apiConfig.post("photo", formData, headers);
+        // this.$alert("Espaço Cadastrado.", "Sucesso", "success");
+        alert("foto salva com sucesso !!");
+        window.console.log(this.form.files);
+        //   this.$router.push("/cadastro-fotos");
+      } else {
+        alert("foto de ID invalido");
       }
-      await apiConfig.post("photo", formData, headers);
-      // this.$alert("Espaço Cadastrado.", "Sucesso", "success");
-      alert("foto salva com sucesso !!");
-      window.console.log(this.form.files);
-      //   this.$router.push("/cadastro-fotos");
     },
   },
 };

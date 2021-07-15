@@ -104,11 +104,10 @@ export default {
       evt.preventDefault();
       // this.$alert("Espaço Cadastrado.", "Sucesso", "success");
       alert("caso queira adicionar as fotos agora, clique em ok");
-      // alert(this.form);
       window.console.log(this.form);
       http.create(this.form);
       
-      // this.$router.push("/cadastro-fotos");
+      this.$router.push("/cadastro-fotos");
     },
     onReset(evt) {
       evt.preventDefault();
