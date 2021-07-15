@@ -68,15 +68,16 @@
           </v-btn>
         </v-card-actions>
       </v-form>
-      <v-dialog v-model="dialog" max-width="320">
+      <v-dialog v-model="dialog" max-width="420">
         <v-card>
           <v-card-title class="text-h5">
             Deseja prosseguir ao cadastro das fotos do anúncio?
           </v-card-title>
 
           <v-card-text>
-            Caso queira prosseguir no cadastro das fotos do anúncio, clique em Concordo, 
-            mas, caso queira voltar a tela inicial, clique em Voltar aos Anúncios
+            Caso queira prosseguir no cadastro das fotos do anúncio, clique em
+            Concordo, mas, caso queira voltar a tela inicial, clique em Voltar
+            aos Anúncios
           </v-card-text>
 
           <v-card-actions>
@@ -99,6 +100,7 @@
 <script>
 import ApiService from "../../utils/ApiService";
 const http = new ApiService("announcement");
+import decode from "jwt-decode";
 
 export default {
   name: "AdRegistration",
@@ -111,6 +113,7 @@ export default {
         category: null,
         quantity: 0,
         value: 0.0,
+        advertiser_id: 4
       },
       options: [
         { label: "Venda", value: "Venda" },
@@ -133,17 +136,17 @@ export default {
     },
     onReset(evt) {
       evt.preventDefault();
-      (this.form.name = ""),
-        (this.form.description = ""),
-        (this.form.localization = ""),
-        (this.form.responsible = ""),
-        (this.form.special = null),
-        (this.form.justification = ""),
-        (this.form.disabled = false),
-        (this.form.computers = null),
-        (this.form.quantityPeople = ""),
-        (this.form.extension = ""),
-        (this.show = false);
+      // (this.form.name = ""),
+      //   (this.form.description = ""),
+      //   (this.form.localization = ""),
+      //   (this.form.responsible = ""),
+      //   (this.form.special = null),
+      //   (this.form.justification = ""),
+      //   (this.form.disabled = false),
+      //   (this.form.computers = null),
+      //   (this.form.quantityPeople = ""),
+      //   (this.form.extension = ""),
+      //   (this.show = false);
       this.$nextTick(() => {
         this.show = true;
       });
@@ -159,6 +162,9 @@ export default {
   },
   components: {},
   created() {
+    const userToken = decode(this.$store.state.token);
+    window.console.log(userToken.user.id);
+    this.form.advertiser_id = userToken.user.id;
     this.$store.commit("setTitle", "");
   },
 };
