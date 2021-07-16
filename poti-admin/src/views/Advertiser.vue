@@ -45,7 +45,6 @@ export default {
     formatPhone(str) {
       return str
         .replace(/\D/g, "")
-        
         .substring(0, 16)
         .trim();
     },

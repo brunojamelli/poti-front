@@ -7,9 +7,17 @@ export default new Vuex.Store({
   state: {
     status: '',
     token: localStorage.getItem('token') || '',
-    user: {}
+    user: {},
+    titlePage: "",
+    titleHome: ""
   },
   mutations: {
+    setTitle(state, payload) {
+      state.titlePage = payload;
+    },
+    setTitleHome(state, payload) {
+      state.titleHome = payload;
+    },
     auth_request(state) {
       state.status = 'loading'
     },
@@ -24,10 +32,11 @@ export default new Vuex.Store({
       state.status = ''
       state.token = ''
     },
+    
   },
   actions: {
     async login({ commit }, data) {
-      let endpoint = 'loginAdmin'
+      let endpoint = 'loginAn'
       commit('auth_request')
       try {
         let result = await apiConfig.post(`/${endpoint}/`, data)
@@ -55,5 +64,7 @@ export default new Vuex.Store({
   getters: {
     isLoggedIn: state => !!state.token,
     authStatus: state => state.status,
+    titlePage: state => state.titlePage,
+    titleHome: state => state.titleHome,
   }
 })

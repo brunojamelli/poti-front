@@ -8,6 +8,7 @@ import Valids from '../views/Valids.vue'
 import Advertiser from '../views/Advertiser.vue'
 import Login from '../views/Login.vue'
 import DetailAdvertiser from '../views/detail/DetailAdvertiser'
+import beforeEach from './beforeEach'
 
 Vue.use(VueRouter)
 
@@ -63,5 +64,7 @@ const routes = [
 const router = new VueRouter({
   routes
 })
+
+router.beforeEach(beforeEach);
 
 export default router

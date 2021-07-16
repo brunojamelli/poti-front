@@ -8,6 +8,13 @@
         :key="item.id"
         style="width: 22rem; margin-bottom: 1em"
       >
+        <template #header>
+          <img
+            class="ads-image"
+            alt="user header"
+            src="http://via.placeholder.com/350x150"
+          />
+        </template>
         <template #title>
           <div class="item-title">
             {{ item.title }}
@@ -18,12 +25,24 @@
             {{ item.description }}
           </p>
         </template>
-        <template #subtitle> {{ item.value }} <b>R$</b> </template>
+        <template #subtitle>
+          <b> R$ </b>{{ item.value }} 
+        </template>
         <template #footer>
           <Button
+            v-if="!item.valid"
+            class="p-button-warning"
             icon="pi pi-check"
-            class="p-button-secondary"
             label="Validar"
+            @click="adValitation(item)"
+          />
+          <Button v-else label="Validado" class="p-button-success" />
+          <Button
+            icon="pi pi-eye"
+            label="Detalhes"
+            class="p-button-secondary"
+            style="margin-left: 0.5em"
+            @click="sendToDetail('detalhes-anuncio', item)"
           />
         </template>
       </Card>
@@ -58,6 +77,20 @@ export default {
 
     const response = await http.getListWithParams(params);
     this.pendings = response.data;
+  },
+  methods: {
+    sendToDetail(where, data) {
+      this.$router.push({ name: where, params: { advertiser: data } });
+    },
+    async adValitation(object) {
+      const service = new ApiService("announcement/validation");
+      let response = service.patch(object.id);
+      window.console.log(response);
+      alert("validado");
+      let index = this.pendings.indexOf(object);
+      this.pendings.splice(index, 1);
+      // this.an_list[index].valid = true;
+    },
   },
 };
 </script>
