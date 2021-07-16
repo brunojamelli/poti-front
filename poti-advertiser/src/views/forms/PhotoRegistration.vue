@@ -80,7 +80,7 @@ export default {
         // this.$alert("Espaço Cadastrado.", "Sucesso", "success");
         alert("foto salva com sucesso !!");
         window.console.log(this.form.files);
-        //   this.$router.push("/cadastro-fotos");
+        this.$router.push("/");
       } else {
         alert("foto de ID invalido");
       }

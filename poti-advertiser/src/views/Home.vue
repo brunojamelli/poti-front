@@ -36,7 +36,9 @@
           ></v-progress-linear>
         </template>
         <v-row align="center" justify="space-around">
-          <v-btn depressed class="mx-auto my-4" @click="click03"> Detalhes </v-btn>
+          <v-btn depressed class="mx-auto my-4" @click="click03">
+            Detalhes
+          </v-btn>
         </v-row>
 
         <v-img
@@ -55,7 +57,7 @@
         </v-card-text>
 
         <v-divider class="mx-4"></v-divider>
-        <v-card-actions >
+        <v-card-actions>
           <!-- <v-btn color="deep-purple lighten-2" text @click="reserve">
             Reserve
           </v-btn> -->
@@ -74,6 +76,29 @@
         </v-card-actions>
       </v-card>
     </v-row>
+    <v-dialog v-model="dialogDelete" max-width="380">
+      <v-card>
+        <v-card-title class="text-h5">
+          Tem certeja que deseja apagar esse anúncio?
+        </v-card-title>
+
+        <v-card-text>
+          Tem certeza que deseja prosseguir? essa ação é irreversivel.
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn color="green darken-1" text @click="dialogDelete = false">
+            Voltar aos Anúncios
+          </v-btn>
+
+          <v-btn color="green darken-1" text @click="clickAgreeDelete">
+            Concordo
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -91,6 +116,7 @@ export default {
     advertiserId: 0,
     loading: false,
     selection: 1,
+    dialogDelete: false,
   }),
   computed: {
     token() {
@@ -147,9 +173,13 @@ export default {
     async click01(payload) {
       window.console.log(payload);
     },
-    async click02() {},
-
-    click03(){
+    async click02() {
+      this.dialogDelete = true;
+    },
+    clickAgreeDelete(){
+      alert("apagado");
+    },
+    click03() {
       // this.$router.push("/");
       alert("detalhes");
       this.$router.push("/detalhes-anuncio");
