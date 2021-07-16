@@ -74,31 +74,33 @@
           </v-btn>
           <v-btn depressed color="error" @click="click02"> Apagar </v-btn>
         </v-card-actions>
+      
+      <v-dialog v-model="dialogDelete" max-width="380">
+        <v-card>
+          <v-card-title class="text-h5">
+            Tem certeja que deseja apagar esse anúncio?
+            {{ item.id }}
+          </v-card-title>
+
+          <v-card-text>
+            Tem certeza que deseja prosseguir? essa ação é irreversivel.
+          </v-card-text>
+
+          <v-card-actions>
+            <v-spacer></v-spacer>
+
+            <v-btn color="green darken-1" text @click="dialogDelete = false">
+              Voltar aos Anúncios
+            </v-btn>
+
+            <v-btn color="green darken-1" text @click="clickAgreeDelete(item)">
+              Concordo
+            </v-btn>
+          </v-card-actions>
+        </v-card>
+      </v-dialog>
       </v-card>
     </v-row>
-    <v-dialog v-model="dialogDelete" max-width="380">
-      <v-card>
-        <v-card-title class="text-h5">
-          Tem certeja que deseja apagar esse anúncio?
-        </v-card-title>
-
-        <v-card-text>
-          Tem certeza que deseja prosseguir? essa ação é irreversivel.
-        </v-card-text>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-
-          <v-btn color="green darken-1" text @click="dialogDelete = false">
-            Voltar aos Anúncios
-          </v-btn>
-
-          <v-btn color="green darken-1" text @click="clickAgreeDelete">
-            Concordo
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog>
   </div>
 </template>
 
@@ -173,11 +175,14 @@ export default {
     async click01(payload) {
       window.console.log(payload);
     },
-    async click02() {
+    click02() {
       this.dialogDelete = true;
     },
-    clickAgreeDelete(){
+    async clickAgreeDelete(data) {
       alert("apagado");
+      http = new ApiService("announcement");
+      let response = await http.delete(data.id);
+      window.console.log(response);
     },
     click03() {
       // this.$router.push("/");
