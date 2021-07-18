@@ -6,9 +6,15 @@
       <v-form ref="form" v-model="valid">
         <v-text-field
           v-model="form.name"
-          :counter="10"
           :rules="[(v) => !!v || 'Nome é de preenchimento obrigatório']"
           label="Nome"
+          required
+        ></v-text-field>
+
+        <v-text-field
+          v-model="form.whatsapp"
+          :rules="[(v) => !!v || 'Whatsapp é de preenchimento obrigatório']"
+          label="Whatsapp"
           required
         ></v-text-field>
 
@@ -27,23 +33,41 @@
           :rules="[rules.password]"
           required
         ></v-text-field>
-        <v-btn large rounded dark color="success" @click.prevent="submit">
-          Cadastrar
-        </v-btn>
+        <v-text-field
+          v-model="form.address"
+          label="Endereço"
+          required
+        ></v-text-field>
+        <v-card-actions class="justify-center">
+          <v-btn
+            style="width: 250px"
+            large
+            dark
+            color="success"
+            @click.prevent="submit"
+          >
+            Cadastrar
+          </v-btn>
+        </v-card-actions>
       </v-form>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
+import ApiService from "../../utils/ApiService";
+const http = new ApiService("advertiser");
+
 export default {
   name: "AdvertiserRegistration",
   components: {},
   data: () => ({
     form: {
       name: "",
+      whatsapp: "",
       email: "",
       password: "",
+      address: "",
     },
     valid: true,
     value: true,
@@ -59,6 +83,14 @@ export default {
       },
     },
   }),
+  methods: {
+    async submit(evt) {
+      evt.preventDefault();
+      http.create(this.form);
+      alert("cadastrado com sucesso");
+      this.$router.push("/");
+    },
+  },
   created() {
     this.$store.commit("setTitle", "Cadastro de Anunciante");
   },
