@@ -49,8 +49,6 @@
         <v-text-field
           v-model="form.quantity"
           label="Quantidade"
-          :rules="[(v) => !!v || 'Quantidade é de preenchimento obrigatório']"
-          required
           type="number"
           outlined
         ></v-text-field>
@@ -59,10 +57,9 @@
           <v-btn
             style="width: 250px"
             large
-            rounded
-            dark
             color="success"
             @click.prevent="submit"
+            :disabled="!isValid"
           >
             Cadastrar
           </v-btn>
@@ -113,7 +110,7 @@ export default {
         category: null,
         quantity: 0,
         value: 0.0,
-        advertiser_id: 4
+        advertiser_id: 4,
       },
       options: [
         { label: "Venda", value: "Venda" },
