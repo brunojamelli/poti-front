@@ -72,6 +72,7 @@
         </v-card-actions>
       </v-card>
     </v-row>
+
     <v-dialog v-model="dialogDelete" max-width="380">
       <v-card>
         <v-card-title class="text-h5">
@@ -96,29 +97,6 @@
       </v-card>
     </v-dialog>
 
-    <!-- <v-dialog v-model="dialogDesative" max-width="380">
-      <v-card>
-        <v-card-title class="text-h5">
-          Tem certeja que deseja desativar esse anúncio?
-        </v-card-title>
-
-        <v-card-text>
-          Ao desativar esse anúncio, essa ação pode ser desfeita.
-        </v-card-text>
-
-        <v-card-actions>
-          <v-spacer></v-spacer>
-
-          <v-btn color="green darken-1" text @click="dialogDelete = false">
-            Voltar aos Anúncios
-          </v-btn>
-
-          <v-btn color="green darken-1" text @click="clickAgreeDelete">
-            Concordo
-          </v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-dialog> -->
     <v-snackbar v-model="snackbar" :multi-line="multiLine">
       {{ text }}
 
@@ -207,6 +185,8 @@ export default {
     async click01(status, clicked) {
       this.snackbar = true;
       //http://localhost:3333/announcement/desativation/4
+      if(!status)
+        this.text = "anúncio ativado com sucesso"
       window.console.log(status);
 
       window.console.log(clicked);
