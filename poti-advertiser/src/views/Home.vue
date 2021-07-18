@@ -16,7 +16,6 @@
       </v-btn>
     </v-row>
     <br />
-    <!-- align="center" -->
     <v-row>
       <v-card
         cols="12"
@@ -58,9 +57,6 @@
 
         <v-divider class="mx-4"></v-divider>
         <v-card-actions>
-          <!-- <v-btn color="deep-purple lighten-2" text @click="reserve">
-            Reserve
-          </v-btn> -->
           <v-btn
             v-if="!item.active"
             depressed

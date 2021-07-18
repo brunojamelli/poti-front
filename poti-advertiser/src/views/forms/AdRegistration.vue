@@ -1,6 +1,5 @@
 <template>
   <v-card class="mx-auto" max-width="500" style="margin-top: 20px">
-    <!-- <div class="title">Registro Anuncio</div> -->
     <h2 class="text-center">Cadastro de Anúncio</h2>
     <v-card-text>
       <v-form class="m-3" v-model="isValid">
@@ -132,7 +131,7 @@ export default {
         (v) => !!v || "Descrição é obrigatoria",
         (v) => (v && v.length >= 8) || "Descrição tem que ter mais de 8 letras",
       ],
-      categoryRule: [(v) => !!v || "A Categoria e Obrigatória"],
+      categoryRule: [(v) => !!v || "A Categoria é Obrigatória"],
       valueRule: [(v) => !!v || "O valor do anuncio é obrigatório"],
     };
   },
@@ -145,16 +144,7 @@ export default {
     },
     onReset(evt) {
       evt.preventDefault();
-      // (this.form.name = ""),
-      //   (this.form.description = ""),
-      //   (this.form.localization = ""),
-      //   (this.form.responsible = ""),
-      //   (this.form.special = null),
-      //   (this.form.justification = ""),
-      //   (this.form.disabled = false),
-      //   (this.form.computers = null),
-      //   (this.form.quantityPeople = ""),
-      //   (this.form.extension = ""),
+      // (this.form.title = ""),
       //   (this.show = false);
       this.$nextTick(() => {
         this.show = true;
