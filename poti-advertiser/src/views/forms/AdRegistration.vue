@@ -7,20 +7,22 @@
         <v-text-field
           v-model="form.title"
           label="Titulo"
-          :rules="[(v) => !!v || 'Titulo é de preenchimento obrigatório']"
+          :rules="titleRules"
           required
           outlined
+          error-count="2"
         ></v-text-field>
 
         <v-textarea
           v-model="form.description"
           label="Descrição"
-          :rules="[(v) => !!v || 'Descrição é de preenchimento obrigatório']"
+          :rules="descriptionRules"
           required
           auto-grow
           outlined
           rows="3"
           row-height="25"
+          error-count="2"
         ></v-textarea>
 
         <v-select
@@ -29,7 +31,7 @@
           item-text="label"
           item-value="value"
           label="Categoria"
-          :rules="[(v) => !!v || 'Categoria é de preenchimento obrigatório']"
+          :rules="categoryRule"
           required
           outlined
           @change="$v.select.$touch()"
@@ -39,7 +41,7 @@
         <v-text-field
           v-model="form.value"
           label="Valor"
-          :rules="[(v) => !!v || 'Valor é de preenchimento obrigatório']"
+          :rules="valueRule"
           required
           value="0.00"
           prefix="$"
@@ -122,6 +124,16 @@ export default {
       ],
       show: true,
       isValid: true,
+      titleRules: [
+        (v) => !!v || "Titulo é obrigatorio",
+        (v) => (v && v.length >= 5) || "Titulo tem que ter mais de 5 letras",
+      ],
+      descriptionRules: [
+        (v) => !!v || "Descrição é obrigatoria",
+        (v) => (v && v.length >= 8) || "Descrição tem que ter mais de 8 letras",
+      ],
+      categoryRule: [(v) => !!v || "A Categoria e Obrigatória"],
+      valueRule: [(v) => !!v || "O valor do anuncio é obrigatório"],
     };
   },
   methods: {
