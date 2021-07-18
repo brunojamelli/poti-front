@@ -68,38 +68,33 @@
           <v-btn v-else depressed color="warning" @click="click01(true)">
             Desativar
           </v-btn>
-          <v-btn depressed color="error" @click="click02"> Apagar </v-btn>
+          <v-btn depressed color="error" @click="click02(item)"> Apagar </v-btn>
         </v-card-actions>
-
-        <v-dialog v-model="dialogDelete" max-width="380">
-          <v-card>
-            <v-card-title class="text-h5">
-              Tem certeja que deseja apagar esse anúncio? {{ item.title }}
-            </v-card-title>
-
-            <v-card-text>
-              Tem certeza que deseja prosseguir? essa ação é irreversivel.
-            </v-card-text>
-
-            <v-card-actions>
-              <v-spacer></v-spacer>
-
-              <v-btn color="green darken-1" text @click="dialogDelete = false">
-                Voltar aos Anúncios
-              </v-btn>
-
-              <v-btn
-                color="green darken-1"
-                text
-                @click="clickAgreeDelete(item)"
-              >
-                Concordo
-              </v-btn>
-            </v-card-actions>
-          </v-card>
-        </v-dialog>
       </v-card>
     </v-row>
+    <v-dialog v-model="dialogDelete" max-width="380">
+      <v-card>
+        <v-card-title class="text-h5">
+          Tem certeja que deseja apagar esse anúncio?
+        </v-card-title>
+
+        <v-card-text>
+          Tem certeza que deseja prosseguir? essa ação é irreversivel.
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn color="green darken-1" text @click="dialogDelete = false">
+            Voltar aos Anúncios
+          </v-btn>
+
+          <v-btn color="green darken-1" text @click="clickAgreeDelete">
+            Concordo
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
@@ -118,6 +113,7 @@ export default {
     loading: false,
     selection: 1,
     dialogDelete: false,
+    clickedAnnouncement: {},
   }),
   computed: {
     token() {
@@ -171,23 +167,25 @@ export default {
       this.announcements = response.data;
       this.$store.commit("setTitleHome", "Todos Anúncios");
     },
-    async click01(payload) {
+    click01(payload) {
       window.console.log(payload);
     },
     // clique do evento de discordar da ação de exclusão
-    click02() {
+    click02(data) {
       this.dialogDelete = true;
+      this.clickedAnnouncement = data;
+      window.console.log(data);
     },
     // evento de click de exclusão permanente de anúncio
-    async clickAgreeDelete(data) {
+    async clickAgreeDelete() {
       http = new ApiService("announcement");
       // executando a requisição http do delete
-      let response = await http.delete(data.id);
+      let response = await http.delete(this.clickedAnnouncement.id);
       window.console.log(response);
       // fechando caixa de dialogo da exclusão
       this.dialogDelete = false;
       // pegando o indice do elemento clicado para removelo da lista
-      let index = this.announcements.indexOf(data);
+      let index = this.announcements.indexOf(this.clickedAnnouncement);
       this.announcements.splice(index, 1);
     },
 
