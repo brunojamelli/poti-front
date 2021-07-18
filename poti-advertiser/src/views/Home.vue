@@ -61,11 +61,11 @@
             v-if="!item.active"
             depressed
             color="primary"
-            @click="click01(false)"
+            @click="click01(false, item)"
           >
             Ativar
           </v-btn>
-          <v-btn v-else depressed color="warning" @click="click01(true)">
+          <v-btn v-else depressed color="warning" @click="click01(true, item)">
             Desativar
           </v-btn>
           <v-btn depressed color="error" @click="click02(item)"> Apagar </v-btn>
@@ -95,6 +95,39 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
+
+    <!-- <v-dialog v-model="dialogDesative" max-width="380">
+      <v-card>
+        <v-card-title class="text-h5">
+          Tem certeja que deseja desativar esse anúncio?
+        </v-card-title>
+
+        <v-card-text>
+          Ao desativar esse anúncio, essa ação pode ser desfeita.
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn color="green darken-1" text @click="dialogDelete = false">
+            Voltar aos Anúncios
+          </v-btn>
+
+          <v-btn color="green darken-1" text @click="clickAgreeDelete">
+            Concordo
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog> -->
+    <v-snackbar v-model="snackbar" :multi-line="multiLine">
+      {{ text }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
@@ -113,7 +146,11 @@ export default {
     loading: false,
     selection: 1,
     dialogDelete: false,
+    dialogDesative: false,
     clickedAnnouncement: {},
+    multiLine: true,
+    snackbar: false,
+    text: `Anuncio desativado`,
   }),
   computed: {
     token() {
@@ -167,8 +204,17 @@ export default {
       this.announcements = response.data;
       this.$store.commit("setTitleHome", "Todos Anúncios");
     },
-    click01(payload) {
-      window.console.log(payload);
+    async click01(status, clicked) {
+      this.snackbar = true;
+      //http://localhost:3333/announcement/desativation/4
+      window.console.log(status);
+
+      window.console.log(clicked);
+      http = new ApiService("announcement/desativation");
+      let response = await http.patch(clicked.id);
+      window.console.log(response);
+      let index = this.announcements.indexOf(clicked);
+      this.announcements[index].active = !status;
     },
     // clique do evento de discordar da ação de exclusão
     click02(data) {
