@@ -35,7 +35,7 @@
           ></v-progress-linear>
         </template>
         <v-row align="center" justify="space-around">
-          <v-btn depressed class="mx-auto my-4" @click="click03">
+          <v-btn depressed class="mx-auto my-4" @click="sendToDetail('detalhes-anuncio', item)">
             Detalhes
           </v-btn>
         </v-row>
@@ -216,15 +216,20 @@ export default {
     },
 
     // evento de click do botão de detalhes
-    click03() {
-      this.$router.push("/detalhes-anuncio");
-    },
+    // click03() {
+    //   this.$router.push("/detalhes-anuncio");
+    // },
 
     reserve() {
       this.loading = true;
 
       setTimeout(() => (this.loading = false), 2000);
     },
+
+    sendToDetail(where, data) {
+      this.$router.push({ name: where, params: { advertiser: data } });
+    },
+
   },
   async created() {
     const userToken = decode(this.$store.state.token);

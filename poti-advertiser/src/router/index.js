@@ -23,7 +23,8 @@ const routes = [
   {
     path: '/detalhes-anuncio',
     name: 'detalhes-anuncio',
-    component: AdDetails
+    component: AdDetails,
+    props: true,
   },
   {
     path: '/entrar',
