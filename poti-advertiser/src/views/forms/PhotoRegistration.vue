@@ -53,9 +53,9 @@ export default {
       last_id: 0,
     },
   }),
-  props: ["edit"],
+  props: ["edit", "old_announcement_id"],
   async created() {
-    window.console.log(this.edit)
+    window.console.log(this.edit);
     this.$store.commit("setTitle", "Cadastro de Fotos");
     if (this.edit) {
       alert("modo de edição");
@@ -77,20 +77,38 @@ export default {
   methods: {
     async submit(evt) {
       evt.preventDefault();
-      const formData = new FormData();
-      if (this.last_id != 0) {
-        formData.append("an_id", this.last_id);
+      // se não esta no modo de edição, cadastra fotos para o novo anuncio
+      if (!this.edit) {
+        const formData = new FormData();
+        if (this.last_id != 0) {
+          formData.append("an_id", this.last_id);
 
-        for (const i of Object.keys(this.form.files)) {
-          formData.append("photo", this.form.files[i]);
+          for (const i of Object.keys(this.form.files)) {
+            formData.append("photo", this.form.files[i]);
+          }
+          await apiConfig.post("photo", formData, headers);
+          // this.$alert("Espaço Cadastrado.", "Sucesso", "success");
+          alert("foto salva com sucesso !!");
+          window.console.log(this.form.files);
+          this.$router.push("/");
+        } else {
+          alert("foto de ID invalido");
         }
-        await apiConfig.post("photo", formData, headers);
-        // this.$alert("Espaço Cadastrado.", "Sucesso", "success");
-        alert("foto salva com sucesso !!");
-        window.console.log(this.form.files);
-        this.$router.push("/");
       } else {
-        alert("foto de ID invalido");
+        alert("modo de edicao");
+        window.console.log(this.old_announcement_id)
+        // const formData = new FormData();
+
+        // formData.append("an_id", this.old_announcement_id);
+
+        // for (const i of Object.keys(this.form.files)) {
+        //   formData.append("photo", this.form.files[i]);
+        // }
+        // await apiConfig.post("photo", formData, headers);
+        // // this.$alert("Espaço Cadastrado.", "Sucesso", "success");
+        // alert("foto salva com sucesso !!");
+        // window.console.log(this.form.files);
+        // this.$router.push("/");
       }
     },
   },

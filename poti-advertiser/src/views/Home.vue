@@ -65,7 +65,7 @@
             v-if="!item.active"
             depressed
             color="primary"
-            @click="clickAtive(false, item)"
+            @click="clickActivation(false, item)"
           >
             Ativar
           </v-btn>
@@ -202,7 +202,7 @@ export default {
       let index = this.announcements.indexOf(clicked);
       this.announcements[index].active = !status;
     },
-    clickAtive(status, clicked) {
+    clickActivation(status, clicked) {
       window.console.log(status);
       window.console.log(clicked);
       alert("ativar");
