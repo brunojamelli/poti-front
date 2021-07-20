@@ -1,49 +1,59 @@
 <template>
-  <v-card class="mx-auto" max-width="500" style="margin-top: 20px">
+  <v-card class="mx-auto" max-width="800" style="margin-top: 20px">
     <h2 class="text-center">Detalhes Anúncio</h2>
-    <v-row>
-      <v-col
-        v-for="photo in photo_list"
-        :key="photo"
-        class="d-flex child-flex"
-        cols="6"
-      >
-        <v-img
-          :src="`http://localhost:3333/photo/${photo.filename}`"
-          :lazy-src="`https://picsum.photos/10/6?image=${5 + 10}`"
-          aspect-ratio="1.5"
-          class="grey lighten-2"
+    <div>
+      <v-row>
+        <v-col
+          v-for="photo in photo_list"
+          :key="photo.filename"
+          class="d-flex child-flex"
+          cols="6"
         >
-          <template v-slot:placeholder>
-            <v-row class="fill-height ma-0" align="center" justify="center">
-              <v-progress-circular
-                indeterminate
-                color="grey lighten-5"
-              ></v-progress-circular>
-            </v-row>
-          </template>
-        </v-img>
-      </v-col>
-    </v-row>
+          <v-img
+            :src="`http://localhost:3333/photo/${photo.filename}`"
+            :lazy-src="`https://picsum.photos/10/6?image=${5 + 10}`"
+            aspect-ratio="1.5"
+            class="grey lighten-2"
+          >
+            <template v-slot:placeholder>
+              <v-row class="fill-height ma-0" align="center" justify="center">
+                <v-progress-circular
+                  indeterminate
+                  color="grey lighten-5"
+                ></v-progress-circular>
+              </v-row>
+            </template>
+          </v-img>
+        </v-col>
+      </v-row>
+    </div>
+
     <br />
     <v-card-text>
       <div>{{ advertiser.createdAt }}</div>
       <p class="text-h4 text--primary">{{ advertiser.title }}</p>
       <p class="text-h5 text--primary">R$ {{ advertiser.value }}</p>
-      <p v-if="advertiser.quantity == 0" class="text-h5 text--primary">
+      <p v-if="advertiser.quantity == 0" class="text--primary">
         Quantidade não Informada
       </p>
-      <p v-else class="text-h5 text--primary">
-        {{ advertiser.quantity }} Unidades
-      </p>
+      <p v-else class="text--primary">{{ advertiser.quantity }} Unidades</p>
 
       <div class="text--primary">
         {{ advertiser.description }}
       </div>
     </v-card-text>
-    <v-card-actions>
-      <v-btn text color="deep-purple accent-4"> Learn More </v-btn>
-    </v-card-actions>
+    <div class="text-center">
+      <v-card-actions>
+        <v-btn v-if="!advertiser.active" depressed color="primary">
+          Ativar
+        </v-btn>
+        <v-btn v-else depressed color="warning"> Desativar </v-btn>
+        <v-btn outlined color="error"> <v-icon left>mdi-delete</v-icon> Apagar </v-btn>
+        <v-btn class="ma-2" tile outlined color="cyan">
+          <v-icon left>mdi-pencil</v-icon> Editar
+        </v-btn>
+      </v-card-actions>
+    </div>
   </v-card>
 </template>
 <script>
