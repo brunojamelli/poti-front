@@ -59,7 +59,8 @@ const routes = [
   {
     path: '/cadastro-fotos',
     name: 'cadastro-fotos',
-    component: PhotoRegistration
+    component: PhotoRegistration,
+    props: true
   },
   {
     path: '/about',

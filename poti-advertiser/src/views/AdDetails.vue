@@ -30,6 +30,7 @@
 
     <br />
     <v-card-text>
+      <p v-if="photo_list.length == 0" class="text-h5 text--primary"> {{ empty_ad }}</p>
       <div>{{ advertiser.createdAt }}</div>
       <p class="text-h4 text--primary">{{ advertiser.title }}</p>
       <p class="text-h5 text--primary">R$ {{ advertiser.value }}</p>
@@ -49,7 +50,7 @@
         </v-btn>
         <v-btn v-else depressed color="warning"> Desativar </v-btn>
         <v-btn outlined color="error"> <v-icon left>mdi-delete</v-icon> Apagar </v-btn>
-        <v-btn class="ma-2" tile outlined color="cyan">
+        <v-btn class="ma-2" tile outlined color="cyan" @click="editionMode('cadastro-fotos', true)">
           <v-icon left>mdi-pencil</v-icon> Editar
         </v-btn>
       </v-card-actions>
@@ -66,8 +67,14 @@ export default {
     photo_list: [],
     photo_link: "",
     first_file: "",
+    empty_ad : "O anúncio ainda não conta com fotos disponiveis"
   }),
-  methods: {},
+  methods: {
+      editionMode(where, data){
+          this.$router.push({ name: where, params: { edit: data } });
+      },
+      
+  },
   async created() {
     //buscando fotos do anuncio para a listagem nos cards
     this.photo_link = `photo/filenames/announcement/${this.advertiser.id}`;

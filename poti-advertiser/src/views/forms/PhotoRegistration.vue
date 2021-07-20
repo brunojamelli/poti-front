@@ -53,20 +53,26 @@ export default {
       last_id: 0,
     },
   }),
+  props: ["edit"],
   async created() {
+    window.console.log(this.edit)
     this.$store.commit("setTitle", "Cadastro de Fotos");
-    http = new ApiService("announcement");
-    let allAds = [];
-    let response2 = await http.getList();
-    allAds = response2.data;
-    window.console.log(allAds);
-    //ordenando a lista de anúncios por id de forma crescente
-    allAds.sort((a, b) =>
-      a.id > b.id ? 1 : a.id === b.id ? (a.size > b.size ? 1 : -1) : -1
-    );
-    window.console.log(allAds[allAds.length - 1]);
-    // pegando o ultimo id de anúncio cadastrado
-    this.last_id = allAds[allAds.length - 1].id;
+    if (this.edit) {
+      alert("modo de edição");
+    } else {
+      http = new ApiService("announcement");
+      let allAds = [];
+      let response2 = await http.getList();
+      allAds = response2.data;
+      window.console.log(allAds);
+      //ordenando a lista de anúncios por id de forma crescente
+      allAds.sort((a, b) =>
+        a.id > b.id ? 1 : a.id === b.id ? (a.size > b.size ? 1 : -1) : -1
+      );
+      window.console.log(allAds[allAds.length - 1]);
+      // pegando o ultimo id de anúncio cadastrado
+      this.last_id = allAds[allAds.length - 1].id;
+    }
   },
   methods: {
     async submit(evt) {
