@@ -30,14 +30,19 @@
 
     <br />
     <v-card-text>
-      <p v-if="photo_list.length == 0" class="text-h5 text--primary"> {{ empty_ad }}</p>
-      <div>{{ advertiser.createdAt }}</div>
+      <div class="text--primary">criado em: {{ formatDate(advertiser.createdAt) }}</div>
+
+      <p v-if="photo_list.length == 0" class="text-h5 text--primary">
+        {{ empty_ad }}
+      </p>
+      <!-- <div>criado em: {{ advertiser.createdAt }}</div> -->
+
       <p class="text-h4 text--primary">{{ advertiser.title }}</p>
       <p class="text-h5 text--primary">R$ {{ advertiser.value }}</p>
-      <p v-if="advertiser.quantity == 0" class="text--primary">
+      <p v-if="advertiser.quantity == 0" class="text-h5 text--primary">
         Quantidade não Informada
       </p>
-      <p v-else class="text--primary">{{ advertiser.quantity }} Unidades</p>
+      <p v-else class="text-h5 text--primary">{{ advertiser.quantity }} Unidades</p>
 
       <div class="text--primary">
         {{ advertiser.description }}
@@ -49,8 +54,16 @@
           Ativar
         </v-btn>
         <v-btn v-else depressed color="warning"> Desativar </v-btn>
-        <v-btn outlined color="error"> <v-icon left>mdi-delete</v-icon> Apagar </v-btn>
-        <v-btn class="ma-2" tile outlined color="cyan" @click="editionMode('cadastro-fotos', true)">
+        <v-btn outlined color="error">
+          <v-icon left>mdi-delete</v-icon> Apagar
+        </v-btn>
+        <v-btn
+          class="ma-2"
+          tile
+          outlined
+          color="cyan"
+          @click="editionMode('cadastro-fotos', true)"
+        >
           <v-icon left>mdi-pencil</v-icon> Editar
         </v-btn>
       </v-card-actions>
@@ -67,13 +80,20 @@ export default {
     photo_list: [],
     photo_link: "",
     first_file: "",
-    empty_ad : "O anúncio ainda não conta com fotos disponiveis"
+    empty_ad: "O anúncio ainda não conta com fotos disponiveis",
   }),
   methods: {
-      editionMode(where, data){
-          this.$router.push({ name: where, params: { edit: data } });
-      },
-      
+    editionMode(where, data) {
+      this.$router.push({ name: where, params: { edit: data } });
+    },
+    formatDate(date) {
+      if (!date) return null;
+      let part01 = date.slice(0, 10);
+      const [year, month, day] = part01.split("-");
+      let part02 = date.slice(11, 16);
+
+      return `${day}/${month}/${year} ás ${part02}`;
+    },
   },
   async created() {
     //buscando fotos do anuncio para a listagem nos cards
