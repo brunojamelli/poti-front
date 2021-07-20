@@ -35,7 +35,11 @@
           ></v-progress-linear>
         </template>
         <v-row align="center" justify="space-around">
-          <v-btn depressed class="mx-auto my-4" @click="sendToDetail('detalhes-anuncio', item)">
+          <v-btn
+            depressed
+            class="mx-auto my-4"
+            @click="sendToDetail('detalhes-anuncio', item)"
+          >
             Detalhes
           </v-btn>
         </v-row>
@@ -61,11 +65,16 @@
             v-if="!item.active"
             depressed
             color="primary"
-            @click="click01(false, item)"
+            @click="clickAtive(false, item)"
           >
             Ativar
           </v-btn>
-          <v-btn v-else depressed color="warning" @click="click01(true, item)">
+          <v-btn
+            v-else
+            depressed
+            color="warning"
+            @click="clickDesative(true, item)"
+          >
             Desativar
           </v-btn>
           <v-btn depressed color="error" @click="click02(item)"> Apagar </v-btn>
@@ -182,11 +191,8 @@ export default {
       this.announcements = response.data;
       this.$store.commit("setTitleHome", "Todos Anúncios");
     },
-    async click01(status, clicked) {
+    async clickDesative(status, clicked) {
       this.snackbar = true;
-      //http://localhost:3333/announcement/desativation/4
-      if(!status)
-        this.text = "anúncio ativado com sucesso"
       window.console.log(status);
 
       window.console.log(clicked);
@@ -195,6 +201,11 @@ export default {
       window.console.log(response);
       let index = this.announcements.indexOf(clicked);
       this.announcements[index].active = !status;
+    },
+    clickAtive(status, clicked) {
+      window.console.log(status);
+      window.console.log(clicked);
+      alert("ativar");
     },
     // clique do evento de discordar da ação de exclusão
     click02(data) {
@@ -229,7 +240,6 @@ export default {
     sendToDetail(where, data) {
       this.$router.push({ name: where, params: { advertiser: data } });
     },
-
   },
   async created() {
     const userToken = decode(this.$store.state.token);

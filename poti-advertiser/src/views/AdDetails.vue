@@ -92,7 +92,7 @@ export default {
       const [year, month, day] = part01.split("-");
       let part02 = date.slice(11, 16);
 
-      return `${day}/${month}/${year} ás ${part02}`;
+      return `${day}/${month}/${year} as ${part02}`;
     },
   },
   async created() {
