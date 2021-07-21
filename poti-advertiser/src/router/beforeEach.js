@@ -1,14 +1,19 @@
 import { isSignedIn } from '../utils/auth';
 
 export default async (to, from, next) => {
-  if (to.name !== 'entrar' && !isSignedIn()) {
-    next('/entrar');
-  }else{
-    if (to.name === 'entrar' && isSignedIn()) {
-      next('/');
+  if (to.name === 'registro-anunciante') {
+    next()
+  } else {
+    if (to.name !== 'entrar' && !isSignedIn()) {
+      next('/entrar');
     } else {
-      next()
-      return;
+      if (to.name === 'entrar' && isSignedIn()) {
+        next('/');
+      } else {
+        next()
+        return;
+      }
     }
   }
+
 }

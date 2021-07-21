@@ -17,8 +17,9 @@
       <b>Endereço não Informado</b>
     </v-card-text>
 
-    <v-card-actions></v-card-actions>
-    <!-- <div class="title"></div> -->
+    <v-card-actions>
+
+    </v-card-actions>
   </v-card>
 </template>
 
