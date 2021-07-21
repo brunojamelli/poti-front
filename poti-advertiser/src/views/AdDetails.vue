@@ -58,7 +58,7 @@
           Ativar
         </v-btn>
         <v-btn v-else depressed color="warning"> Desativar </v-btn>
-        <v-btn outlined color="error">
+        <v-btn outlined color="error" @click="clickDelete">
           <v-icon left>mdi-delete</v-icon> Apagar
         </v-btn>
         <v-btn
@@ -72,10 +72,34 @@
         </v-btn>
       </v-card-actions>
     </div>
+    <v-dialog v-model="dialogDelete" max-width="380">
+      <v-card>
+        <v-card-title class="text-h5">
+          Tem certeja que deseja apagar esse anúncio?
+        </v-card-title>
+
+        <v-card-text>
+          Tem certeza que deseja prosseguir? essa ação é irreversivel.
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn color="green darken-1" text @click="dialogDelete = false">
+            Voltar ao anúncio
+          </v-btn>
+
+          <v-btn color="green darken-1" text @click="clickAgreeDelete">
+            Concordo
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-card>
 </template>
 <script>
 import ApiService from "../utils/ApiService";
+let http = {};
 
 export default {
   name: "AdDetails",
@@ -85,6 +109,7 @@ export default {
     photo_link: "",
     first_file: "",
     empty_ad: "O anúncio ainda não conta com fotos disponiveis",
+    dialogDelete: false,
   }),
   methods: {
     editionMode(where, data, id) {
@@ -100,6 +125,19 @@ export default {
       let part02 = date.slice(11, 16);
 
       return `${day}/${month}/${year} as ${part02}`;
+    },
+    clickDelete() {
+      this.dialogDelete = true;
+    },
+    async clickAgreeDelete() {
+      http = new ApiService("announcement");
+      // executando a requisição http do delete
+      let response = await http.delete(this.advertiser.id);
+      window.console.log(response);
+      // fechando caixa de dialogo da exclusão
+      this.dialogDelete = false;
+      // voltando a tela inicial
+      this.$router.push("/");
     },
   },
   async created() {
