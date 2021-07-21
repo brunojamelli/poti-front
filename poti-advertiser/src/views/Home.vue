@@ -202,9 +202,14 @@ export default {
       let index = this.announcements.indexOf(clicked);
       this.announcements[index].active = !status;
     },
-    clickActivation(status, clicked) {
+    async clickActivation(status, clicked) {
       window.console.log(status);
       window.console.log(clicked);
+      http = new ApiService("announcement/activation");
+      let response = await http.patch(clicked.id);
+      window.console.log(response);
+      let index = this.announcements.indexOf(clicked);
+      this.announcements[index].active = !status;
       alert("ativar");
     },
     // clique do evento de discordar da ação de exclusão
