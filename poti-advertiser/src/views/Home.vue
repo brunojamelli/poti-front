@@ -242,6 +242,15 @@ export default {
       setTimeout(() => (this.loading = false), 2000);
     },
 
+    formatDate(date) {
+      if (!date) return null;
+      let part01 = date.slice(0, 10);
+      const [year, month, day] = part01.split("-");
+      let part02 = date.slice(11, 16);
+
+      return `${day}/${month}/${year} as ${part02}`;
+    },
+
     sendToDetail(where, data) {
       this.$router.push({ name: where, params: { advertiser: data } });
     },

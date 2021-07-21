@@ -54,7 +54,13 @@
     </v-card-text>
     <div class="text-center">
       <v-card-actions>
-        <v-btn v-if="!advertiser.active" depressed outlined color="primary">
+        <v-btn
+          v-if="!advertiser.active"
+          depressed
+          outlined
+          color="primary"
+          @click="clickActivation(false)"
+        >
           Ativar
         </v-btn>
         <v-btn
@@ -152,7 +158,15 @@ export default {
       http = new ApiService("announcement/desativation");
       let response = await http.patch(this.advertiser.id);
       window.console.log(response);
-      alert("anuncio desativado !!")
+      alert("anuncio desativado !!");
+      this.advertiser.active = !status;
+    },
+    async clickActivation(status) {
+      window.console.log(status);
+      http = new ApiService("announcement/activation");
+      let response = await http.patch(this.advertiser.id);
+      window.console.log(response);
+      alert("anuncio ativado !!");
       this.advertiser.active = !status;
     },
   },
