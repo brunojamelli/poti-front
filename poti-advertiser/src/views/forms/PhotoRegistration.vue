@@ -88,7 +88,7 @@ export default {
           }
           await apiConfig.post("photo", formData, headers);
           // this.$alert("Espaço Cadastrado.", "Sucesso", "success");
-          alert("foto salva com sucesso !!");
+          alert("Fotos do anúncio salvas");
           window.console.log(this.form.files);
           this.$router.push("/");
         } else {
@@ -97,18 +97,18 @@ export default {
       } else {
         alert("modo de edicao");
         window.console.log(this.old_announcement_id)
-        // const formData = new FormData();
+        const formData = new FormData();
 
-        // formData.append("an_id", this.old_announcement_id);
+        formData.append("an_id", this.old_announcement_id);
 
-        // for (const i of Object.keys(this.form.files)) {
-        //   formData.append("photo", this.form.files[i]);
-        // }
-        // await apiConfig.post("photo", formData, headers);
-        // // this.$alert("Espaço Cadastrado.", "Sucesso", "success");
-        // alert("foto salva com sucesso !!");
-        // window.console.log(this.form.files);
-        // this.$router.push("/");
+        for (const i of Object.keys(this.form.files)) {
+          formData.append("photo", this.form.files[i]);
+        }
+        await apiConfig.post("photo", formData, headers);
+        // this.$alert("Espaço Cadastrado.", "Sucesso", "success");
+        alert("Anúncio editado com sucesso !!");
+        window.console.log(this.form.files);
+        this.$router.push("/");
       }
     },
   },

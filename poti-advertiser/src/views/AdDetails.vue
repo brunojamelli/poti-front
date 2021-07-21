@@ -30,7 +30,9 @@
 
     <br />
     <v-card-text>
-      <div class="text--primary">criado em: {{ formatDate(advertiser.createdAt) }}</div>
+      <div class="text--primary">
+        criado em: {{ formatDate(advertiser.createdAt) }}
+      </div>
 
       <p v-if="photo_list.length == 0" class="text-h5 text--primary">
         {{ empty_ad }}
@@ -42,7 +44,9 @@
       <p v-if="advertiser.quantity == 0" class="text-h5 text--primary">
         Quantidade não Informada
       </p>
-      <p v-else class="text-h5 text--primary">{{ advertiser.quantity }} Unidades</p>
+      <p v-else class="text-h5 text--primary">
+        {{ advertiser.quantity }} Unidades
+      </p>
 
       <div class="text--primary">
         {{ advertiser.description }}
@@ -62,7 +66,7 @@
           tile
           outlined
           color="cyan"
-          @click="editionMode('cadastro-fotos', true)"
+          @click="editionMode('cadastro-fotos', true, advertiser.id)"
         >
           <v-icon left>mdi-pencil</v-icon> Editar
         </v-btn>
@@ -83,8 +87,11 @@ export default {
     empty_ad: "O anúncio ainda não conta com fotos disponiveis",
   }),
   methods: {
-    editionMode(where, data) {
-      this.$router.push({ name: where, params: { edit: data } });
+    editionMode(where, data, id) {
+      this.$router.push({
+        name: where,
+        params: { edit: data, old_announcement_id: id },
+      });
     },
     formatDate(date) {
       if (!date) return null;
