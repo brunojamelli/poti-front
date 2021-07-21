@@ -54,10 +54,18 @@
     </v-card-text>
     <div class="text-center">
       <v-card-actions>
-        <v-btn v-if="!advertiser.active" depressed color="primary">
+        <v-btn v-if="!advertiser.active" depressed outlined color="primary">
           Ativar
         </v-btn>
-        <v-btn v-else depressed color="warning"> Desativar </v-btn>
+        <v-btn
+          v-else
+          depressed
+          outlined
+          color="warning"
+          @click="clickDesative(true)"
+        >
+          Desativar
+        </v-btn>
         <v-btn outlined color="error" @click="clickDelete">
           <v-icon left>mdi-delete</v-icon> Apagar
         </v-btn>
@@ -138,6 +146,14 @@ export default {
       this.dialogDelete = false;
       // voltando a tela inicial
       this.$router.push("/");
+    },
+    async clickDesative(status) {
+      window.console.log(status);
+      http = new ApiService("announcement/desativation");
+      let response = await http.patch(this.advertiser.id);
+      window.console.log(response);
+      alert("anuncio desativado !!")
+      this.advertiser.active = !status;
     },
   },
   async created() {
