@@ -4,20 +4,21 @@
     <h2>Cadastre um novo Administrador</h2>
     <v-card class="mx-auto" max-width="500" style="margin-top: 20px">
       <v-card-text>
-        <v-form ref="form" v-model="valid">
+        <v-form ref="form" v-model="isValid">
           <v-text-field
             v-model="form.name"
-            :counter="10"
-            :rules="[(v) => !!v || 'Nome é de preenchimento obrigatório']"
+            :rules="rules.nameRules"
             label="Nome"
             required
+            error-count="2"
           ></v-text-field>
 
           <v-text-field
             v-model="form.email"
-            :rules="[(v) => !!v || 'Email é de preenchimento obrigatório']"
+            :rules="rules.emailRules"
             label="E-mail"
             required
+            error-count="2"
           ></v-text-field>
           <v-text-field
             v-model="form.password"
@@ -26,9 +27,15 @@
             @click:append="() => (value = !value)"
             :type="value ? 'password' : 'text'"
             :rules="[rules.password]"
+            error-count="2"
             required
           ></v-text-field>
-          <v-btn large rounded dark color="success" @click.prevent="submit">
+          <v-btn
+            large
+            color="success"
+            @click.prevent="submit"
+            :disabled="!isValid"
+          >
             Cadastrar
           </v-btn>
         </v-form>
@@ -51,18 +58,25 @@ export default {
       email: "",
       password: "",
     },
-    valid: true,
+    isValid: true,
     value: true,
     rules: {
-      required: (value) => !!value || "Required.",
       password: (value) => {
         const pattern =
           /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%&])(?=.{8,})/;
         return (
           pattern.test(value) ||
-          "Min. 8 characters with at least one capital letter, a number and a special character."
+          "Min. 8 caracteres com ao menos uma letra maiuscula, um número e um caractere especial."
         );
       },
+      nameRules: [
+        (v) => !!v || "O nome é obrigatório",
+        (v) => (v && v.length >= 10) || "o nome tem que ter 10 letras ou mais",
+      ],
+      emailRules: [
+        (v) => !!v || "Email é obrigatório",
+        (v) => /.+@.+/.test(v) || "Email tem que ser válido",
+      ],
     },
   }),
 
