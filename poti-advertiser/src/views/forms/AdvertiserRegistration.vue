@@ -3,19 +3,21 @@
     <v-card-text>
       <h2 class="text-center">Cadastro</h2>
 
-      <v-form ref="form" v-model="valid">
+      <v-form ref="form" v-model="isValid">
         <v-text-field
           v-model="form.name"
-          :rules="[(v) => !!v || 'Nome é de preenchimento obrigatório']"
+          :rules="nameRules"
           label="Nome"
           required
+          error-count="2"
         ></v-text-field>
 
         <v-text-field
           v-model="form.whatsapp"
-          :rules="[(v) => !!v || 'Whatsapp é de preenchimento obrigatório']"
+          :rules="whatsRules"
           label="Whatsapp"
           required
+          error-count="2"
         ></v-text-field>
 
         <v-text-field
@@ -42,9 +44,9 @@
           <v-btn
             style="width: 250px"
             large
-            dark
             color="success"
             @click.prevent="submit"
+            :disabled="!isValid"
           >
             Cadastrar
           </v-btn>
@@ -69,7 +71,7 @@ export default {
       password: "",
       address: "",
     },
-    valid: true,
+    isValid: true,
     value: true,
     rules: {
       required: (value) => !!value || "Required.",
@@ -82,6 +84,18 @@ export default {
         );
       },
     },
+    whatsRules: [
+      (v) => !!v || "Whatsapp é obrigatorio",
+      (v) =>
+        (v && v.length >= 8) ||
+        "O número de whats tem que ter 9 digitos ou mais",
+    ],
+    nameRules: [
+      (v) => !!v || "O nome é Obrigatório",
+      (v) =>
+        (v && v.length >= 10) ||
+        "O número de whats tem que ter 10 letras ou mais",
+    ],
   }),
   methods: {
     async submit(evt) {
