@@ -6,7 +6,7 @@
       <v-form ref="form" v-model="isValid">
         <v-text-field
           v-model="form.name"
-          :rules="nameRules"
+          :rules="rules.nameRules"
           label="Nome"
           required
           error-count="2"
@@ -14,7 +14,7 @@
 
         <v-text-field
           v-model="form.whatsapp"
-          :rules="whatsRules"
+          :rules="rules.whatsRules"
           label="Whatsapp"
           required
           error-count="2"
@@ -22,9 +22,10 @@
 
         <v-text-field
           v-model="form.email"
-          :rules="[(v) => !!v || 'Email é de preenchimento obrigatório']"
+          :rules="rules.emailRules"
           label="E-mail"
           required
+          error-count="2"
         ></v-text-field>
         <v-text-field
           v-model="form.password"
@@ -75,27 +76,33 @@ export default {
     value: true,
     rules: {
       required: (value) => !!value || "Required.",
+      nameRules: [
+        (v) => !!v || "Nome é Obrigatório",
+        (v) =>
+          (v && v.length >= 10) ||
+          "O número de whats tem que ter 10 letras ou mais",
+      ],
+      whatsRules: [
+      (v) => !!v || "Whatsapp é obrigatorio",
+      (v) =>
+        (v && v.length >= 8) ||
+        "O número de whats tem que ter 9 digitos ou mais",
+      ],
+      emailRules: [
+        (v) => !!v || "Email é obrigatório",
+        (v) => /.+@.+/.test(v) || "Email tem que ser válido",
+      ],
       password: (value) => {
         const pattern =
           /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%&])(?=.{8,})/;
         return (
           pattern.test(value) ||
-          "Min. 8 characters with at least one capital letter, a number and a special character."
+          "Min. 8 caracteres com ao menos uma letra maiuscula, um número e um caractere especial."
         );
       },
     },
-    whatsRules: [
-      (v) => !!v || "Whatsapp é obrigatorio",
-      (v) =>
-        (v && v.length >= 8) ||
-        "O número de whats tem que ter 9 digitos ou mais",
-    ],
-    nameRules: [
-      (v) => !!v || "O nome é Obrigatório",
-      (v) =>
-        (v && v.length >= 10) ||
-        "O número de whats tem que ter 10 letras ou mais",
-    ],
+    
+    
   }),
   methods: {
     async submit(evt) {
