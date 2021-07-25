@@ -22,7 +22,8 @@
   </div>
 </template>
 
-<script>import AppNavbar from "./components/AppNavbar";
+<script>
+import AppNavbar from "./components/AppNavbar";
 // import Footer from "./components/Footer";
 export default {
   name: "App",
@@ -42,7 +43,7 @@ export default {
   computed: {
     showMenu() {
       return this.$route.name !== "entrar";
-    }
+    },
   },
 };
 </script>

@@ -44,10 +44,11 @@
           </v-btn>
         </v-row>
 
-        <v-img
+        <!-- <v-img
           height="180"
           src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-        ></v-img>
+        ></v-img> -->
+        <AnnouncementImage :announcement="item"></AnnouncementImage>
 
         <v-card-title>{{ item.title }}</v-card-title>
 
@@ -121,12 +122,15 @@
 <script>
 import ApiService from "../utils/ApiService";
 import decode from "jwt-decode";
+import AnnouncementImage from "../components/AnnouncementImage.vue";
 
 let http = {};
 export default {
   name: "Home",
 
-  components: {},
+  components: {
+    AnnouncementImage,
+  },
   data: () => ({
     announcements: [],
     advertiserId: 0,
