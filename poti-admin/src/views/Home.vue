@@ -10,11 +10,12 @@
         style="width: 22rem; margin-bottom: 1em"
       >
         <template #header>
-          <img
+          <!-- <img
             class="ads-image"
             alt="user header"
             src="http://via.placeholder.com/350x150"
-          />
+          /> -->
+          <AnnouncementImage :announcement="item"></AnnouncementImage>
         </template>
         <template #title>
           <div class="item-title">
@@ -53,12 +54,15 @@
 import Card from "primevue/card";
 import ApiService from "../utils/ApiService";
 import Button from "primevue/button";
+import AnnouncementImage from "../components/AnnouncementImage.vue";
+
 const http = new ApiService("announcement");
 export default {
   name: "Home",
   components: {
     Card,
     Button,
+    AnnouncementImage
   },
   data: () => ({
     an_list: null,

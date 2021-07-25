@@ -8,8 +8,8 @@
       v-if="photo_list.length > 0"
       :src="`http://localhost:3333/photo/${first_file}`"
       :lazy-src="`https://picsum.photos/10/6?image=${5 + 10}`"
-      
-      height="180"
+      width="350"
+      height="150"
     >
       <template v-slot:placeholder>
         <v-row class="fill-height ma-0" align="center" justify="center">
