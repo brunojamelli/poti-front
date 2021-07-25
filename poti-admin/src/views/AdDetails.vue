@@ -56,12 +56,15 @@
 
         <template #footer>
           <Button
-            v-show="!advertiser.valid"
+            v-if="!advertiser.valid"
             class="p-button-warning"
             icon="pi pi-check"
             label="Validar"
             @click="adValitation(advertiser)"
           />
+          <div v-else>
+            <h3>Anúncio Válido</h3>
+          </div>
         </template>
       </Card>
     </div>
@@ -73,7 +76,7 @@
 
 <script>
 import Card from "primevue/card";
-import ApiService from "../../utils/ApiService";
+import ApiService from "../utils/ApiService";
 import Button from "primevue/button";
 
 export default {

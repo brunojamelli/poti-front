@@ -7,7 +7,7 @@ import Pending from '../views/Pending.vue'
 import Valids from '../views/Valids.vue'
 import Advertiser from '../views/Advertiser.vue'
 import Login from '../views/Login.vue'
-import AdDetails from '../views/detail/AdDetails'
+import AdDetails from '../views/AdDetails'
 import beforeEach from './beforeEach'
 
 Vue.use(VueRouter)
