@@ -44,10 +44,6 @@
           </v-btn>
         </v-row>
 
-        <!-- <v-img
-          height="180"
-          src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-        ></v-img> -->
         <AnnouncementImage :announcement="item"></AnnouncementImage>
 
         <v-card-title>{{ item.title }}</v-card-title>

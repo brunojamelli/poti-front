@@ -1,8 +1,4 @@
 <template>
-  <!-- <v-img
-    height="180"
-    src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-  ></v-img> -->
   <div>
     <v-img
       v-if="photo_list.length > 0"

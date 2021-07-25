@@ -10,11 +10,6 @@
         style="width: 22rem; margin-bottom: 1em"
       >
         <template #header>
-          <!-- <img
-            class="ads-image"
-            alt="user header"
-            src="http://via.placeholder.com/350x150"
-          /> -->
           <AnnouncementImage :announcement="item"></AnnouncementImage>
         </template>
         <template #title>
@@ -87,14 +82,6 @@ export default {
   async mounted() {
     let response = await http.getList();
     this.an_list = response.data;
-    // for (var i = 0, l = this.an_list.length; i < l; i++) {
-    //   // console.log(this.an_list[i]);
-    //   let photo_link = `photo/filenames/announcement/${this.an_list[i].an_id}`;
-    //   const http = new ApiService(photo_link);
-    //   let response = await http.getList();
-    //   this.photo_links.push(response.data[0].filename);
-    //   window.console.table(this.photo_links);
-    // }
   },
 };
 </script>
