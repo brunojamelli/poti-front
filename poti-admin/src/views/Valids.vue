@@ -9,11 +9,7 @@
         style="width: 22rem; margin-bottom: 1em"
       >
         <template #header>
-          <img
-            class="ads-image"
-            alt="user header"
-            src="http://via.placeholder.com/350x150"
-          />
+          <AnnouncementImage :announcement="item"></AnnouncementImage>
         </template>
         <template #title>
           <div class="item-title">
@@ -25,9 +21,7 @@
             {{ item.description }}
           </p>
         </template>
-        <template #subtitle>
-          <b> R$ </b>{{ item.value }} 
-        </template>
+        <template #subtitle> <b> R$ </b>{{ item.value }} </template>
         <template #footer>
           <Button
             v-if="!item.valid"
@@ -57,12 +51,14 @@ import ApiService from "../utils/ApiService";
 const http = new ApiService("announcement/by_validation");
 import Card from "primevue/card";
 import Button from "primevue/button";
+import AnnouncementImage from "../components/AnnouncementImage.vue";
 
 export default {
   name: "Valids",
   components: {
     Card,
     Button,
+    AnnouncementImage,
   },
   data: () => ({
     valids: null,
@@ -82,7 +78,6 @@ export default {
     sendToDetail(where, data) {
       this.$router.push({ name: where, params: { advertiser: data } });
     },
-    
   },
 };
 </script>

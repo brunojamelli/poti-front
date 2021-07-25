@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>Anúncios Pendentes</h2>
-    <div class="grid-container">
+    <div class="grid-container" v-if="pendings.length > 0">
       <Card
         class="grid-item"
         v-for="item in pendings"
@@ -46,6 +46,9 @@
           />
         </template>
       </Card>
+    </div>
+    <div v-else>
+      <h3>Não tem anúncios pendentes</h3>
     </div>
   </div>
 </template>
