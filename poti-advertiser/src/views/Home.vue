@@ -51,9 +51,9 @@
         <v-card-text>
           <div class="my-4 text-subtitle-1">R$ {{ item.value }} •</div>
 
-          <div>
+          <!-- <div>
             {{ item.description }}
-          </div>
+          </div> -->
         </v-card-text>
 
         <v-divider class="mx-4"></v-divider>
@@ -230,11 +230,6 @@ export default {
       let index = this.announcements.indexOf(this.clickedAnnouncement);
       this.announcements.splice(index, 1);
     },
-
-    // evento de click do botão de detalhes
-    // click03() {
-    //   this.$router.push("/detalhes-anuncio");
-    // },
 
     reserve() {
       this.loading = true;

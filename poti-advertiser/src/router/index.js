@@ -9,6 +9,8 @@ import PhotoRegistration from '../views/forms/PhotoRegistration.vue'
 import ValidatedAds from '../views/ValidatedAds.vue'
 import ActivatedAds from '../views/ActivatedAds.vue'
 import AdDetails from '../views/AdDetails.vue'
+import PublicListing from '../views/PublicListing.vue'
+
 import beforeEach from './beforeEach'
 
 
@@ -61,6 +63,11 @@ const routes = [
     name: 'cadastro-fotos',
     component: PhotoRegistration,
     props: true
+  },
+  {
+    path: '/listagem-publica',
+    name: 'listagem-publica',
+    component: PublicListing,
   },
   {
     path: '/about',

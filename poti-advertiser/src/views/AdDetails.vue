@@ -82,7 +82,7 @@
           color="cyan"
           @click="editionMode('cadastro-fotos', true, advertiser.id)"
         >
-          <v-icon left>mdi-pencil</v-icon> Editar
+          <v-icon left>mdi-pencil</v-icon> Adicionar Fotos
         </v-btn>
       </v-card-actions>
     </div>
