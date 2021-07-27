@@ -23,9 +23,14 @@
           <AnnouncementImage :announcement="item"></AnnouncementImage>
 
           <v-card-title>{{ item.title }}</v-card-title>
-          
+
           <v-card-text>
-            <div class="my-4 text-subtitle-1"><b>R$ {{ item.value }} •</b></div>
+            <div class="my-4 text-subtitle-1">
+              <b>R$ {{ item.value }} •</b>
+            </div>
+          </v-card-text>
+          <v-card-text>
+            <AnnouncementContact :data="item"></AnnouncementContact>
           </v-card-text>
         </v-card>
       </v-row>
@@ -35,6 +40,7 @@
 </template>
 <script>
 import AnnouncementImage from "../components/AnnouncementImage.vue";
+import AnnouncementContact from "../components/AnnouncementContact.vue";
 
 import ApiService from "../utils/ApiService";
 let http = {};
@@ -42,6 +48,7 @@ export default {
   name: "PublicListing",
   components: {
     AnnouncementImage,
+    AnnouncementContact,
   },
   data: () => ({
     title: "",
