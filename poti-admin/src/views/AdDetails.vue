@@ -37,7 +37,7 @@
         </template>
         <template #content>
           <div id="ad-description">
-            {{ advertiser.description }}
+            <b>Descrição: </b>{{ advertiser.description }}
           </div>
           <div id="ad-quantity" v-show="advertiser.quantity != 0">
             <b>Quantidade: </b> {{ advertiser.quantity }}
@@ -127,7 +127,7 @@ export default {
   margin-left: 25%;
   margin-right: 25%;
 }
-/* #ad-title {
+#ad-title {
   text-align: left;
 }
 
@@ -136,5 +136,8 @@ export default {
 }
 #ad-description {
   text-align: left;
-} */
+}
+#contact-box{
+  text-align: left;
+}
 </style>
