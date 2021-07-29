@@ -7,7 +7,7 @@ import Pending from '../views/Pending.vue'
 import Valids from '../views/Valids.vue'
 import Advertiser from '../views/Advertiser.vue'
 import Login from '../views/Login.vue'
-import DetailAdvertiser from '../views/detail/DetailAdvertiser'
+import AdDetails from '../views/AdDetails'
 import beforeEach from './beforeEach'
 
 Vue.use(VueRouter)
@@ -41,7 +41,7 @@ const routes = [
   {
     path: '/detalhes-anuncio',
     name: 'detalhes-anuncio',
-    component: DetailAdvertiser,
+    component: AdDetails,
     props: true,
   },
   {

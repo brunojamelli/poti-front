@@ -53,36 +53,62 @@ export default {
       last_id: 0,
     },
   }),
+  props: ["edit", "old_announcement_id"],
   async created() {
+    window.console.log(this.edit);
     this.$store.commit("setTitle", "Cadastro de Fotos");
-    http = new ApiService("announcement");
-    let allAds = [];
-    let response2 = await http.getList();
-    allAds = response2.data;
-    window.console.log(allAds);
-    allAds.sort((a, b) =>
-      a.id > b.id ? 1 : a.id === b.id ? (a.size > b.size ? 1 : -1) : -1
-    );
-    window.console.log(allAds[allAds.length - 1]);
-    this.last_id = allAds[allAds.length - 1].id;
+    if (this.edit) {
+      alert("modo de edição");
+    } else {
+      http = new ApiService("announcement");
+      let allAds = [];
+      let response2 = await http.getList();
+      allAds = response2.data;
+      window.console.log(allAds);
+      //ordenando a lista de anúncios por id de forma crescente
+      allAds.sort((a, b) =>
+        a.id > b.id ? 1 : a.id === b.id ? (a.size > b.size ? 1 : -1) : -1
+      );
+      window.console.log(allAds[allAds.length - 1]);
+      // pegando o ultimo id de anúncio cadastrado
+      this.last_id = allAds[allAds.length - 1].id;
+    }
   },
   methods: {
     async submit(evt) {
       evt.preventDefault();
-      const formData = new FormData();
-      if (this.last_id != 0) {
-        formData.append("an_id", this.last_id);
+      // se não esta no modo de edição, cadastra fotos para o novo anuncio
+      if (!this.edit) {
+        const formData = new FormData();
+        if (this.last_id != 0) {
+          formData.append("an_id", this.last_id);
+
+          for (const i of Object.keys(this.form.files)) {
+            formData.append("photo", this.form.files[i]);
+          }
+          await apiConfig.post("photo", formData, headers);
+          // this.$alert("Espaço Cadastrado.", "Sucesso", "success");
+          alert("Fotos do anúncio salvas");
+          window.console.log(this.form.files);
+          this.$router.push("/");
+        } else {
+          alert("foto de ID invalido");
+        }
+      } else {
+        alert("modo de edicao");
+        window.console.log(this.old_announcement_id)
+        const formData = new FormData();
+
+        formData.append("an_id", this.old_announcement_id);
 
         for (const i of Object.keys(this.form.files)) {
           formData.append("photo", this.form.files[i]);
         }
         await apiConfig.post("photo", formData, headers);
         // this.$alert("Espaço Cadastrado.", "Sucesso", "success");
-        alert("foto salva com sucesso !!");
+        alert("Anúncio editado com sucesso !!");
         window.console.log(this.form.files);
-        //   this.$router.push("/cadastro-fotos");
-      } else {
-        alert("foto de ID invalido");
+        this.$router.push("/");
       }
     },
   },

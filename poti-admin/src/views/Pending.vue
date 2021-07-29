@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>Anúncios Pendentes</h2>
-    <div class="grid-container">
+    <div class="grid-container" v-if="pendings.length > 0">
       <Card
         class="grid-item"
         v-for="item in pendings"
@@ -9,11 +9,7 @@
         style="width: 22rem; margin-bottom: 1em"
       >
         <template #header>
-          <img
-            class="ads-image"
-            alt="user header"
-            src="http://via.placeholder.com/350x150"
-          />
+          <AnnouncementImage :announcement="item"></AnnouncementImage>
         </template>
         <template #title>
           <div class="item-title">
@@ -25,9 +21,7 @@
             {{ item.description }}
           </p>
         </template>
-        <template #subtitle>
-          <b> R$ </b>{{ item.value }} 
-        </template>
+        <template #subtitle> <b> R$ </b>{{ item.value }} </template>
         <template #footer>
           <Button
             v-if="!item.valid"
@@ -47,6 +41,9 @@
         </template>
       </Card>
     </div>
+    <div v-else>
+      <h3>Não tem anúncios pendentes</h3>
+    </div>
   </div>
 </template>
 <style scoped>
@@ -57,12 +54,14 @@ import ApiService from "../utils/ApiService";
 const http = new ApiService("announcement/by_validation");
 import Card from "primevue/card";
 import Button from "primevue/button";
+import AnnouncementImage from "../components/AnnouncementImage.vue";
 
 export default {
   name: "Pending",
   components: {
     Card,
     Button,
+    AnnouncementImage,
   },
   data: () => ({
     pendings: null,

@@ -16,7 +16,6 @@
       </v-btn>
     </v-row>
     <br />
-    <!-- align="center" -->
     <v-row>
       <v-card
         cols="12"
@@ -36,61 +35,109 @@
           ></v-progress-linear>
         </template>
         <v-row align="center" justify="space-around">
-          <v-btn depressed class="mx-auto my-4" @click="click03"> Detalhes </v-btn>
+          <v-btn
+            depressed
+            class="mx-auto my-4"
+            @click="sendToDetail('detalhes-anuncio', item)"
+          >
+            Detalhes
+          </v-btn>
         </v-row>
 
-        <v-img
-          height="180"
-          src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-        ></v-img>
+        <AnnouncementImage :announcement="item"></AnnouncementImage>
 
         <v-card-title>{{ item.title }}</v-card-title>
 
         <v-card-text>
           <div class="my-4 text-subtitle-1">R$ {{ item.value }} •</div>
 
-          <div>
+          <!-- <div>
             {{ item.description }}
-          </div>
+          </div> -->
         </v-card-text>
 
         <v-divider class="mx-4"></v-divider>
-        <v-card-actions >
-          <!-- <v-btn color="deep-purple lighten-2" text @click="reserve">
-            Reserve
-          </v-btn> -->
+        <v-card-actions>
           <v-btn
             v-if="!item.active"
             depressed
             color="primary"
-            @click="click01(false)"
+            @click="clickActivation(false, item)"
           >
             Ativar
           </v-btn>
-          <v-btn v-else depressed color="warning" @click="click01(true)">
+          <v-btn
+            v-else
+            depressed
+            color="warning"
+            @click="clickDesative(true, item)"
+          >
             Desativar
           </v-btn>
-          <v-btn depressed color="error" @click="click02"> Apagar </v-btn>
+          <v-btn depressed color="error" @click="click02(item)"> Apagar </v-btn>
         </v-card-actions>
       </v-card>
     </v-row>
+
+    <v-dialog v-model="dialogDelete" max-width="380">
+      <v-card>
+        <v-card-title class="text-h5">
+          Tem certeja que deseja apagar esse anúncio?
+        </v-card-title>
+
+        <v-card-text>
+          Tem certeza que deseja prosseguir? essa ação é irreversivel.
+        </v-card-text>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+
+          <v-btn color="green darken-1" text @click="dialogDelete = false">
+            Voltar aos Anúncios
+          </v-btn>
+
+          <v-btn color="green darken-1" text @click="clickAgreeDelete">
+            Concordo
+          </v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <v-snackbar v-model="snackbar" :multi-line="multiLine">
+      {{ text }}
+
+      <template v-slot:action="{ attrs }">
+        <v-btn color="red" text v-bind="attrs" @click="snackbar = false">
+          Close
+        </v-btn>
+      </template>
+    </v-snackbar>
   </div>
 </template>
 
 <script>
 import ApiService from "../utils/ApiService";
 import decode from "jwt-decode";
+import AnnouncementImage from "../components/AnnouncementImage.vue";
 
 let http = {};
 export default {
   name: "Home",
 
-  components: {},
+  components: {
+    AnnouncementImage,
+  },
   data: () => ({
     announcements: [],
     advertiserId: 0,
     loading: false,
     selection: 1,
+    dialogDelete: false,
+    dialogDesative: false,
+    clickedAnnouncement: {},
+    multiLine: true,
+    snackbar: false,
+    text: `Anuncio desativado`,
   }),
   computed: {
     token() {
@@ -144,21 +191,63 @@ export default {
       this.announcements = response.data;
       this.$store.commit("setTitleHome", "Todos Anúncios");
     },
-    async click01(payload) {
-      window.console.log(payload);
-    },
-    async click02() {},
+    async clickDesative(status, clicked) {
+      this.snackbar = true;
+      window.console.log(status);
 
-    click03(){
-      // this.$router.push("/");
-      alert("detalhes");
-      this.$router.push("/detalhes-anuncio");
+      window.console.log(clicked);
+      http = new ApiService("announcement/desativation");
+      let response = await http.patch(clicked.id);
+      window.console.log(response);
+      let index = this.announcements.indexOf(clicked);
+      this.announcements[index].active = !status;
+    },
+    async clickActivation(status, clicked) {
+      window.console.log(status);
+      window.console.log(clicked);
+      http = new ApiService("announcement/activation");
+      let response = await http.patch(clicked.id);
+      window.console.log(response);
+      let index = this.announcements.indexOf(clicked);
+      this.announcements[index].active = !status;
+      alert("ativar");
+    },
+    // clique do evento de discordar da ação de exclusão
+    click02(data) {
+      this.dialogDelete = true;
+      this.clickedAnnouncement = data;
+      window.console.log(data);
+    },
+    // evento de click de exclusão permanente de anúncio
+    async clickAgreeDelete() {
+      http = new ApiService("announcement");
+      // executando a requisição http do delete
+      let response = await http.delete(this.clickedAnnouncement.id);
+      window.console.log(response);
+      // fechando caixa de dialogo da exclusão
+      this.dialogDelete = false;
+      // pegando o indice do elemento clicado para removelo da lista
+      let index = this.announcements.indexOf(this.clickedAnnouncement);
+      this.announcements.splice(index, 1);
     },
 
     reserve() {
       this.loading = true;
 
       setTimeout(() => (this.loading = false), 2000);
+    },
+
+    formatDate(date) {
+      if (!date) return null;
+      let part01 = date.slice(0, 10);
+      const [year, month, day] = part01.split("-");
+      let part02 = date.slice(11, 16);
+
+      return `${day}/${month}/${year} as ${part02}`;
+    },
+
+    sendToDetail(where, data) {
+      this.$router.push({ name: where, params: { advertiser: data } });
     },
   },
   async created() {

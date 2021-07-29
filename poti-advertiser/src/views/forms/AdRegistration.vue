@@ -1,26 +1,27 @@
 <template>
   <v-card class="mx-auto" max-width="500" style="margin-top: 20px">
-    <!-- <div class="title">Registro Anuncio</div> -->
     <h2 class="text-center">Cadastro de Anúncio</h2>
     <v-card-text>
       <v-form class="m-3" v-model="isValid">
         <v-text-field
           v-model="form.title"
           label="Titulo"
-          :rules="[(v) => !!v || 'Titulo é de preenchimento obrigatório']"
+          :rules="titleRules"
           required
           outlined
+          error-count="2"
         ></v-text-field>
 
         <v-textarea
           v-model="form.description"
           label="Descrição"
-          :rules="[(v) => !!v || 'Descrição é de preenchimento obrigatório']"
+          :rules="descriptionRules"
           required
           auto-grow
           outlined
           rows="3"
           row-height="25"
+          error-count="2"
         ></v-textarea>
 
         <v-select
@@ -29,7 +30,7 @@
           item-text="label"
           item-value="value"
           label="Categoria"
-          :rules="[(v) => !!v || 'Categoria é de preenchimento obrigatório']"
+          :rules="categoryRule"
           required
           outlined
           @change="$v.select.$touch()"
@@ -39,7 +40,7 @@
         <v-text-field
           v-model="form.value"
           label="Valor"
-          :rules="[(v) => !!v || 'Valor é de preenchimento obrigatório']"
+          :rules="valueRule"
           required
           value="0.00"
           prefix="$"
@@ -49,8 +50,6 @@
         <v-text-field
           v-model="form.quantity"
           label="Quantidade"
-          :rules="[(v) => !!v || 'Quantidade é de preenchimento obrigatório']"
-          required
           type="number"
           outlined
         ></v-text-field>
@@ -59,10 +58,9 @@
           <v-btn
             style="width: 250px"
             large
-            rounded
-            dark
             color="success"
             @click.prevent="submit"
+            :disabled="!isValid"
           >
             Cadastrar
           </v-btn>
@@ -113,7 +111,7 @@ export default {
         category: null,
         quantity: 0,
         value: 0.0,
-        advertiser_id: 4
+        advertiser_id: 4,
       },
       options: [
         { label: "Venda", value: "Venda" },
@@ -125,6 +123,16 @@ export default {
       ],
       show: true,
       isValid: true,
+      titleRules: [
+        (v) => !!v || "Titulo é obrigatorio",
+        (v) => (v && v.length >= 5) || "Titulo tem que ter mais de 5 letras",
+      ],
+      descriptionRules: [
+        (v) => !!v || "Descrição é obrigatoria",
+        (v) => (v && v.length >= 8) || "Descrição tem que ter mais de 8 letras",
+      ],
+      categoryRule: [(v) => !!v || "A Categoria é Obrigatória"],
+      valueRule: [(v) => !!v || "O valor do anuncio é obrigatório"],
     };
   },
   methods: {
@@ -136,16 +144,7 @@ export default {
     },
     onReset(evt) {
       evt.preventDefault();
-      // (this.form.name = ""),
-      //   (this.form.description = ""),
-      //   (this.form.localization = ""),
-      //   (this.form.responsible = ""),
-      //   (this.form.special = null),
-      //   (this.form.justification = ""),
-      //   (this.form.disabled = false),
-      //   (this.form.computers = null),
-      //   (this.form.quantityPeople = ""),
-      //   (this.form.extension = ""),
+      // (this.form.title = ""),
       //   (this.show = false);
       this.$nextTick(() => {
         this.show = true;

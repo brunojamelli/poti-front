@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!showMenu">
+  <div v-if="!showMenu || !showMenu2">
     <v-app style="background-color: #d9e2eb">
       <v-main>
         <v-container fluid>
@@ -22,7 +22,8 @@
   </div>
 </template>
 
-<script>import AppNavbar from "./components/AppNavbar";
+<script>
+import AppNavbar from "./components/AppNavbar";
 // import Footer from "./components/Footer";
 export default {
   name: "App",
@@ -42,7 +43,10 @@ export default {
   computed: {
     showMenu() {
       return this.$route.name !== "entrar";
-    }
+    },
+    showMenu2() {
+      return this.$route.name !== "listagem-publica";
+    },
   },
 };
 </script>

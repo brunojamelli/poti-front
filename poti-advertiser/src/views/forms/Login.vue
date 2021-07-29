@@ -33,11 +33,23 @@
               rounded
               dark
               color="blue"
-              style="width: 200px; margin-bottom: 40px"
+              style="width: 200px; margin-bottom: 40px; margin-right:2%;"
             >
               Entrar
             </v-btn>
+
+            <v-btn
+              @click="register"
+              rounded
+              dark
+              color="blue"
+              style="width: 200px; margin-bottom: 40px; margin-left:2%;"
+            >
+              Cadastre-se
+            </v-btn>
+             
           </v-row>
+
         </v-card-actions>
       </v-card>
     </v-col>
@@ -61,6 +73,9 @@ export default {
         .then(() => this.$router.push("/"))
         .catch(() => (this.valid = false));
     },
+    register(){
+      this.$router.push('/registro-anunciante');
+    }
   },
 };
 </script>
