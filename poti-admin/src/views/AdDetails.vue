@@ -140,4 +140,7 @@ export default {
 #contact-box{
   text-align: left;
 }
+#ad-quantity{
+  text-align: left;
+}
 </style>
