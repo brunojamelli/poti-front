@@ -26,6 +26,11 @@
           </v-img>
         </v-col>
       </v-row>
+      <v-card-text>
+        <p v-if="photo_list.length == 0" class="text-h5 text--primary">
+          {{ empty_ad }}
+        </p>
+      </v-card-text>
     </div>
     <!-- {{ announcement }} -->
   </v-card>
@@ -54,15 +59,15 @@ export default {
     },
   },
   async created() {
-      //buscando fotos do anuncio para a listagem nos cards
-      this.photo_link = `photo/filenames/announcement/${this.announcement.id}`;
-      const http = new ApiService(this.photo_link);
-      let response = await http.getList();
-      this.photo_list = response.data;
+    //buscando fotos do anuncio para a listagem nos cards
+    this.photo_link = `photo/filenames/announcement/${this.announcement.id}`;
+    const http = new ApiService(this.photo_link);
+    let response = await http.getList();
+    this.photo_list = response.data;
 
-      this.photo_link = this.photo_list[0].filename;
-      window.console.log(this.photo_list[0].filename);
-      this.$store.commit("setTitle", "");
-    },
+    this.photo_link = this.photo_list[0].filename;
+    window.console.log(this.photo_list[0].filename);
+    this.$store.commit("setTitle", "");
+  },
 };
 </script>
