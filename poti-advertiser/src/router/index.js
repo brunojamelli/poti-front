@@ -75,6 +75,7 @@ const routes = [
     path: '/detalhe-publico',
     name: 'detalhe-publico',
     component: PublicAdDetails,
+    props: true
   },
 
   {

@@ -11,7 +11,7 @@
           max-width="240"
           v-for="item in announcements"
           :key="item.id"
-          @click="clickDetails"
+          @click="clickDetails('detalhe-publico',item)"
         >
           <template slot="progress">
             <v-progress-linear
@@ -23,7 +23,7 @@
 
           <AnnouncementImage :announcement="item"></AnnouncementImage>
 
-          <v-card-title>
+          <v-card-title >
             {{ item.title }}
           </v-card-title>
 
@@ -64,8 +64,9 @@ export default {
     window.console.log(this.announcements);
   },
   methods:{
-    clickDetails(){
-      this.$router.push("detalhe-publico")
+    clickDetails(where, data){
+      // this.$router.push("detalhe-publico");
+      this.$router.push({ name: where, params: { announcement: data } });
     }
   }
 };
