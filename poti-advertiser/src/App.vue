@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!showMenu || !showMenu2">
+  <div v-if="!showMenu || !showMenu2 || !detailHide">
     <v-app style="background-color: #d9e2eb">
       <v-main>
         <v-container fluid>
@@ -47,6 +47,9 @@ export default {
     showMenu2() {
       return this.$route.name !== "listagem-publica";
     },
+    detailHide(){
+      return this.$route.name !== "detalhe-publico";
+    }
   },
 };
 </script>
