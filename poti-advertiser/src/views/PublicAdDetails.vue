@@ -26,11 +26,29 @@
           </v-img>
         </v-col>
       </v-row>
+      <br />
+      <v-divider class="mx-4"></v-divider>
+      <br />
       <v-card-text>
         <p v-if="photo_list.length == 0" class="text-h5 text--primary">
           {{ empty_ad }}
         </p>
+        <p class="text-h4 text--primary">{{ announcement.title }}</p>
+        <p class="text-h5 text--primary">R$ {{ announcement.value }}</p>
+        <p v-if="announcement.quantity == 0" class="text-h5 text--primary">
+          Quantidade não Informada
+        </p>
+        <p v-else class="text-h5 text--primary">
+          {{ announcement.quantity }} Unidades
+        </p>
+
+        <div class="text--primary">
+          {{ announcement.description }}
+        </div>
       </v-card-text>
+      <br />
+      <v-divider class="mx-4"></v-divider>
+      <br />
     </div>
     <!-- {{ announcement }} -->
   </v-card>

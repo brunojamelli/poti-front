@@ -32,6 +32,7 @@
               <b>R$ {{ item.value }} •</b>
             </div>
           </v-card-text>
+          <v-divider class="mx-4"></v-divider>
           <v-card-text>
             <AnnouncementContact :data="item"></AnnouncementContact>
           </v-card-text>
