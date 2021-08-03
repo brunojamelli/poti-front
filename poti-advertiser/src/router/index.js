@@ -10,6 +10,8 @@ import ValidatedAds from '../views/ValidatedAds.vue'
 import ActivatedAds from '../views/ActivatedAds.vue'
 import AdDetails from '../views/AdDetails.vue'
 import PublicListing from '../views/PublicListing.vue'
+import PublicAdDetails from '../views/PublicAdDetails.vue'
+
 
 import beforeEach from './beforeEach'
 
@@ -69,6 +71,12 @@ const routes = [
     name: 'listagem-publica',
     component: PublicListing,
   },
+  {
+    path: '/detalhe-publico',
+    name: 'detalhe-publico',
+    component: PublicAdDetails,
+  },
+
   {
     path: '/about',
     name: 'About',
