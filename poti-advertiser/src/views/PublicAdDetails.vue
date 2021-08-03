@@ -28,7 +28,6 @@
       </v-row>
       <br />
       <v-divider class="mx-4"></v-divider>
-      <br />
       <v-card-text>
         <p v-if="photo_list.length == 0" class="text-h5 text--primary">
           {{ empty_ad }}
@@ -46,9 +45,10 @@
           {{ announcement.description }}
         </div>
       </v-card-text>
-      <br />
       <v-divider class="mx-4"></v-divider>
-      <br />
+      <v-card-text>
+        <AnnouncementContact :data="announcement"></AnnouncementContact>
+      </v-card-text>
     </div>
     <!-- {{ announcement }} -->
   </v-card>
@@ -56,9 +56,13 @@
 <script>
 import ApiService from "../utils/ApiService";
 // let http = {};
+import AnnouncementContact from "../components/AnnouncementContact.vue";
 
 export default {
   name: "PublicAdDetails",
+  components: {
+    AnnouncementContact,
+  },
   props: ["announcement"],
   data: () => ({
     photo_list: [],

@@ -1,8 +1,9 @@
 <template>
   <div>
     {{ contact.email }}
+    <br>
     {{ contact.whatsapp }}
-
+    
   </div>
 </template>
 <script>
