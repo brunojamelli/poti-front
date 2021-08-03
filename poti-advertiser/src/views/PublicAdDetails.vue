@@ -33,7 +33,7 @@
           {{ empty_ad }}
         </p>
         <p class="text-h4 text--primary">{{ announcement.title }}</p>
-        <p class="text-h5 text--primary">R$ {{ announcement.value }}</p>
+        <p class="text-h5 text--primary font-weight-bold">R$ {{ announcement.value }}</p>
         <p v-if="announcement.quantity == 0" class="text-h5 text--primary">
           Quantidade não Informada
         </p>
