@@ -108,7 +108,6 @@ export default {
     async submit(evt) {
       evt.preventDefault();
       http.create(this.form);
-      // alert("");
       this.$alert("Anúnciante Cadastrado", "Sucesso", 'success');
       this.$router.push("/");
     },

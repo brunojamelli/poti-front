@@ -153,6 +153,8 @@ export default {
     clickDisagree() {
       this.dialog = false;
       this.$router.push("/");
+      this.$alert("Anúncio Cadastrado", "Sucesso", 'success');
+
     },
     clickAgree() {
       this.dialog = false;

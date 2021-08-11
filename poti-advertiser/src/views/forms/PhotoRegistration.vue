@@ -58,7 +58,8 @@ export default {
     window.console.log(this.edit);
     this.$store.commit("setTitle", "Cadastro de Fotos");
     if (this.edit) {
-      alert("modo de edição");
+      // alert("modo de edição");
+      window.console.log("entrando na edição");
     } else {
       http = new ApiService("announcement");
       let allAds = [];
@@ -87,16 +88,22 @@ export default {
             formData.append("photo", this.form.files[i]);
           }
           await apiConfig.post("photo", formData, headers);
-          // this.$alert("Espaço Cadastrado.", "Sucesso", "success");
-          alert("Fotos do anúncio salvas");
+          // alert("Fotos do anúncio salvas");
+          this.$alert(
+            "Upload de fotos realizado com sucesso",
+            "Concluído",
+            "success"
+          );
+
           window.console.log(this.form.files);
           this.$router.push("/");
         } else {
           alert("foto de ID invalido");
         }
       } else {
-        alert("modo de edicao");
-        window.console.log(this.old_announcement_id)
+        // alert("modo de edicao");
+        window.console.log("modo de edição");
+        window.console.log(this.old_announcement_id);
         const formData = new FormData();
 
         formData.append("an_id", this.old_announcement_id);
@@ -105,8 +112,12 @@ export default {
           formData.append("photo", this.form.files[i]);
         }
         await apiConfig.post("photo", formData, headers);
-        // this.$alert("Espaço Cadastrado.", "Sucesso", "success");
-        alert("Anúncio editado com sucesso !!");
+        // alert("Anúncio editado com sucesso !!");
+        this.$alert(
+          "Upload de fotos realizado com sucesso",
+          "Concluído",
+          "success"
+        );
         window.console.log(this.form.files);
         this.$router.push("/");
       }
