@@ -229,6 +229,12 @@ export default {
       // pegando o indice do elemento clicado para removelo da lista
       let index = this.announcements.indexOf(this.clickedAnnouncement);
       this.announcements.splice(index, 1);
+      this.$alert(
+          "Anúncio Apagado",
+          "Concluído",
+          "warning"
+        );
+      
     },
 
     reserve() {
