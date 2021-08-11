@@ -80,7 +80,7 @@ export default {
         (v) => !!v || "Nome é Obrigatório",
         (v) =>
           (v && v.length >= 10) ||
-          "O número de whats tem que ter 10 letras ou mais",
+          "O nome tem que ter 10 letras ou mais",
       ],
       whatsRules: [
       (v) => !!v || "Whatsapp é obrigatorio",
@@ -108,7 +108,8 @@ export default {
     async submit(evt) {
       evt.preventDefault();
       http.create(this.form);
-      alert("cadastrado com sucesso");
+      // alert("");
+      this.$alert("Anúnciante Cadastrado", "Sucesso", 'success');
       this.$router.push("/");
     },
   },
