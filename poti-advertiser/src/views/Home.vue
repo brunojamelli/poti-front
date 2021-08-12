@@ -210,11 +210,7 @@ export default {
       window.console.log(response);
       let index = this.announcements.indexOf(clicked);
       this.announcements[index].active = !status;
-      this.$alert(
-          "Anuncio ativado com sucesso",
-          "Ativado",
-          "success"
-        );
+      this.$alert("Anuncio ativado com sucesso", "Ativado", "success");
     },
     // clique do evento de discordar da ação de exclusão
     click02(data) {
@@ -233,12 +229,7 @@ export default {
       // pegando o indice do elemento clicado para removelo da lista
       let index = this.announcements.indexOf(this.clickedAnnouncement);
       this.announcements.splice(index, 1);
-      this.$alert(
-          "Anúncio Apagado",
-          "Concluído",
-          "warning"
-        );
-      
+      this.$alert("Anúncio Apagado", "Concluído", "warning");
     },
 
     reserve() {

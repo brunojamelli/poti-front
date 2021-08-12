@@ -150,6 +150,7 @@ export default {
       window.console.log(response);
       // fechando caixa de dialogo da exclusão
       this.dialogDelete = false;
+      this.$alert("Anúncio Apagado", "Concluído", "warning");
       // voltando a tela inicial
       this.$router.push("/");
     },
@@ -158,7 +159,7 @@ export default {
       http = new ApiService("announcement/desativation");
       let response = await http.patch(this.advertiser.id);
       window.console.log(response);
-      alert("anuncio desativado !!");
+      this.$alert("Anuncio desativado com sucesso", "Desativado", "success");
       this.advertiser.active = !status;
     },
     async clickActivation(status) {
@@ -166,7 +167,7 @@ export default {
       http = new ApiService("announcement/activation");
       let response = await http.patch(this.advertiser.id);
       window.console.log(response);
-      alert("anuncio ativado !!");
+      this.$alert("Anuncio ativado com sucesso", "Ativado", "success");
       this.advertiser.active = !status;
     },
   },
