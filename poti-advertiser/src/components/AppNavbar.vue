@@ -82,11 +82,11 @@ export default {
           icon: "mdi-home",
           to: "home",
         },
-        {
-          title: "Anuncios Validados",
-          icon: "mdi-checkbox-marked-circle ",
-          to: "anuncios-validados",
-        },
+        // {
+        //   title: "Anuncios Validados",
+        //   icon: "mdi-checkbox-marked-circle ",
+        //   to: "anuncios-validados",
+        // },
         {
           title: "Cadastrar Anúncio",
           icon: "mdi-bookmark-plus",

@@ -210,7 +210,11 @@ export default {
       window.console.log(response);
       let index = this.announcements.indexOf(clicked);
       this.announcements[index].active = !status;
-      alert("ativar");
+      this.$alert(
+          "Anuncio ativado com sucesso",
+          "Ativado",
+          "success"
+        );
     },
     // clique do evento de discordar da ação de exclusão
     click02(data) {
