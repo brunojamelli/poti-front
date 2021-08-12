@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!showMenu || !showMenu2 || !detailHide">
+  <div v-if="!showMenu || !showMenu2 || !detailHide || !registerHide">
     <v-app style="background-color: #d9e2eb">
       <v-main>
         <v-container fluid>
@@ -49,6 +49,9 @@ export default {
     },
     detailHide(){
       return this.$route.name !== "detalhe-publico";
+    },
+    registerHide(){
+      return this.$route.name !== "registro-anunciante";
     }
   },
 };
