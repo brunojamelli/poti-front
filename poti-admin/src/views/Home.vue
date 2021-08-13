@@ -71,7 +71,7 @@ export default {
       const service = new ApiService("announcement/validation");
       let response = service.patch(object.id);
       window.console.log(response);
-      alert("validado");
+      this.$alert("Anúncio validado com sucesso");
       let index = this.an_list.indexOf(object);
       this.an_list[index].valid = true;
     },
