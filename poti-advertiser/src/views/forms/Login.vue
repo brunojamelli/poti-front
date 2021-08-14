@@ -3,7 +3,7 @@
     <v-col cols="12" sm="10" md="8" lg="5">
       <v-card ref="form" elevation="2" outlined>
         <v-card-title>
-          <!-- <v-img src="../assets/login.svg"></v-img> -->
+          <v-card-text class="text-h4">Anunciante Potianuncios</v-card-text>
         </v-card-title>
 
         <div v-if="!valid">
@@ -33,7 +33,7 @@
               rounded
               dark
               color="blue"
-              style="width: 200px; margin-bottom: 40px; margin-right:2%;"
+              style="width: 200px; margin-bottom: 40px; margin-right: 2%"
             >
               Entrar
             </v-btn>
@@ -43,13 +43,11 @@
               rounded
               dark
               color="blue"
-              style="width: 200px; margin-bottom: 40px; margin-left:2%;"
+              style="width: 200px; margin-bottom: 40px; margin-left: 2%"
             >
               Cadastre-se
             </v-btn>
-             
           </v-row>
-
         </v-card-actions>
       </v-card>
     </v-col>
@@ -73,9 +71,9 @@ export default {
         .then(() => this.$router.push("/"))
         .catch(() => (this.valid = false));
     },
-    register(){
-      this.$router.push('/registro-anunciante');
-    }
+    register() {
+      this.$router.push("/registro-anunciante");
+    },
   },
 };
 </script>
