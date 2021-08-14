@@ -57,7 +57,7 @@ export default {
   components: {
     Card,
     Button,
-    AnnouncementImage
+    AnnouncementImage,
   },
   data: () => ({
     an_list: null,
@@ -71,7 +71,7 @@ export default {
       const service = new ApiService("announcement/validation");
       let response = service.patch(object.id);
       window.console.log(response);
-      this.$alert("Anúncio validado com sucesso");
+      this.$alert("Anúncio validado com sucesso", "Concluido", "success");
       let index = this.an_list.indexOf(object);
       this.an_list[index].valid = true;
     },

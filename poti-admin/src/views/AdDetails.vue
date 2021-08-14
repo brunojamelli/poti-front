@@ -109,7 +109,7 @@ export default {
       const service = new ApiService("announcement/validation");
       let response = service.patch(object.id);
       window.console.log(response);
-      this.$alert("Anúncio validado com sucesso");
+      this.$alert("Anúncio validado com sucesso", "Concluido", "success");
       this.$router.push("/");
     },
   },
