@@ -37,6 +37,15 @@
           required
         ></v-text-field>
         <v-text-field
+          v-model="password2"
+          label="Confirme a senha"
+          :append-icon="value ? 'mdi-eye' : 'mdi-eye-off'"
+          @click:append="() => (value = !value)"
+          :type="value ? 'password' : 'text'"
+          :rules="[rules.password]"
+          error-count="2"
+        ></v-text-field>
+        <v-text-field
           v-model="form.address"
           label="Endereço"
           required
@@ -72,21 +81,20 @@ export default {
       password: "",
       address: "",
     },
+    password2: "",
     isValid: true,
     value: true,
     rules: {
       required: (value) => !!value || "Required.",
       nameRules: [
         (v) => !!v || "Nome é Obrigatório",
-        (v) =>
-          (v && v.length >= 10) ||
-          "O nome tem que ter 10 letras ou mais",
+        (v) => (v && v.length >= 10) || "O nome tem que ter 10 letras ou mais",
       ],
       whatsRules: [
-      (v) => !!v || "Whatsapp é obrigatorio",
-      (v) =>
-        (v && v.length >= 8) ||
-        "O número de whats tem que ter 9 digitos ou mais",
+        (v) => !!v || "Whatsapp é obrigatorio",
+        (v) =>
+          (v && v.length >= 8) ||
+          "O número de whats tem que ter 9 digitos ou mais",
       ],
       emailRules: [
         (v) => !!v || "Email é obrigatório",
@@ -101,15 +109,21 @@ export default {
         );
       },
     },
-    
-    
   }),
   methods: {
     async submit(evt) {
       evt.preventDefault();
-      http.create(this.form);
-      this.$alert("Anúnciante Cadastrado", "Sucesso", 'success');
-      this.$router.push("/");
+      if (this.form.password === this.password2) {
+        http.create(this.form);
+        this.$alert("Anúnciante Cadastrado", "Sucesso", "success");
+        this.$router.push("/");
+      } else {
+        this.$alert(
+          "A senha e a sua confirmação devem ser iguais",
+          "Senhas diferentes",
+          "warning"
+        );
+      }
     },
   },
   created() {
