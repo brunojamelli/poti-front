@@ -1,8 +1,7 @@
 <template>
   <v-card class="mx-auto" max-width="500" style="margin-top: 20px">
-    {{advertiser}}
     <v-card-text>
-      <h2 class="text-center">Atualização Informações de Contato</h2>
+      <h2 class="text-center">Atualize as suas informações de contato</h2>
 
       <v-form ref="form" v-model="isValid">
         <v-text-field
@@ -38,6 +37,8 @@
             style="width: 250px"
             large
             color="success"
+            @click.prevent="editProfile"
+            :disabled="!isValid"
           >
             Atualizar
           </v-btn>
@@ -47,6 +48,9 @@
   </v-card>
 </template>
 <script>
+import ApiService from "../../utils/ApiService";
+const http = new ApiService("advertiser");
+
 export default {
   name: "AdvertiserEdit",
   props: ["advertiser"],
@@ -85,14 +89,20 @@ export default {
       },
     },
   }),
-  methods:{
-
+  methods: {
+    async editProfile(evt) {
+      evt.preventDefault();
+      http.update(this.form, this.advertiser.id);
+      this.$alert("Informações de contato atualizadas", "Sucesso", "success");
+      this.$router.push("/");
+    },
   },
-  created(){
+  created() {
     this.form.name = this.advertiser.name;
     this.form.whatsapp = this.advertiser.whatsapp;
     this.form.email = this.advertiser.email;
     this.form.address = this.advertiser.address;
-  }
+    this.$store.commit("setTitle", "Edição de Perfil");
+  },
 };
 </script>
