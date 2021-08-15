@@ -18,7 +18,9 @@
     </v-card-text>
 
     <v-card-actions>
-
+      <v-btn depressed outlined color="primary" @click="sendToEdit('editar-contato', userData)">
+        Atualizar Informações de contato
+      </v-btn>
     </v-card-actions>
   </v-card>
 </template>
@@ -46,6 +48,12 @@ export default {
     let user = response.data[0];
     this.userData = user;
     window.console.log(user);
+  },
+  methods: {
+    
+    sendToEdit(where, data) {
+      this.$router.push({ name: where, params: { advertiser: data } });
+    },
   },
 };
 </script>

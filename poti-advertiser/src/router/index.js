@@ -11,7 +11,7 @@ import ActivatedAds from '../views/ActivatedAds.vue'
 import AdDetails from '../views/AdDetails.vue'
 import PublicListing from '../views/PublicListing.vue'
 import PublicAdDetails from '../views/PublicAdDetails.vue'
-
+import AdvertiserEdit from '../views/forms/AdvertiserEdit.vue'
 
 import beforeEach from './beforeEach'
 
@@ -77,7 +77,12 @@ const routes = [
     component: PublicAdDetails,
     props: true
   },
-
+  {
+    path: '/editar-contato',
+    name: 'editar-contato',
+    component: AdvertiserEdit,
+    props: true
+  },
   {
     path: '/about',
     name: 'About',
