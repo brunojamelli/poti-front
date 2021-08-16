@@ -12,6 +12,7 @@ import AdDetails from '../views/AdDetails.vue'
 import PublicListing from '../views/PublicListing.vue'
 import PublicAdDetails from '../views/PublicAdDetails.vue'
 import AdvertiserEdit from '../views/forms/AdvertiserEdit.vue'
+import ResetPassword from '../views/forms/ResetPassword.vue'
 
 import beforeEach from './beforeEach'
 
@@ -82,6 +83,11 @@ const routes = [
     name: 'editar-contato',
     component: AdvertiserEdit,
     props: true
+  },
+  {
+    path: '/alterar-senha',
+    name: 'alterar-senha',
+    component: ResetPassword
   },
   {
     path: '/about',

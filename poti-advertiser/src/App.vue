@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!showMenu || !showMenu2 || !detailHide || !registerHide">
+  <div v-if="!showMenu || !showMenu2 || !detailHide || !registerHide || !forgotHide">
     <v-app style="background-color: #d9e2eb">
       <v-main>
         <v-container fluid>
@@ -52,6 +52,9 @@ export default {
     },
     registerHide(){
       return this.$route.name !== "registro-anunciante";
+    },
+    forgotHide(){
+      return this.$route.name !== "alterar-senha";
     }
   },
 };

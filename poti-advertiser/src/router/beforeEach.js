@@ -1,7 +1,7 @@
 import { isSignedIn } from '../utils/auth';
 
 export default async (to, from, next) => {
-  if (to.name === 'registro-anunciante' || to.name === 'listagem-publica' || to.name === 'detalhe-publico') {
+  if (to.name === 'registro-anunciante' || to.name === 'listagem-publica' || to.name === 'detalhe-publico' || to.name === 'alterar-senha') {
     next()
   } else {
     if (to.name !== 'entrar' && !isSignedIn()) {

@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" max-width="500" style="margin-top: 20px">
     <v-card-text>
-      <h2 class="text-center">Atualize as suas informações de contato</h2>
+      <h2 class="text-center">Informe o email da sua conta para alterar a senha</h2>
 
       <v-form ref="form">
         <v-text-field

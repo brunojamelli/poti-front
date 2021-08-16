@@ -61,13 +61,10 @@
 </template>
 
 <script>
-// import apiConfig from "../../utils/config";
-// import { getToken } from "../../utils/auth";
-import ApiService from "../../utils/ApiService";
-const http = new ApiService("forgot-password");
-// const headers = () => {
-//   return { headers: { Authorization: `${getToken()}` } };
-// };
+
+// import ApiService from "../../utils/ApiService";
+// const http = new ApiService("forgot-password");
+
 
 export default {
   name: "Login",
@@ -88,12 +85,13 @@ export default {
     register() {
       this.$router.push("/registro-anunciante");
     },
-    async forgotPassword() {
-      let x = "brunojamelli@protonmail.com";
+    forgotPassword() {
+      // let x = "brunojamelli@protonmail.com";
 
-      let obj = { email: x };
-      let response = http.create(obj);
-      window.console.log(response);
+      // let obj = { email: x };
+      // let response = http.create(obj);
+      this.$router.push('/alterar-senha');
+      // window.console.log(response);
     },
   },
 };
