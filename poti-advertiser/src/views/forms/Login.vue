@@ -47,6 +47,12 @@
             >
               Cadastre-se
             </v-btn>
+
+            <a @click="forgotPassword">esqueci minha senha</a>
+
+            <!-- <v-btn class="ma-2" outlined color="blue">
+              esqueci minha senha
+            </v-btn> -->
           </v-row>
         </v-card-actions>
       </v-card>
@@ -55,6 +61,14 @@
 </template>
 
 <script>
+// import apiConfig from "../../utils/config";
+// import { getToken } from "../../utils/auth";
+import ApiService from "../../utils/ApiService";
+const http = new ApiService("forgot-password");
+// const headers = () => {
+//   return { headers: { Authorization: `${getToken()}` } };
+// };
+
 export default {
   name: "Login",
 
@@ -73,6 +87,13 @@ export default {
     },
     register() {
       this.$router.push("/registro-anunciante");
+    },
+    async forgotPassword() {
+      let x = "brunojamelli@protonmail.com";
+
+      let obj = { email: x };
+      let response = http.create(obj);
+      window.console.log(response);
     },
   },
 };
