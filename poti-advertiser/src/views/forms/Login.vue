@@ -3,7 +3,7 @@
     <v-col cols="12" sm="10" md="8" lg="5">
       <v-card ref="form" elevation="2" outlined>
         <v-card-title>
-          <v-card-text class="text-h4">Anunciante Potianuncios</v-card-text>
+          <v-card-text class="text-h4">Potianuncios</v-card-text>
         </v-card-title>
 
         <div v-if="!valid">
@@ -26,29 +26,25 @@
           ></v-text-field>
         </v-card-text>
 
-        <v-card-actions>
+        <v-card-actions class="justify-center">
           <v-row align="center" justify="center">
-            <v-btn
-              @click="login"
-              rounded
-              dark
-              color="blue"
-              style="width: 200px; margin-bottom: 40px; margin-right: 2%"
-            >
+            <v-btn @click="login" dark color="blue" style="width: 200px;margin-bottom: 40px; margin-right: 2%" large class="justify-center">
+              <!-- style="width: 200px; margin-bottom: 40px; margin-right: 2%" -->
               Entrar
             </v-btn>
 
             <v-btn
               @click="register"
-              rounded
               dark
+              large
               color="blue"
-              style="width: 200px; margin-bottom: 40px; margin-left: 2%"
+              style="width: 200px;margin-bottom: 40px; margin-right: 2%"
             >
+              <!-- style="width: 200px; margin-bottom: 40px; margin-left: 2%" -->
               Cadastre-se
             </v-btn>
 
-            <a @click="forgotPassword">esqueci minha senha</a>
+            <a @click="forgotPassword" style="width: 200px;">Esqueceu a senha?</a>
 
             <!-- <v-btn class="ma-2" outlined color="blue">
               esqueci minha senha
@@ -61,10 +57,8 @@
 </template>
 
 <script>
-
 // import ApiService from "../../utils/ApiService";
 // const http = new ApiService("forgot-password");
-
 
 export default {
   name: "Login",
@@ -86,7 +80,7 @@ export default {
       this.$router.push("/registro-anunciante");
     },
     forgotPassword() {
-      this.$router.push('/alterar-senha');
+      this.$router.push("/alterar-senha");
     },
   },
 };
