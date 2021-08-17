@@ -1,9 +1,11 @@
 <template>
   <v-card class="mx-auto" max-width="500" style="margin-top: 20px">
     <v-card-text>
-      <h2 class="text-center">Informe o email da sua conta para alterar a senha</h2>
+      <h2 class="text-center">
+        Informe o email da sua conta para alterar a senha
+      </h2>
 
-      <v-form ref="form">
+      <v-form ref="form" v-model="isValid">
         <v-text-field
           v-model="form.email"
           :rules="rules.emailRules"
@@ -29,6 +31,9 @@
 </template>
 
 <script>
+import ApiService from "../../utils/ApiService";
+const http = new ApiService("forgot-password");
+
 export default {
   name: "ResetPassword",
   data: () => ({
@@ -47,10 +52,18 @@ export default {
   methods: {
     async changePassword(evt) {
       evt.preventDefault();
-    //   http.update(this.form, this.advertiser.id);
-    //   this.$alert("Informações de contato atualizadas", "Sucesso", "success");
-    //   this.$router.push("/");
-
+      const text =
+        "Caso o seu email esteja cadastrado, você recebra a sua nova senha";
+      let obj = { email: this.form.email };
+      try {
+        let response = await http.create(obj);
+        window.console.log(response);
+        this.$alert(text, "Concluido", "success");
+        this.$router.push("/entrar");
+      } catch (error) {
+        this.$alert(text, "Concluido", "success");
+        this.$router.push("/entrar");
+      }
     },
   },
 };

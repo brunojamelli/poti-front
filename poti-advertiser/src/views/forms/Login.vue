@@ -86,12 +86,7 @@ export default {
       this.$router.push("/registro-anunciante");
     },
     forgotPassword() {
-      // let x = "brunojamelli@protonmail.com";
-
-      // let obj = { email: x };
-      // let response = http.create(obj);
       this.$router.push('/alterar-senha');
-      // window.console.log(response);
     },
   },
 };
