@@ -19,7 +19,7 @@
     <v-img
       v-else
       height="180"
-      src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+      src="../assets/default.jpg"
     ></v-img>
   </div>
 </template>
