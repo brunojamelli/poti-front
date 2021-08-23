@@ -2,7 +2,7 @@
   <v-card class="mx-auto" max-width="800" style="margin-top: 20px">
     <h2 class="text-center">Detalhes Anúncio</h2>
     <div>
-      <v-row>
+      <!-- <v-row>
         <v-col
           v-for="photo in photo_list"
           :key="photo.filename"
@@ -25,7 +25,8 @@
             </template>
           </v-img>
         </v-col>
-      </v-row>
+      </v-row> -->
+      <silent-box :gallery="modified_list"></silent-box>
     </div>
 
     <br />
@@ -120,6 +121,7 @@ export default {
   props: ["advertiser"],
   data: () => ({
     photo_list: [],
+    modified_list: [],
     photo_link: "",
     first_file: "",
     empty_ad: "O anúncio ainda não conta com fotos disponiveis",
@@ -177,10 +179,20 @@ export default {
     const http = new ApiService(this.photo_link);
     let response = await http.getList();
     this.photo_list = response.data;
-
+    window.console.log("fotos dos detalhes")
+    window.console.log(this.photo_list)
     // this.photo_link = this.photo_list[0].filename;
     window.console.log(this.photo_list[0].filename);
     this.$store.commit("setTitle", "");
+    this.modified_list = this.photo_list;
+    for (let index = 0; index < this.modified_list.length; index++) {
+      this.modified_list[index].thumbnailWidth = '392px';
+      this.modified_list[index].thumbnailHeight = '258px';
+      this.modified_list[index].src = `http://localhost:3333/photo/${this.modified_list[index].filename}`;
+      this.modified_list[index].description = 'Landscape photo of mountain with fog.';
+
+    }
+    window.console.log(this.modified_list)
   },
 };
 </script>
