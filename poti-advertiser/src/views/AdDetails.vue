@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" max-width="800" style="margin-top: 20px">
-    <h2 class="text-center">Detalhes Anúncio</h2>
-    <div>
+    <!-- <h2 class="text-center">Detalhes Anúncio</h2> -->
+    <div class="pa-2">
       <!-- <v-row>
         <v-col
           v-for="photo in photo_list"
@@ -26,8 +26,19 @@
           </v-img>
         </v-col>
       </v-row> -->
-      <silent-box :gallery="modified_list"></silent-box>
+      <!-- <silent-box :gallery="modified_list"></silent-box> -->
     </div>
+    <v-card elevation="5" max-width="666" class="mx-auto">
+      <v-carousel>
+        <v-carousel-item
+          v-for="(item, i) in teste"
+          :key="i"
+          :src="item.src"
+          reverse-transition="fade-transition"
+          transition="fade-transition"
+        ></v-carousel-item>
+      </v-carousel>
+    </v-card>
 
     <br />
     <v-card-text>
@@ -126,6 +137,7 @@ export default {
     first_file: "",
     empty_ad: "O anúncio ainda não conta com fotos disponiveis",
     dialogDelete: false,
+    teste: [],
   }),
   methods: {
     editionMode(where, data, id) {
@@ -179,20 +191,29 @@ export default {
     const http = new ApiService(this.photo_link);
     let response = await http.getList();
     this.photo_list = response.data;
-    window.console.log("fotos dos detalhes")
-    window.console.log(this.photo_list)
+    window.console.log("fotos dos detalhes");
+    window.console.log(this.photo_list);
     // this.photo_link = this.photo_list[0].filename;
     window.console.log(this.photo_list[0].filename);
     this.$store.commit("setTitle", "");
     this.modified_list = this.photo_list;
+    this.teste = this.photo_list;
     for (let index = 0; index < this.modified_list.length; index++) {
-      this.modified_list[index].thumbnailWidth = '392px';
-      this.modified_list[index].thumbnailHeight = '258px';
-      this.modified_list[index].src = `http://localhost:3333/photo/${this.modified_list[index].filename}`;
-      this.modified_list[index].description = 'Landscape photo of mountain with fog.';
-
+      this.modified_list[index].thumbnailWidth = "392px";
+      this.modified_list[index].thumbnailHeight = "258px";
+      this.modified_list[
+        index
+      ].src = `http://localhost:3333/photo/${this.modified_list[index].filename}`;
+      this.modified_list[index].description =
+        "Landscape photo of mountain with fog.";
     }
-    window.console.log(this.modified_list)
+
+    for (let index = 0; index < this.teste.length; index++) {
+      this.teste[
+        index
+      ].src = `http://localhost:3333/photo/${this.teste[index].filename}`;
+    }
+    window.console.log(this.modified_list);
   },
 };
 </script>
