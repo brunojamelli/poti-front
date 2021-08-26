@@ -28,7 +28,7 @@
       </v-row> -->
       <!-- <silent-box :gallery="modified_list"></silent-box> -->
     </div>
-    <v-card elevation="5" max-width="666" class="mx-auto">
+    <v-card v-if="photo_list.length != 0" elevation="5" max-width="666" class="mx-auto">
       <v-carousel>
         <v-carousel-item
           v-for="(item, i) in teste"
