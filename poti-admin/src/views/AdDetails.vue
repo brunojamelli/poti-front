@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="detail-box">
-      <v-row>
+      <!-- <v-row>
         <v-col
           v-for="photo in photo_list"
           :key="photo.id"
@@ -24,7 +24,21 @@
             </template>
           </v-img>
         </v-col>
-      </v-row>
+      </v-row> -->
+      <v-card
+        v-if="photo_list.length != 0"
+        elevation="5"
+        max-width="666"
+        class="mx-auto"
+      >
+        <v-carousel>
+          <v-carousel-item
+            v-for="(item, i) in src_list"
+            :key="i"
+            :src="item.src"
+          ></v-carousel-item>
+        </v-carousel>
+      </v-card>
       <br />
       <Card>
         <template #title>
@@ -86,6 +100,7 @@ export default {
     photo_link: "",
     first_file: "",
     concact_info: {},
+    src_list: [],
   }),
   props: ["advertiser"],
   components: {
@@ -103,6 +118,12 @@ export default {
     const http2 = new ApiService(`advertiser/${this.advertiser.advertiser_id}`);
     let response2 = await http2.getList();
     this.concact_info = response2.data[0];
+    this.src_list = this.photo_list;
+    for (let index = 0; index < this.src_list.length; index++) {
+      this.src_list[
+        index
+      ].src = `http://localhost:3333/photo/${this.src_list[index].filename}`;
+    }
   },
   methods: {
     async adValitation(object) {
@@ -137,10 +158,10 @@ export default {
 #ad-description {
   text-align: left;
 }
-#contact-box{
+#contact-box {
   text-align: left;
 }
-#ad-quantity{
+#ad-quantity {
   text-align: left;
 }
 </style>
