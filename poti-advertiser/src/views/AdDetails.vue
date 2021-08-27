@@ -28,6 +28,7 @@
       </v-row> -->
       <!-- <silent-box :gallery="modified_list"></silent-box> -->
     </div>
+    <p class="text-h3 text--primary align-center" align="center">{{ advertiser.title }}</p>
     <v-card v-if="photo_list.length != 0" elevation="5" max-width="666" class="mx-auto">
       <v-carousel>
         <v-carousel-item
@@ -41,7 +42,7 @@
     </v-card>
 
     <br />
-    <v-card-text>
+    <v-card-text > 
       <div class="text--primary">
         criado em: {{ formatDate(advertiser.createdAt) }}
       </div>
@@ -51,8 +52,8 @@
       </p>
       <!-- <div>criado em: {{ advertiser.createdAt }}</div> -->
 
-      <p class="text-h4 text--primary">{{ advertiser.title }}</p>
-      <p class="text-h5 text--primary">R$ {{ advertiser.value }}</p>
+      
+      <p class="text-h4 text--primary">R$ {{ advertiser.value }}</p>
       <p v-if="advertiser.quantity == 0" class="text-h5 text--primary">
         Quantidade não Informada
       </p>
@@ -60,7 +61,7 @@
         {{ advertiser.quantity }} Unidades
       </p>
 
-      <div class="text--primary">
+      <div class="text-h5 text--primary">
         {{ advertiser.description }}
       </div>
     </v-card-text>

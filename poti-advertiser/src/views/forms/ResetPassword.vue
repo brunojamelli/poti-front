@@ -53,7 +53,7 @@ export default {
     async changePassword(evt) {
       evt.preventDefault();
       const text =
-        "Caso o seu email esteja cadastrado, você recebra a sua nova senha";
+        "Caro anunciante, caso este email esteja cadastrado na plataforma, nele você recebera a sua nova senha";
       let obj = { email: this.form.email };
       try {
         let response = await http.create(obj);
