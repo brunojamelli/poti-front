@@ -3,7 +3,7 @@
     <v-col cols="12" sm="10" md="8" lg="5">
       <v-card ref="form" elevation="2" outlined>
         <v-card-title>
-          <v-img src="../assets/login.svg"></v-img>
+          <v-img src="../assets/logo-potianuncios.jpg" max-width="333" class="mx-auto"></v-img>
         </v-card-title>
 
         <div v-if="!valid">
