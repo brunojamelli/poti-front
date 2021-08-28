@@ -2,41 +2,14 @@
   <v-card class="mx-auto" max-width="800" style="margin-top: 20px">
     <!-- <h2 class="text-center">Detalhes Anúncio</h2> -->
     <div class="pa-2">
-      <!-- <v-row>
-        <v-col
-          v-for="photo in photo_list"
-          :key="photo.filename"
-          class="d-flex child-flex"
-          cols="6"
-        >
-          <v-img
-            :src="`http://localhost:3333/photo/${photo.filename}`"
-            :lazy-src="`https://picsum.photos/10/6?image=${5 + 10}`"
-            aspect-ratio="1.5"
-            class="grey lighten-2"
-          >
-            <template v-slot:placeholder>
-              <v-row class="fill-height ma-0" align="center" justify="center">
-                <v-progress-circular
-                  indeterminate
-                  color="grey lighten-5"
-                ></v-progress-circular>
-              </v-row>
-            </template>
-          </v-img>
-        </v-col>
-      </v-row> -->
-      <!-- <silent-box :gallery="modified_list"></silent-box> -->
     </div>
     <p class="text-h3 text--primary align-center" align="center">{{ advertiser.title }}</p>
     <v-card v-if="photo_list.length != 0" elevation="5" max-width="666" class="mx-auto">
       <v-carousel>
         <v-carousel-item
-          v-for="(item, i) in teste"
+          v-for="(item, i) in src_list"
           :key="i"
           :src="item.src"
-          reverse-transition="fade-transition"
-          transition="fade-transition"
         ></v-carousel-item>
       </v-carousel>
     </v-card>
@@ -138,7 +111,7 @@ export default {
     first_file: "",
     empty_ad: "O anúncio ainda não conta com fotos disponiveis",
     dialogDelete: false,
-    teste: [],
+    src_list: [],
   }),
   methods: {
     editionMode(where, data, id) {
@@ -194,25 +167,15 @@ export default {
     this.photo_list = response.data;
     window.console.log("fotos dos detalhes");
     window.console.log(this.photo_list);
-    // this.photo_link = this.photo_list[0].filename;
     window.console.log(this.photo_list[0].filename);
     this.$store.commit("setTitle", "");
-    this.modified_list = this.photo_list;
-    this.teste = this.photo_list;
-    for (let index = 0; index < this.modified_list.length; index++) {
-      this.modified_list[index].thumbnailWidth = "392px";
-      this.modified_list[index].thumbnailHeight = "258px";
-      this.modified_list[
+    this.src_list = this.photo_list;
+    
+    // gerando a lista de urls das imagens para o carrousel
+    for (let index = 0; index < this.src_list.length; index++) {
+      this.src_list[
         index
-      ].src = `http://localhost:3333/photo/${this.modified_list[index].filename}`;
-      this.modified_list[index].description =
-        "Landscape photo of mountain with fog.";
-    }
-
-    for (let index = 0; index < this.teste.length; index++) {
-      this.teste[
-        index
-      ].src = `http://localhost:3333/photo/${this.teste[index].filename}`;
+      ].src = `http://localhost:3333/photo/${this.src_list[index].filename}`;
     }
     window.console.log(this.modified_list);
   },
