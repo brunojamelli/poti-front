@@ -42,8 +42,8 @@
   height: 100px;
 }
 #logout {
-  margin-left: 78%;
-  /* margin-top: 10%; */
+  margin-left: 90%;
+  margin-top: -8%;
 }
 .content{
   /* margin: auto; */
