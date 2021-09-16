@@ -1,15 +1,49 @@
-# poti-front
+# Potiánuncios frontend
 
-## Project Resume
-```
-this project has the two frontend applications of my TCC from the systems analysis and development course.
-```
-
-### About the project idea
-```
-```
+## ℹ️ Sobre o projeto
+Trabalho de conclusão do curso de Análise e Desenvolvimento de Sistemas, UFRN - EAJ. [Escola Agrícola de Jundiaí](https://eaj.ufrn.br/).
 
 ---
+
+## ⚙️ Funcionalidades Administradores
+
+- [x] Autenticar-se
+- [x] Visualizar todos os anúncios
+- [x] Validar anúncios
+- [x] Visualizar os administradores cadastrados
+- [x] Cadastrar novos administradores
+
+
+---
+## ⚙️ Funcionalidades Anunciantes
+
+- [x] Registrar-se na plataforma
+- [x] Autenticar-se
+- [x] Recuperar a senha via email
+- [x] Visualizar os seus anúncios
+- [x] Cadastrar novos anúncios
+- [x] Adicionar fotos aos seus anúncios
+- [x] Excluir anúncios
+- [x] Ativar/desativar anúncios
+- [x] Filtrar anúncios
+---
+## ⚙️ Funcionalidades De acesso sem Autenticação
+
+- [x] Listagem de todos os anúncios
+- [x] Detalhamento dos anúncios
+- [x] Ter acesso às informações de contato do anunciante de cada anúncio
+
+---
+
+
+## 🎨 Demonstração Layout Sistema
+
+<details>
+  <summary>Login Administrador</summary>
+  <p align="center" style="display: flex; align-items: flex-start; justify-content: center; margin:5px">
+      <img style="margin:5px" alt="Login" src="./assets/login.png" width="800px">
+    </p>
+</details>
 
 ### 👩🏽‍💻 Autores
 <table>
