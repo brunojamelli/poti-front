@@ -19,7 +19,7 @@
     <v-img
       v-else
       height="180"
-      src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+      src="../assets/default.jpg"
     ></v-img>
   </div>
 </template>
@@ -44,6 +44,8 @@ export default {
     // this.photo_link = this.photo_list[0].filename;
     // window.console.log(this.photo_list[0].filename);
     this.first_file = this.photo_list[0].filename;
+    window.console.log("lista de fotos")
+    window.console.log(this.photo_list);
   },
 };
 </script>

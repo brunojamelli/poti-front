@@ -10,6 +10,9 @@ import ValidatedAds from '../views/ValidatedAds.vue'
 import ActivatedAds from '../views/ActivatedAds.vue'
 import AdDetails from '../views/AdDetails.vue'
 import PublicListing from '../views/PublicListing.vue'
+import PublicAdDetails from '../views/PublicAdDetails.vue'
+import AdvertiserEdit from '../views/forms/AdvertiserEdit.vue'
+import ResetPassword from '../views/forms/ResetPassword.vue'
 
 import beforeEach from './beforeEach'
 
@@ -68,6 +71,23 @@ const routes = [
     path: '/listagem-publica',
     name: 'listagem-publica',
     component: PublicListing,
+  },
+  {
+    path: '/detalhe-publico',
+    name: 'detalhe-publico',
+    component: PublicAdDetails,
+    props: true
+  },
+  {
+    path: '/editar-contato',
+    name: 'editar-contato',
+    component: AdvertiserEdit,
+    props: true
+  },
+  {
+    path: '/alterar-senha',
+    name: 'alterar-senha',
+    component: ResetPassword
   },
   {
     path: '/about',

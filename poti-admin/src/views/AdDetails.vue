@@ -1,30 +1,20 @@
 <template>
   <div>
     <div class="detail-box">
-      <v-row>
-        <v-col
-          v-for="photo in photo_list"
-          :key="photo.id"
-          class="d-flex child-flex"
-          cols="6"
-        >
-          <v-img
-            :src="`http://localhost:3333/photo/${photo.filename}`"
-            :lazy-src="`https://picsum.photos/10/6?image=${5 + 10}`"
-            aspect-ratio="1.5"
-            class="grey lighten-2"
-          >
-            <template v-slot:placeholder>
-              <v-row class="fill-height ma-0" align="center" justify="center">
-                <v-progress-circular
-                  indeterminate
-                  color="grey lighten-5"
-                ></v-progress-circular>
-              </v-row>
-            </template>
-          </v-img>
-        </v-col>
-      </v-row>
+      <v-card
+        v-if="photo_list.length != 0"
+        elevation="5"
+        max-width="666"
+        class="mx-auto"
+      >
+        <v-carousel>
+          <v-carousel-item
+            v-for="(item, i) in src_list"
+            :key="i"
+            :src="item.src"
+          ></v-carousel-item>
+        </v-carousel>
+      </v-card>
       <br />
       <Card>
         <template #title>
@@ -86,6 +76,7 @@ export default {
     photo_link: "",
     first_file: "",
     concact_info: {},
+    src_list: [],
   }),
   props: ["advertiser"],
   components: {
@@ -103,13 +94,19 @@ export default {
     const http2 = new ApiService(`advertiser/${this.advertiser.advertiser_id}`);
     let response2 = await http2.getList();
     this.concact_info = response2.data[0];
+    this.src_list = this.photo_list;
+    for (let index = 0; index < this.src_list.length; index++) {
+      this.src_list[
+        index
+      ].src = `http://localhost:3333/photo/${this.src_list[index].filename}`;
+    }
   },
   methods: {
     async adValitation(object) {
       const service = new ApiService("announcement/validation");
       let response = service.patch(object.id);
       window.console.log(response);
-      alert("validado");
+      this.$alert("Anúncio validado com sucesso", "Concluido", "success");
       this.$router.push("/");
     },
   },
@@ -137,10 +134,10 @@ export default {
 #ad-description {
   text-align: left;
 }
-#contact-box{
+#contact-box {
   text-align: left;
 }
-#ad-quantity{
+#ad-quantity {
   text-align: left;
 }
 </style>

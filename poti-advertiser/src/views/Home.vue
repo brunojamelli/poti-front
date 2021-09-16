@@ -16,7 +16,7 @@
       </v-btn>
     </v-row>
     <br />
-    <v-row>
+    <v-row v-if="announcements.length != 0">
       <v-card
         cols="12"
         sm="3"
@@ -78,7 +78,9 @@
         </v-card-actions>
       </v-card>
     </v-row>
-
+    <v-card v-else max-width="666" class="mx-auto"> 
+      <v-card-text class="text-h4">Não há anuncios para essa filtragem</v-card-text>
+    </v-card>
     <v-dialog v-model="dialogDelete" max-width="380">
       <v-card>
         <v-card-title class="text-h5">
@@ -210,7 +212,7 @@ export default {
       window.console.log(response);
       let index = this.announcements.indexOf(clicked);
       this.announcements[index].active = !status;
-      alert("ativar");
+      this.$alert("Anuncio ativado com sucesso", "Ativado", "success");
     },
     // clique do evento de discordar da ação de exclusão
     click02(data) {
@@ -229,6 +231,7 @@ export default {
       // pegando o indice do elemento clicado para removelo da lista
       let index = this.announcements.indexOf(this.clickedAnnouncement);
       this.announcements.splice(index, 1);
+      this.$alert("Anúncio Apagado", "Concluído", "warning");
     },
 
     reserve() {

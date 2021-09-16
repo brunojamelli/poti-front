@@ -22,11 +22,21 @@
           ></v-text-field>
           <v-text-field
             v-model="form.password"
-            label="Senha"
+            label="Informe a senha"
             :append-icon="value ? 'mdi-eye' : 'mdi-eye-off'"
             @click:append="() => (value = !value)"
             :type="value ? 'password' : 'text'"
             :rules="[rules.password]"
+            error-count="2"
+            required
+          ></v-text-field>
+          <v-text-field
+            v-model="password2"
+            label="Informe a senha novamente"
+            :append-icon="value ? 'mdi-eye' : 'mdi-eye-off'"
+            @click:append="() => (value = !value)"
+            :type="value ? 'password' : 'text'"
+            :rules="[passwordConfirmationRules]"
             error-count="2"
             required
           ></v-text-field>
@@ -58,6 +68,7 @@ export default {
       email: "",
       password: "",
     },
+    password2: "",
     isValid: true,
     value: true,
     rules: {
@@ -83,10 +94,44 @@ export default {
   methods: {
     async submit(evt) {
       evt.preventDefault();
-      http.create(this.form);
-      alert("cadastrado com sucesso");
-      this.$router.push("/");
+      if (this.form.password === this.password2) {
+        http.create(this.form);
+        this.$alert(
+          "Administrador cadastrado com sucesso",
+          "Concluido",
+          "success"
+        );
+
+        this.$router.push("/");
+      } else {
+        this.$alert(
+          "A senha e a sua confirmação devem ser iguais",
+          "Senhas diferentes",
+          "warning"
+        );
+      }
     },
   },
+  // computed: {
+  //   checkPassword() {
+  //     return this.form.password !== this.form.password2;
+  //   },
+  //   passwordConfirmationRules() {
+  //     return [
+  //       () => this.form.password === this.form.password2 || "Senhas não batem",
+  //       (v) => {
+  //         /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#%&])(?=.{8,})/.test(v) ||
+  //           "Min. 8 caracteres com ao menos uma letra maiuscula, um número e um caractere especial.";
+  //       },
+  //       (v) => !!v || "Confirmação de senha é obrigatoria",
+  //     ];
+  //   },
+  //   emailConfirmationRules() {
+  //     return [
+  //       () => (this.form.password === this.form.password2) || 'E-mail must match',
+  //       v => !!v || 'Confirmation E-mail is required'
+  //     ];
+  //   },
+  // },
 };
 </script>

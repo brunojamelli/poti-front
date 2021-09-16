@@ -1,7 +1,7 @@
 <template>
   <v-card class="mx-auto" max-width="500" style="margin-top: 20px">
     <v-card-text>
-      <h2 class="text-center">Cadastro</h2>
+      <h2 class="text-center">Atualize as suas informações de contato</h2>
 
       <v-form ref="form" v-model="isValid">
         <v-text-field
@@ -28,24 +28,6 @@
           error-count="2"
         ></v-text-field>
         <v-text-field
-          v-model="form.password"
-          label="Senha"
-          :append-icon="value ? 'mdi-eye' : 'mdi-eye-off'"
-          @click:append="() => (value = !value)"
-          :type="value ? 'password' : 'text'"
-          :rules="[rules.password]"
-          required
-        ></v-text-field>
-        <v-text-field
-          v-model="password2"
-          label="Confirme a senha"
-          :append-icon="value ? 'mdi-eye' : 'mdi-eye-off'"
-          @click:append="() => (value = !value)"
-          :type="value ? 'password' : 'text'"
-          :rules="[rules.password]"
-          error-count="2"
-        ></v-text-field>
-        <v-text-field
           v-model="form.address"
           label="Endereço"
           required
@@ -55,33 +37,30 @@
             style="width: 250px"
             large
             color="success"
-            @click.prevent="submit"
+            @click.prevent="editProfile"
             :disabled="!isValid"
           >
-            Cadastrar
+            Atualizar
           </v-btn>
         </v-card-actions>
       </v-form>
     </v-card-text>
   </v-card>
 </template>
-
 <script>
 import ApiService from "../../utils/ApiService";
 const http = new ApiService("advertiser");
 
 export default {
-  name: "AdvertiserRegistration",
-  components: {},
+  name: "AdvertiserEdit",
+  props: ["advertiser"],
   data: () => ({
     form: {
       name: "",
       whatsapp: "",
       email: "",
-      password: "",
       address: "",
     },
-    password2: "",
     isValid: true,
     value: true,
     rules: {
@@ -111,25 +90,19 @@ export default {
     },
   }),
   methods: {
-    async submit(evt) {
+    async editProfile(evt) {
       evt.preventDefault();
-      if (this.form.password === this.password2) {
-        http.create(this.form);
-        this.$alert("Anúnciante Cadastrado", "Sucesso", "success");
-        this.$router.push("/");
-      } else {
-        this.$alert(
-          "A senha e a sua confirmação devem ser iguais",
-          "Senhas diferentes",
-          "warning"
-        );
-      }
+      http.update(this.form, this.advertiser.id);
+      this.$alert("Informações de contato atualizadas", "Sucesso", "success");
+      this.$router.push("/");
     },
   },
   created() {
-    this.$store.commit("setTitle", "Cadastro de Anunciante");
+    this.form.name = this.advertiser.name;
+    this.form.whatsapp = this.advertiser.whatsapp;
+    this.form.email = this.advertiser.email;
+    this.form.address = this.advertiser.address;
+    this.$store.commit("setTitle", "Edição de Perfil");
   },
 };
 </script>
-<style scoped>
-</style>

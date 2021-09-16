@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-app-bar app clipped-rigth flat color="#000000" dark>
+    <v-app-bar app clipped-rigth flat color="#588E43" dark>
       <v-app-bar-nav-icon
         dark
         @click.stop="drawer = !drawer"
@@ -19,13 +19,15 @@
       enable-resize-watcher
       fixed
       app
-      color="#000000"
+      color="#588E43"
       dark
       width="220"
     >
       <v-list nav dense>
         <v-list-item>
-          <v-img src="../assets/logo.svg"></v-img>
+          <!-- <v-img src="../assets/logo.svg"></v-img> -->
+          <v-img src="../assets/logo-potianuncios.jpg"></v-img>
+
         </v-list-item>
         <v-divider></v-divider>
 
@@ -82,11 +84,11 @@ export default {
           icon: "mdi-home",
           to: "home",
         },
-        {
-          title: "Anuncios Validados",
-          icon: "mdi-checkbox-marked-circle ",
-          to: "anuncios-validados",
-        },
+        // {
+        //   title: "Anuncios Validados",
+        //   icon: "mdi-checkbox-marked-circle ",
+        //   to: "anuncios-validados",
+        // },
         {
           title: "Cadastrar Anúncio",
           icon: "mdi-bookmark-plus",

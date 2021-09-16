@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!showMenu || !showMenu2">
+  <div v-if="!showMenu || !showMenu2 || !detailHide || !registerHide || !forgotHide">
     <v-app style="background-color: #d9e2eb">
       <v-main>
         <v-container fluid>
@@ -47,6 +47,15 @@ export default {
     showMenu2() {
       return this.$route.name !== "listagem-publica";
     },
+    detailHide(){
+      return this.$route.name !== "detalhe-publico";
+    },
+    registerHide(){
+      return this.$route.name !== "registro-anunciante";
+    },
+    forgotHide(){
+      return this.$route.name !== "alterar-senha";
+    }
   },
 };
 </script>

@@ -1,7 +1,7 @@
 <template>
   <div>
     <h2>Anúncios Validos</h2>
-    <div class="grid-container">
+    <div class="grid-container" v-if="valids.length > 0">
       <Card
         class="grid-item"
         v-for="item in valids"
@@ -40,6 +40,9 @@
           />
         </template>
       </Card>
+    </div>
+    <div v-else>
+      <h3>Ainda não tem anúncios validados</h3>
     </div>
   </div>
 </template>

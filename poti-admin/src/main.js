@@ -14,10 +14,13 @@ import TabMenu from "primevue/tabmenu";
 import store from './store'
 import vuetify from './plugins/vuetify'
 import Axios from 'axios';
+import VueSimpleAlert from "vue-simple-alert";
+
 
 Vue.component('TabMenu', TabMenu);
 Vue.config.productionTip = false
 Vue.use(PrimeVue);
+Vue.use(VueSimpleAlert);
 
 Vue.prototype.$http = Axios;
 const token = localStorage.getItem('token');

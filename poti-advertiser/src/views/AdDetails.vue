@@ -1,35 +1,21 @@
 <template>
   <v-card class="mx-auto" max-width="800" style="margin-top: 20px">
-    <h2 class="text-center">Detalhes Anúncio</h2>
-    <div>
-      <v-row>
-        <v-col
-          v-for="photo in photo_list"
-          :key="photo.filename"
-          class="d-flex child-flex"
-          cols="6"
-        >
-          <v-img
-            :src="`http://localhost:3333/photo/${photo.filename}`"
-            :lazy-src="`https://picsum.photos/10/6?image=${5 + 10}`"
-            aspect-ratio="1.5"
-            class="grey lighten-2"
-          >
-            <template v-slot:placeholder>
-              <v-row class="fill-height ma-0" align="center" justify="center">
-                <v-progress-circular
-                  indeterminate
-                  color="grey lighten-5"
-                ></v-progress-circular>
-              </v-row>
-            </template>
-          </v-img>
-        </v-col>
-      </v-row>
+    <!-- <h2 class="text-center">Detalhes Anúncio</h2> -->
+    <div class="pa-2">
     </div>
+    <p class="text-h3 text--primary align-center" align="center">{{ advertiser.title }}</p>
+    <v-card v-if="photo_list.length != 0" elevation="5" max-width="666" class="mx-auto">
+      <v-carousel>
+        <v-carousel-item
+          v-for="(item, i) in src_list"
+          :key="i"
+          :src="item.src"
+        ></v-carousel-item>
+      </v-carousel>
+    </v-card>
 
     <br />
-    <v-card-text>
+    <v-card-text > 
       <div class="text--primary">
         criado em: {{ formatDate(advertiser.createdAt) }}
       </div>
@@ -39,8 +25,8 @@
       </p>
       <!-- <div>criado em: {{ advertiser.createdAt }}</div> -->
 
-      <p class="text-h4 text--primary">{{ advertiser.title }}</p>
-      <p class="text-h5 text--primary">R$ {{ advertiser.value }}</p>
+      
+      <p class="text-h4 text--primary">R$ {{ advertiser.value }}</p>
       <p v-if="advertiser.quantity == 0" class="text-h5 text--primary">
         Quantidade não Informada
       </p>
@@ -48,7 +34,7 @@
         {{ advertiser.quantity }} Unidades
       </p>
 
-      <div class="text--primary">
+      <div class="text-h5 text--primary">
         {{ advertiser.description }}
       </div>
     </v-card-text>
@@ -120,10 +106,12 @@ export default {
   props: ["advertiser"],
   data: () => ({
     photo_list: [],
+    modified_list: [],
     photo_link: "",
     first_file: "",
     empty_ad: "O anúncio ainda não conta com fotos disponiveis",
     dialogDelete: false,
+    src_list: [],
   }),
   methods: {
     editionMode(where, data, id) {
@@ -150,6 +138,7 @@ export default {
       window.console.log(response);
       // fechando caixa de dialogo da exclusão
       this.dialogDelete = false;
+      this.$alert("Anúncio Apagado", "Concluído", "warning");
       // voltando a tela inicial
       this.$router.push("/");
     },
@@ -158,7 +147,7 @@ export default {
       http = new ApiService("announcement/desativation");
       let response = await http.patch(this.advertiser.id);
       window.console.log(response);
-      alert("anuncio desativado !!");
+      this.$alert("Anuncio desativado com sucesso", "Desativado", "success");
       this.advertiser.active = !status;
     },
     async clickActivation(status) {
@@ -166,7 +155,7 @@ export default {
       http = new ApiService("announcement/activation");
       let response = await http.patch(this.advertiser.id);
       window.console.log(response);
-      alert("anuncio ativado !!");
+      this.$alert("Anuncio ativado com sucesso", "Ativado", "success");
       this.advertiser.active = !status;
     },
   },
@@ -176,10 +165,19 @@ export default {
     const http = new ApiService(this.photo_link);
     let response = await http.getList();
     this.photo_list = response.data;
-
-    // this.photo_link = this.photo_list[0].filename;
+    window.console.log("fotos dos detalhes");
+    window.console.log(this.photo_list);
     window.console.log(this.photo_list[0].filename);
     this.$store.commit("setTitle", "");
+    this.src_list = this.photo_list;
+    
+    // gerando a lista de urls das imagens para o carrousel
+    for (let index = 0; index < this.src_list.length; index++) {
+      this.src_list[
+        index
+      ].src = `http://localhost:3333/photo/${this.src_list[index].filename}`;
+    }
+    window.console.log(this.modified_list);
   },
 };
 </script>
